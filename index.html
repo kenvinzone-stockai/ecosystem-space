@@ -889,11 +889,11 @@
         .planet-label.selected .label-name { color: var(--bg-void); text-shadow: none; }
         .planet-label.selected .label-code { color: var(--bg-void); opacity: 0.9; }
 
+        /* Sound + Ship toggles - DESKTOP: horizontal pair phía trên minimap, cùng cột với side-nav */
         .sound-toggle {
             position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: calc(2rem + 160px);  /* Phía trên minimap (minimap cao 140px + 20px gap) */
+            left: 2rem;
             z-index: 14;
             width: 44px;
             height: 44px;
@@ -917,8 +917,8 @@
 
         .ship-toggle {
             position: fixed;
-            bottom: 2rem;
-            left: calc(50% + 60px);
+            bottom: calc(2rem + 160px);
+            left: calc(2rem + 56px);  /* Cạnh sound-toggle, gap 12px */
             z-index: 14;
             width: 44px;
             height: 44px;
@@ -1019,7 +1019,91 @@
                 border-top: 1px solid rgba(255,255,255,0.06);
             }
             .hud-btn { flex: 1; justify-content: center; padding: 0.75rem; }
-            .sound-toggle { bottom: auto; top: 5rem; left: auto; right: 1rem; transform: none; }
+
+            /* Mobile: sound + ship toggle - đặt cùng cột với side-nav, gần đáy nhưng tránh planet-hud */
+            .side-nav {
+                left: 0.75rem;
+                top: 50%;
+                transform: translateY(-50%);
+                gap: 0.5rem;
+            }
+            .sound-toggle {
+                position: fixed;
+                bottom: 9rem;          /* Cao đủ để không bị che bởi planet-hud (HUD ~110px + 50px gap) */
+                top: auto;
+                left: 0.75rem;
+                right: auto;
+                margin-top: 0;
+                transform: none;
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            .ship-toggle {
+                position: fixed;
+                bottom: calc(9rem + 50px);  /* Phía trên sound-toggle */
+                top: auto;
+                left: 0.75rem;
+                right: auto;
+                margin-top: 0;
+                transform: none;
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+
+            /* Mobile: planet HUD compact hơn — chỉ chiếm 1/3 màn hình dưới */
+            .planet-hud {
+                bottom: 0.5rem;
+                left: 0.5rem;
+                right: 0.5rem;
+                transform: none;
+                width: auto;
+                max-width: none;
+                border-radius: 8px;
+            }
+            .planet-hud-content {
+                gap: 0.5rem;
+                padding: 0.6rem 0.75rem;
+            }
+            .planet-hud-emoji {
+                font-size: 1.5rem;
+                width: 36px;
+                height: 36px;
+                min-width: 36px;
+            }
+            .planet-hud-info {
+                gap: 0.1rem;
+            }
+            .planet-hud-meta {
+                font-size: 0.55rem;
+                letter-spacing: 0.1em;
+            }
+            .planet-hud-title {
+                font-size: 1rem;
+                line-height: 1.15;
+            }
+            .planet-hud-desc {
+                font-size: 0.7rem;
+                line-height: 1.3;
+                /* Chỉ show 2 dòng để không tốn space */
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .planet-hud-actions {
+                gap: 0.4rem;
+                padding: 0.4rem 0.6rem;
+            }
+            .hud-btn {
+                padding: 0.55rem 0.5rem;
+                font-size: 0.7rem;
+                gap: 0.3rem;
+            }
+            .hud-btn-icon {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -1137,15 +1221,15 @@
     </div>
 
     <!-- Three.js UMD bundle - chạy được trên file:// -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/Pass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/shaders/CopyShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/Pass.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
     <script>
     // Đợi cho tất cả script load xong trước khi chạy
@@ -1194,33 +1278,33 @@
         { id: 'vnindex', code: '0x01', name: 'VN-Index', type: 'planet',
           url: 'https://vnindex.kenvinzone.com',
           radius: 1.5, distance: 13, speed: 0.18, color: 0x5dd5d5, atmoColor: 0x5dd5d5,
-          desc: 'Dữ liệu cập nhật & phân tích chuyên sâu chỉ số TTCK Việt Nam — tracking real-time',
-          subtitle: 'Phân tích chiến lược chỉ số VN-Index chuyên sâu',
+          desc: 'Dữ liệu bảng giá & chỉ số TTCK Việt Nam — tracking real-time',
+          subtitle: 'Phân tích chỉ số VN-Index hàng ngày',
           emoji: '📈', rgb: '93, 213, 213' },
         { id: 'aiclass', code: '0x02', name: 'AI Class', type: 'planet',
           url: 'https://aiclass.kenvinzone.com',
-          radius: 1.7, distance: 18, speed: 0.14, color: 0x6bcb6b, atmoColor: 0x4169E1,
-          desc: 'Lớp học AI thế hệ mới cho Kids — workshop, training, build & deploy',
+          radius: 1.7, distance: 18, speed: 0.14, color: 0x6bcb6b, atmoColor: 0x6bcb6b,
+          desc: 'Lớp học AI thế hệ mới — workshop, training, build & deploy',
           subtitle: 'Lớp học "AI for Kids"',
           emoji: '🎓', rgb: '107, 203, 107' },
         { id: 'trading', code: '0x03', name: 'Trading Tool', type: 'planet',
           url: 'https://tradingtool.kenvinzone.com',
-          radius: 1.4, distance: 23, speed: 0.11, color: 0x6bb8ff, atmoColor: 0x00BFFF,
-          desc: 'Công cụ hỗ trợ phân tích kỹ thuật & trợ lý giao dịch thông minh',
-          subtitle: 'Tools hiện thực hóa idea giao dịch CK-Crypto-FT',
+          radius: 1.4, distance: 23, speed: 0.11, color: 0x6bb8ff, atmoColor: 0x6bb8ff,
+          desc: 'Công cụ phân tích kỹ thuật & trợ lý giao dịch thông minh',
+          subtitle: 'Thiết kế các ý tưởng giao dịch',
           emoji: '🛠️', rgb: '107, 184, 255' },
         { id: 'gold', code: '0x04', name: 'Gold & Nasdaq', type: 'planet',
           url: 'https://gold-nasdaq.kenvinzone.com',
           radius: 1.6, distance: 28, speed: 0.085, color: 0xf4c542, atmoColor: 0xf4c542,
           desc: 'Tín hiệu thị trường Vàng và NASDAQ — coverage 24/7',
-          subtitle: 'Chiến lược giao dịch chỉ số Future: Gold & Nasdaq',
+          subtitle: 'Chiến lược giao dịch chỉ số Future',
           emoji: '🟡', rgb: '244, 197, 66' },
         { id: 'ainews', code: '0x05', name: 'AI News', type: 'planet',
           url: 'https://ainews.kenvinzone.com',
-          radius: 1.3, distance: 33, speed: 0.065, color: 0x08ff4e, atmoColor: 0x08ff4e,
+          radius: 1.3, distance: 33, speed: 0.065, color: 0x9778d9, atmoColor: 0x9778d9,
           desc: 'Dòng tin AI, neural networks, LLMs — curated daily',
           subtitle: 'Cập nhật tin tức AI hàng ngày',
-          emoji: '📰', rgb: '8, 255, 78' }
+          emoji: '📰', rgb: '151, 120, 217' }
     ];
 
     const loadingSteps = [
@@ -2949,7 +3033,7 @@
     // ============================================================
     // ⚠️ Đây là API key gốc của bạn. Hãy chuyển sang Cloudflare Worker proxy trước khi deploy public!
     const apiKey = "AIzaSyAt2Ia8Vyt8A5lks6VsGG2b5dZzQr8NG6Q";
-    const MODEL = "gemini-2.0-flash";
+    const MODEL = "gemini-2.5-flash";  // Cập nhật từ 2.0-flash → quota free tier tốt hơn
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
 
     const systemPrompt = `Bạn là KV-Core v5.0 — Quantum Neural AI vận hành hệ thống Quantum Observatory của KenvinZone.
@@ -3037,7 +3121,8 @@ GIỌNG ĐIỆU:
             };
 
             let response, attempts = 0;
-            let delay = 800;
+            let delay = 1500;
+            let lastStatus = 0;
             while (attempts < 3) {
                 try {
                     response = await fetch(apiUrl, {
@@ -3046,11 +3131,23 @@ GIỌNG ĐIỆU:
                         body: JSON.stringify(payload)
                     });
                     if (response.ok) break;
+                    lastStatus = response.status;
+                    // 429 = rate limit, cần backoff lâu hơn
+                    if (response.status === 429) {
+                        throw new Error('RATE_LIMIT');
+                    }
                     throw new Error(`HTTP ${response.status}`);
                 } catch (err) {
                     attempts++;
-                    if (attempts >= 3) throw err;
-                    await new Promise(r => setTimeout(r, delay));
+                    if (attempts >= 3) {
+                        if (lastStatus === 429 || err.message === 'RATE_LIMIT') {
+                            throw new Error('RATE_LIMIT_FINAL');
+                        }
+                        throw err;
+                    }
+                    // 429 → backoff lâu hơn (5-10s) vì quota cần thời gian reset
+                    const waitMs = lastStatus === 429 ? Math.max(delay, 5000) : delay;
+                    await new Promise(r => setTimeout(r, waitMs));
                     delay *= 2;
                 }
             }
@@ -3074,7 +3171,21 @@ GIỌNG ĐIỆU:
 
         } catch (err) {
             console.error(err);
-            target.innerHTML = `<strong style="color: var(--neon-magenta);">⚠ [QUANTUM-LINK ERROR]</strong> ${escapeHtml(err.message)}<br><span style="color: var(--text-dim); font-size: 0.85em;">Kiểm tra API key/model hoặc thử lại sau.</span>`;
+            let errorMsg, hint;
+            if (err.message === 'RATE_LIMIT_FINAL' || err.message === 'RATE_LIMIT') {
+                errorMsg = '⏱ [RATE LIMIT] Quá nhiều request';
+                hint = 'Gemini API free tier đã hết quota. Vui lòng đợi 1-2 phút rồi thử lại, hoặc nâng cấp lên paid tier.';
+            } else if (err.message.includes('403')) {
+                errorMsg = '🔒 [AUTH ERROR] API key không hợp lệ';
+                hint = 'Kiểm tra lại API key hoặc đảm bảo Gemini API được enable.';
+            } else if (err.message.includes('400')) {
+                errorMsg = '✗ [BAD REQUEST] Sai format';
+                hint = 'Vui lòng thử lại với câu hỏi khác.';
+            } else {
+                errorMsg = '⚠ [QUANTUM-LINK ERROR] ' + escapeHtml(err.message);
+                hint = 'Kiểm tra kết nối hoặc thử lại sau.';
+            }
+            target.innerHTML = `<strong style="color: var(--neon-magenta);">${errorMsg}</strong><br><span style="color: var(--text-dim); font-size: 0.85em;">${hint}</span>`;
             document.getElementById('status-ai').textContent = 'ERROR';
             document.getElementById('status-ai').style.color = 'var(--neon-magenta)';
             consoleLog('[AI] Link failure', 'magenta');
@@ -3151,61 +3262,12 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     })();
 
     // ============================================================
-    // SOUND & YOUTUBE BACKGROUND MUSIC (OFFICIAL PLAYER API)
+    // SOUND
     // ============================================================
     let audioCtx = null;
     let soundEnabled = false;
-    const videoId = "gCWaRhNUvfc"; // YouTube video ID của bạn
-    let ytPlayer = null;
-    let ytApiReady = false;
-
-    // Khởi tạo khung chứa iframe ẩn đặc thù đẩy hẳn ra ngoài viewport
-    const ytDiv = document.createElement('div');
-    ytDiv.id = 'yt-player-container';
-    ytDiv.style.position = 'fixed';
-    ytDiv.style.left = '-9999px';
-    ytDiv.style.top = '-9999px';
-    ytDiv.style.width = '480px';
-    ytDiv.style.height = '270px';
-    ytDiv.style.pointerEvents = 'none';
-    document.body.appendChild(ytDiv);
-
-    // Tải động YouTube SDK để tương tác an toàn
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // YouTube SDK gọi lại khi sẵn sàng
-    window.onYouTubeIframeAPIReady = function() {
-        ytPlayer = new YT.Player('yt-player-container', {
-            height: '270',
-            width: '480',
-            videoId: videoId,
-            playerVars: {
-                autoplay: 0,
-                loop: 1,
-                playlist: videoId,
-                controls: 0,
-                showinfo: 0,
-                rel: 0,
-                enablejsapi: 1,
-                origin: window.location.origin
-            },
-            events: {
-                onReady: () => {
-                    ytApiReady = true;
-                    consoleLog('[AUDIO] Quantum audio receiver synced', 'cyan');
-                },
-                onStateChange: (e) => {
-                    // Fallback lặp nhạc của YouTube
-                    if (e.data === YT.PlayerState.ENDED) {
-                        ytPlayer.playVideo();
-                    }
-                }
-            }
-        });
-    };
+    let ambientGain = null;
+    let ambientOsc = null;
 
     function initAudio() {
         if (audioCtx) return;
@@ -3256,28 +3318,39 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     }
 
     function startAmbient() {
-        if (ytPlayer && ytApiReady && typeof ytPlayer.playVideo === 'function') {
-            try {
-                ytPlayer.unMute();
-                ytPlayer.setVolume(100);
-                ytPlayer.playVideo();
-                consoleLog('[AUDIO] Ambient music initiated', 'cyan');
-            } catch (e) {
-                console.error('[AUDIO] Embed interaction failure', e);
-            }
-        } else {
-            // Chờ API tải xong nếu người dùng kích hoạt quá nhanh
-            setTimeout(startAmbient, 300);
-        }
+        if (!audioCtx || ambientOsc) return;
+        ambientOsc = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        ambientGain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 400;
+        ambientOsc.type = 'sine';
+        ambientOsc.frequency.value = 55;
+        osc2.type = 'sine';
+        osc2.frequency.value = 110;
+        ambientOsc.connect(ambientGain);
+        osc2.connect(ambientGain);
+        ambientGain.connect(filter);
+        filter.connect(audioCtx.destination);
+        ambientGain.gain.value = 0;
+        ambientGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 2);
+        ambientOsc.start();
+        osc2.start();
+        const lfo = audioCtx.createOscillator();
+        const lfoGain = audioCtx.createGain();
+        lfo.frequency.value = 0.1;
+        lfoGain.gain.value = 5;
+        lfo.connect(lfoGain);
+        lfoGain.connect(ambientOsc.frequency);
+        lfo.start();
     }
-
     function stopAmbient() {
-        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-            try {
-                ytPlayer.pauseVideo();
-            } catch(e) {}
-        }
-        consoleLog('[AUDIO] Silent mode active', 'amber');
+        if (!ambientGain) return;
+        ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+        setTimeout(() => {
+            if (ambientOsc) { ambientOsc.stop(); ambientOsc = null; }
+        }, 600);
     }
 
     document.getElementById('sound-toggle').addEventListener('click', () => {
@@ -3289,10 +3362,12 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
             btn.classList.remove('muted');
             icon.className = 'fa-solid fa-volume-high';
             startAmbient();
+            consoleLog('[AUDIO] Ambient field online', 'cyan');
         } else {
             btn.classList.add('muted');
             icon.className = 'fa-solid fa-volume-xmark';
             stopAmbient();
+            consoleLog('[AUDIO] Silent mode', 'amber');
         }
     });
 
