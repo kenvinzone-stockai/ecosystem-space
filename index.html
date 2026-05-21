@@ -1001,26 +1001,8 @@
             }
             .ai-terminal.collapsed { max-height: 56px; }
             .minimap, .console-log { display: none; }
-            .planet-hud {
-                min-width: auto;
-                width: calc(100% - 2rem);
-                bottom: auto;
-                top: 5rem;
-                flex-direction: column;
-            }
-            .planet-hud-emoji {
-                width: 100%;
-                height: 50px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.06);
-            }
-            .planet-hud-actions {
-                border-left: none;
-                border-top: 1px solid rgba(255,255,255,0.06);
-            }
-            .hud-btn { flex: 1; justify-content: center; padding: 0.75rem; }
 
-            /* Mobile: sound + ship toggle - đặt cùng cột với side-nav, gần đáy nhưng tránh planet-hud */
+            /* Mobile: sound + ship toggle bên trái */
             .side-nav {
                 left: 0.75rem;
                 top: 50%;
@@ -1029,11 +1011,11 @@
             }
             .sound-toggle {
                 position: fixed;
-                bottom: 9rem;          /* Cao đủ để không bị che bởi planet-hud (HUD ~110px + 50px gap) */
+                bottom: 9rem;
                 top: auto;
                 left: 0.75rem;
                 right: auto;
-                margin-top: 0;
+                margin: 0;
                 transform: none;
                 width: 40px;
                 height: 40px;
@@ -1041,69 +1023,103 @@
             }
             .ship-toggle {
                 position: fixed;
-                bottom: calc(9rem + 50px);  /* Phía trên sound-toggle */
+                bottom: calc(9rem + 50px);
                 top: auto;
                 left: 0.75rem;
                 right: auto;
-                margin-top: 0;
+                margin: 0;
                 transform: none;
                 width: 40px;
                 height: 40px;
                 font-size: 0.9rem;
             }
 
-            /* Mobile: planet HUD compact hơn — chỉ chiếm 1/3 màn hình dưới */
+            /* Mobile: Planet HUD - compact card phía trên AI terminal, full width */
+            /* IMPORTANT: override transform để không bị translate(-50%) như desktop */
             .planet-hud {
-                bottom: 0.5rem;
-                left: 0.5rem;
-                right: 0.5rem;
-                transform: none;
+                /* Position: phía trên ai-terminal, không phải dưới đáy */
+                bottom: auto;
+                /* ai-terminal collapsed cao 56px, đặt bên trên 60px ai-terminal + 10px gap */
+                top: auto;
+                /* Đặt theo bottom để không phụ thuộc height màn hình */
+                /* AI terminal collapsed: bottom 1rem + max-height 56px = top edge ở 56+16 = 72px from bottom
+                   AI terminal expanded: max-height 50vh từ bottom 1rem
+                   → đặt planet-hud ngay phía trên collapsed terminal, expanded terminal sẽ tự che */
+                bottom: calc(56px + 1rem + 12px); /* 56 collapsed terminal + margin + gap */
+                left: 0.75rem;
+                right: 0.75rem;
                 width: auto;
+                min-width: 0;
                 max-width: none;
-                border-radius: 8px;
+                /* Reset desktop transform để không bị lệch -50% sang trái */
+                transform: translateY(20px);
+                flex-direction: row;
+                border-radius: 6px;
             }
-            .planet-hud-content {
-                gap: 0.5rem;
-                padding: 0.6rem 0.75rem;
+            .planet-hud.visible {
+                transform: translateY(0);
             }
             .planet-hud-emoji {
-                font-size: 1.5rem;
-                width: 36px;
-                height: 36px;
-                min-width: 36px;
+                width: 52px;
+                height: auto;
+                min-width: 52px;
+                font-size: 1.6rem;
+                border-right: 1px solid rgba(255,255,255,0.06);
+                border-bottom: none;
+                padding: 0.5rem;
+            }
+            .planet-hud-emoji::after {
+                top: 5px; left: 5px;
+                width: 8px; height: 8px;
             }
             .planet-hud-info {
-                gap: 0.1rem;
+                padding: 0.55rem 0.8rem;
+                min-width: 0;
+                flex: 1;
+                overflow: hidden;
             }
-            .planet-hud-meta {
-                font-size: 0.55rem;
-                letter-spacing: 0.1em;
+            .planet-hud-id {
+                font-size: 0.5rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 0.15rem;
             }
-            .planet-hud-title {
+            .planet-hud-name {
                 font-size: 1rem;
-                line-height: 1.15;
+                line-height: 1.1;
+                margin-bottom: 0.2rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
             .planet-hud-desc {
-                font-size: 0.7rem;
-                line-height: 1.3;
-                /* Chỉ show 2 dòng để không tốn space */
+                font-size: 0.62rem;
+                line-height: 1.35;
+                max-width: none;
+                /* Show tối đa 2 dòng để vừa khít */
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
             .planet-hud-actions {
-                gap: 0.4rem;
-                padding: 0.4rem 0.6rem;
+                border-left: 1px solid rgba(255,255,255,0.06);
+                border-top: none;
+                flex-direction: column;
+                flex-shrink: 0;
             }
             .hud-btn {
-                padding: 0.55rem 0.5rem;
-                font-size: 0.7rem;
+                flex: 1;
+                justify-content: center;
+                padding: 0.5rem 0.7rem;
+                font-size: 0.55rem;
+                letter-spacing: 0.08em;
                 gap: 0.3rem;
+                min-width: 0;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
             }
-            .hud-btn-icon {
-                font-size: 0.85rem;
-            }
+            .hud-btn:last-child { border-bottom: none; }
+            .hud-btn i { font-size: 0.85rem; }
         }
     </style>
 </head>
