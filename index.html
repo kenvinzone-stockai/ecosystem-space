@@ -3151,12 +3151,61 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     })();
 
     // ============================================================
-    // SOUND & YOUTUBE BACKGROUND MUSIC
+    // SOUND & YOUTUBE BACKGROUND MUSIC (OFFICIAL PLAYER API)
     // ============================================================
     let audioCtx = null;
     let soundEnabled = false;
-    const videoId = "gCWaRhNUvfc"; // YouTube video ID
-    let ytFrame = null; // Khởi tạo động khi kích hoạt để loại bỏ lỗi nguồn bảo mật cục bộ file://
+    const videoId = "gCWaRhNUvfc"; // YouTube video ID của bạn
+    let ytPlayer = null;
+    let ytApiReady = false;
+
+    // Khởi tạo khung chứa iframe ẩn đặc thù đẩy hẳn ra ngoài viewport
+    const ytDiv = document.createElement('div');
+    ytDiv.id = 'yt-player-container';
+    ytDiv.style.position = 'fixed';
+    ytDiv.style.left = '-9999px';
+    ytDiv.style.top = '-9999px';
+    ytDiv.style.width = '480px';
+    ytDiv.style.height = '270px';
+    ytDiv.style.pointerEvents = 'none';
+    document.body.appendChild(ytDiv);
+
+    // Tải động YouTube SDK để tương tác an toàn
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // YouTube SDK gọi lại khi sẵn sàng
+    window.onYouTubeIframeAPIReady = function() {
+        ytPlayer = new YT.Player('yt-player-container', {
+            height: '270',
+            width: '480',
+            videoId: videoId,
+            playerVars: {
+                autoplay: 0,
+                loop: 1,
+                playlist: videoId,
+                controls: 0,
+                showinfo: 0,
+                rel: 0,
+                enablejsapi: 1,
+                origin: window.location.origin
+            },
+            events: {
+                onReady: () => {
+                    ytApiReady = true;
+                    consoleLog('[AUDIO] Quantum audio receiver synced', 'cyan');
+                },
+                onStateChange: (e) => {
+                    // Fallback lặp nhạc của YouTube
+                    if (e.data === YT.PlayerState.ENDED) {
+                        ytPlayer.playVideo();
+                    }
+                }
+            }
+        });
+    };
 
     function initAudio() {
         if (audioCtx) return;
@@ -3207,32 +3256,26 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     }
 
     function startAmbient() {
-        if (!ytFrame) {
-            ytFrame = document.createElement('iframe');
-            ytFrame.style.position = 'fixed';
-            ytFrame.style.left = '-9999px'; // Đẩy hoàn toàn ra khỏi màn hình hiển thị
-            ytFrame.style.top = '-9999px';
-            ytFrame.style.width = '480px';  // Đặt kích thước chuẩn để YouTube không chặn (Anti-spam/Anti-fraud player size check)
-            ytFrame.style.height = '270px';
-            ytFrame.style.pointerEvents = 'none';
-            // Vô hiệu hóa referrer chuyển tiếp để YouTube không chặn giao thức file:// từ trình duyệt của bạn
-            ytFrame.setAttribute('referrerpolicy', 'no-referrer');
-            ytFrame.setAttribute('allow', 'autoplay; encrypted-media');
-            document.body.appendChild(ytFrame);
+        if (ytPlayer && ytApiReady && typeof ytPlayer.playVideo === 'function') {
+            try {
+                ytPlayer.unMute();
+                ytPlayer.setVolume(100);
+                ytPlayer.playVideo();
+                consoleLog('[AUDIO] Ambient music initiated', 'cyan');
+            } catch (e) {
+                console.error('[AUDIO] Embed interaction failure', e);
+            }
+        } else {
+            // Chờ API tải xong nếu người dùng kích hoạt quá nhanh
+            setTimeout(startAmbient, 300);
         }
-        // Nạp nguồn URL trực tiếp từ embed YouTube kèm theo loop, playlist, và autoplay
-        ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&start=0&enablejsapi=0`;
-        consoleLog('[AUDIO] YouTube background music initiated', 'cyan');
     }
 
     function stopAmbient() {
-        if (ytFrame) {
-            ytFrame.src = '';
-            // Gỡ bỏ hoàn toàn Iframe ra khỏi DOM khi tắt nhạc để triệt tiêu cảnh báo bảo mật ngầm
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try {
-                document.body.removeChild(ytFrame);
+                ytPlayer.pauseVideo();
             } catch(e) {}
-            ytFrame = null;
         }
         consoleLog('[AUDIO] Silent mode active', 'amber');
     }
@@ -3246,12 +3289,10 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
             btn.classList.remove('muted');
             icon.className = 'fa-solid fa-volume-high';
             startAmbient();
-            consoleLog('[AUDIO] Ambient music online', 'cyan');
         } else {
             btn.classList.add('muted');
             icon.className = 'fa-solid fa-volume-xmark';
             stopAmbient();
-            consoleLog('[AUDIO] Silent mode', 'amber');
         }
     });
 
