@@ -3262,12 +3262,12 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     })();
 
     // ============================================================
-    // SOUND
+    // SOUND & YOUTUBE BACKGROUND MUSIC
     // ============================================================
     let audioCtx = null;
     let soundEnabled = false;
-    let ambientGain = null;
-    let ambientOsc = null;
+    const videoId = "gCWaRhNUvfc"; // YouTube video ID
+    let ytFrame = null; // Khởi tạo động khi kích hoạt để loại bỏ lỗi nguồn bảo mật cục bộ file://
 
     function initAudio() {
         if (audioCtx) return;
@@ -3318,39 +3318,34 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     }
 
     function startAmbient() {
-        if (!audioCtx || ambientOsc) return;
-        ambientOsc = audioCtx.createOscillator();
-        const osc2 = audioCtx.createOscillator();
-        ambientGain = audioCtx.createGain();
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 400;
-        ambientOsc.type = 'sine';
-        ambientOsc.frequency.value = 55;
-        osc2.type = 'sine';
-        osc2.frequency.value = 110;
-        ambientOsc.connect(ambientGain);
-        osc2.connect(ambientGain);
-        ambientGain.connect(filter);
-        filter.connect(audioCtx.destination);
-        ambientGain.gain.value = 0;
-        ambientGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 2);
-        ambientOsc.start();
-        osc2.start();
-        const lfo = audioCtx.createOscillator();
-        const lfoGain = audioCtx.createGain();
-        lfo.frequency.value = 0.1;
-        lfoGain.gain.value = 5;
-        lfo.connect(lfoGain);
-        lfoGain.connect(ambientOsc.frequency);
-        lfo.start();
+        if (!ytFrame) {
+            ytFrame = document.createElement('iframe');
+            ytFrame.style.position = 'fixed';
+            ytFrame.style.left = '-9999px'; // Đẩy hoàn toàn ra khỏi màn hình hiển thị
+            ytFrame.style.top = '-9999px';
+            ytFrame.style.width = '480px';  // Đặt kích thước chuẩn để YouTube không chặn (Anti-spam/Anti-fraud player size check)
+            ytFrame.style.height = '270px';
+            ytFrame.style.pointerEvents = 'none';
+            // Vô hiệu hóa referrer chuyển tiếp để YouTube không chặn giao thức file:// từ trình duyệt của bạn
+            ytFrame.setAttribute('referrerpolicy', 'no-referrer');
+            ytFrame.setAttribute('allow', 'autoplay; encrypted-media');
+            document.body.appendChild(ytFrame);
+        }
+        // Nạp nguồn URL trực tiếp từ embed YouTube kèm theo loop, playlist, và autoplay
+        ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&start=0&enablejsapi=0`;
+        consoleLog('[AUDIO] YouTube background music initiated', 'cyan');
     }
+
     function stopAmbient() {
-        if (!ambientGain) return;
-        ambientGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
-        setTimeout(() => {
-            if (ambientOsc) { ambientOsc.stop(); ambientOsc = null; }
-        }, 600);
+        if (ytFrame) {
+            ytFrame.src = '';
+            // Gỡ bỏ hoàn toàn Iframe ra khỏi DOM khi tắt nhạc để triệt tiêu cảnh báo bảo mật ngầm
+            try {
+                document.body.removeChild(ytFrame);
+            } catch(e) {}
+            ytFrame = null;
+        }
+        consoleLog('[AUDIO] Silent mode active', 'amber');
     }
 
     document.getElementById('sound-toggle').addEventListener('click', () => {
