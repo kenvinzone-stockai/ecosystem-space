@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#020005">
-    <title>KenvinZone v5.0 — Quantum Observatory</title>
+    <title>KenvinZone v5.18 — Quantum Observatory</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +149,7 @@
             position: relative;
         }
         .loading-logo::after {
-            content: 'v5.0';
+            content: 'v5.18';
             position: absolute;
             top: 0.4em;
             right: -2.2em;
@@ -686,7 +686,7 @@
         }
         .planet-hud-id {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: var(--text-dim);
             letter-spacing: 0.3em;
             text-transform: uppercase;
@@ -889,10 +889,10 @@
         .planet-label.selected .label-name { color: var(--bg-void); text-shadow: none; }
         .planet-label.selected .label-code { color: var(--bg-void); opacity: 0.9; }
 
-        /* Sound + Ship toggles - DESKTOP: horizontal pair phía trên minimap, cùng cột với side-nav */
+        /* Sound + Ship toggles - DESKTOP */
         .sound-toggle {
             position: fixed;
-            bottom: calc(2rem + 160px);  /* Phía trên minimap (minimap cao 140px + 20px gap) */
+            bottom: calc(2rem + 160px);
             left: 2rem;
             z-index: 14;
             width: 44px;
@@ -918,7 +918,7 @@
         .ship-toggle {
             position: fixed;
             bottom: calc(2rem + 160px);
-            left: calc(2rem + 56px);  /* Cạnh sound-toggle, gap 12px */
+            left: calc(2rem + 56px);
             z-index: 14;
             width: 44px;
             height: 44px;
@@ -940,7 +940,7 @@
         .ship-toggle.hidden-ship { color: var(--text-dim); border-color: var(--text-dim); }
         .ship-toggle.hidden-ship:hover { box-shadow: none; }
 
-        /* === CURVED TEXT OVERLAY (HUD arc trên hành tinh được focus) === */
+        /* === CURVED TEXT OVERLAY === */
         .curved-text-overlay {
             position: fixed;
             pointer-events: none;
@@ -960,7 +960,7 @@
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.08em;
-            text-transform: none;  /* Bỏ uppercase - giữ chữ thường để dễ đọc */
+            text-transform: none;
             fill: var(--arc-color, #5dd5d5);
             filter: drop-shadow(0 0 4px var(--arc-color, #5dd5d5));
         }
@@ -989,7 +989,8 @@
             filter: drop-shadow(0 0 4px var(--arc-color, #5dd5d5));
         }
 
-        @media (max-width: 900px) {            .top-bar { padding: 1rem; }
+        @media (max-width: 900px) {
+            .top-bar { padding: 1rem; }
             .side-nav { left: 1rem; gap: 0.5rem; }
             .ai-terminal {
                 width: calc(100% - 2rem);
@@ -1002,7 +1003,7 @@
             .ai-terminal.collapsed { max-height: 56px; }
             .minimap, .console-log { display: none; }
 
-            /* Mobile: sound + ship toggle bên trái */
+            /* Mobile: sound + ship toggle */
             .side-nav {
                 left: 0.75rem;
                 top: 50%;
@@ -1034,24 +1035,16 @@
                 font-size: 0.9rem;
             }
 
-            /* Mobile: Planet HUD - compact card phía trên AI terminal, full width */
-            /* IMPORTANT: override transform để không bị translate(-50%) như desktop */
+            /* Mobile: Planet HUD */
             .planet-hud {
-                /* Position: phía trên ai-terminal, không phải dưới đáy */
                 bottom: auto;
-                /* ai-terminal collapsed cao 56px, đặt bên trên 60px ai-terminal + 10px gap */
                 top: auto;
-                /* Đặt theo bottom để không phụ thuộc height màn hình */
-                /* AI terminal collapsed: bottom 1rem + max-height 56px = top edge ở 56+16 = 72px from bottom
-                   AI terminal expanded: max-height 50vh từ bottom 1rem
-                   → đặt planet-hud ngay phía trên collapsed terminal, expanded terminal sẽ tự che */
-                bottom: calc(56px + 1rem + 12px); /* 56 collapsed terminal + margin + gap */
+                bottom: calc(56px + 1rem + 12px);
                 left: 0.75rem;
                 right: 0.75rem;
                 width: auto;
                 min-width: 0;
                 max-width: none;
-                /* Reset desktop transform để không bị lệch -50% sang trái */
                 transform: translateY(20px);
                 flex-direction: row;
                 border-radius: 6px;
@@ -1095,7 +1088,6 @@
                 font-size: 0.62rem;
                 line-height: 1.35;
                 max-width: none;
-                /* Show tối đa 2 dòng để vừa khít */
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
@@ -1145,12 +1137,12 @@
         <div class="brand-block">
             <div class="brand-tag">KV-CORE / OBSERVATORY ONLINE</div>
             <div>
-                <span class="brand-name">KenvinZone</span><span class="brand-version">v5.0</span>
+                <span class="brand-name">KenvinZone</span><span class="brand-version">v5.18</span>
             </div>
         </div>
         <div class="status-block">
             <div class="status-row"><span class="dot dot-green"></span><span>Quantum Link</span><strong>STABLE</strong></div>
-            <div class="status-row"><span class="dot dot-cyan"></span><span>Nodes</span><strong>6/6 ACTIVE</strong></div>
+            <div class="status-row"><span class="dot dot-cyan"></span><span>Nodes</span><strong>8/8 ACTIVE</strong></div>
             <div class="status-row"><span class="dot dot-amber"></span><span>Neural AI</span><strong id="status-ai">STANDBY</strong></div>
         </div>
     </div>
@@ -1170,8 +1162,10 @@
             <button class="quick-btn" style="--btn-color: var(--neon-cyan);" data-prompt="Phân tích Vệ tinh VN-Index và lợi ích cho nhà đầu tư">📈 VN-Index</button>
             <button class="quick-btn" style="--btn-color: var(--neon-magenta);" data-prompt="Giới thiệu về AI Class: bạn dạy gì ở đây?">🎓 AI Class</button>
             <button class="quick-btn" style="--btn-color: var(--neon-amber);" data-prompt="Trading Tool có những chức năng tối ưu nào?">🛠 Trading</button>
-            <button class="quick-btn" style="--btn-color: var(--neon-emerald);" data-prompt="Gold &amp; Nasdaq cập nhật thị trường thế nào?">🟡 Gold</button>
+            <button class="quick-btn" style="--btn-color: var(--neon-amber);" data-prompt="Gold &amp; Nasdaq cập nhật thị trường thế nào?">🟡 Gold</button>
             <button class="quick-btn" style="--btn-color: var(--neon-violet);" data-prompt="AI News cập nhật xu hướng công nghệ ra sao?">📰 News</button>
+            <button class="quick-btn" style="--btn-color: #ff7300;" data-prompt="Crypto Index cung cấp chỉ số và dữ liệu biến động chuỗi khối như thế nào?">🪙 Crypto</button>
+            <button class="quick-btn" style="--btn-color: var(--neon-emerald);" data-prompt="Forex Index phân tích tỷ giá ngoại hối toàn cầu và cập nhật biến động tiền tệ thế nào?">💱 Forex</button>
         </div>
         <div class="input-area">
             <input type="text" id="ai-input" placeholder="Truy vấn KV-Core...">
@@ -1207,27 +1201,22 @@
         <i class="fa-solid fa-rocket"></i>
     </button>
 
-    <!-- Curved text overlay - HUD arc trên hành tinh được focus -->
+    <!-- Curved text overlay -->
     <div class="curved-text-overlay" id="curved-text">
         <svg id="curved-svg" width="600" height="400" viewBox="-300 -200 600 400">
             <defs>
                 <path id="arc-path-top" d="" />
                 <path id="arc-path-bottom" d="" />
             </defs>
-            <!-- Dashed outer arc marker -->
             <path id="arc-outer" class="arc-marker" d="" />
-            <!-- Tick marks -->
             <g id="arc-ticks"></g>
-            <!-- Center dot indicators -->
             <circle id="arc-dot-left" class="arc-dot" r="2.5" cx="0" cy="0" />
             <circle id="arc-dot-right" class="arc-dot" r="2.5" cx="0" cy="0" />
-            <!-- Main curved text (subtitle) -->
             <text class="arc-text">
                 <textPath id="arc-textpath-main" href="#arc-path-top" startOffset="50%" text-anchor="middle">
                     PLANET NAME
                 </textPath>
             </text>
-            <!-- Small code text below -->
             <text class="arc-text-small">
                 <textPath id="arc-textpath-code" href="#arc-path-bottom" startOffset="50%" text-anchor="middle">
                     NODE / 0X00
@@ -1236,19 +1225,18 @@
         </svg>
     </div>
 
-    <!-- Three.js UMD bundle - chạy được trên file:// -->
-    <script src="https://unpkg.com/three@0.135.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/Pass.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/shaders/CopyShader.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-    <script src="https://unpkg.com/three@0.135.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <!-- Three.js UMD bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/Pass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
     <script>
-    // Đợi cho tất cả script load xong trước khi chạy
     function checkLibrariesReady() {
         if (typeof THREE === 'undefined') return 'Three.js core';
         if (typeof THREE.OrbitControls === 'undefined') return 'OrbitControls';
@@ -1281,7 +1269,7 @@
 
     function initApp() {
     // ============================================================
-    // KENVINZONE v5.0 — QUANTUM OBSERVATORY (UMD VERSION)
+    // KENVINZONE v5.18 — QUANTUM OBSERVATORY (UMD VERSION)
     // ============================================================
 
     const SYSTEM = [
@@ -1320,7 +1308,19 @@
           radius: 1.3, distance: 33, speed: 0.065, color: 0x9778d9, atmoColor: 0x9778d9,
           desc: 'Dòng tin AI, neural networks, LLMs — curated daily',
           subtitle: 'Cập nhật tin tức AI hàng ngày',
-          emoji: '📰', rgb: '151, 120, 217' }
+          emoji: '📰', rgb: '151, 120, 217' },
+        { id: 'cryptoindex', code: '0x06', name: 'Crypto Index', type: 'planet',
+          url: 'https://cryptoindex.kenvinzone.com',
+          radius: 1.5, distance: 38, speed: 0.05, color: 0xff7300, atmoColor: 0xff7300,
+          desc: 'Phân tích dữ liệu chỉ số vốn hóa & biến động thị trường Crypto — Bitcoin, Ethereum và Altcoins real-time',
+          subtitle: 'Cập nhật phân tích chỉ số BTC & Altcoin',
+          emoji: '🪙', rgb: '255, 115, 0' },
+        { id: 'forexindex', code: '0x07', name: 'Forex Index', type: 'planet',
+          url: 'https://forex-index.kenvinzone.com',
+          radius: 1.4, distance: 43, speed: 0.04, color: 0x00ffaa, atmoColor: 0x00ffaa,
+          desc: 'Bảng chỉ số tỷ giá & phân tích biến động thị trường ngoại hối toàn cầu Forex — EUR/USD, USD/JPY, GBP/USD real-time',
+          subtitle: 'Theo dõi biến động tỷ giá ngoại hối liên ngân hàng',
+          emoji: '💱', rgb: '0, 255, 170' }
     ];
 
     const loadingSteps = [
@@ -1350,7 +1350,7 @@
     // ============================================================
     const container = document.getElementById('canvas-container');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x080418, 0.005);  // Giảm density để thiên thạch xa vẫn nhìn được mờ ảo
+    scene.fog = new THREE.FogExp2(0x080418, 0.005);
 
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
     camera.position.set(0, 55, 90);
@@ -1359,7 +1359,7 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.85;  // Giảm từ 1.15 → tổng thể dịu hơn
+    renderer.toneMappingExposure = 0.85;
     if (THREE.SRGBColorSpace !== undefined) {
         renderer.outputColorSpace = THREE.SRGBColorSpace;
     } else {
@@ -1373,12 +1373,11 @@
     const composer = new THREE.EffectComposer(renderer);
     composer.addPass(new THREE.RenderPass(scene, camera));
 
-    // Bloom rất nhẹ - chỉ làm cho rim light hơi mềm, không "phát sáng" lan tỏa
     const bloomPass = new THREE.UnrealBloomPass(
         new THREE.Vector2(window.innerWidth, window.innerHeight),
-        0.18,  // strength rất thấp
-        0.5,   // radius rộng để bloom mềm và mượt
-        0.7    // threshold cao - chỉ vùng cực sáng mới bloom
+        0.18,
+        0.5,
+        0.7
     );
     composer.addPass(bloomPass);
 
@@ -1386,8 +1385,8 @@
         uniforms: {
             tDiffuse: { value: null },
             uTime: { value: 0 },
-            uAberration: { value: 0.0003 },  // Gần như không thấy
-            uGrain: { value: 0.015 }          // Grain rất nhẹ - vừa đủ "atmosphere"
+            uAberration: { value: 0.0003 },
+            uGrain: { value: 0.015 }
         },
         vertexShader: `
             varying vec2 vUv;
@@ -1432,7 +1431,7 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxDistance = 350;  // Tăng từ 180 để có thể zoom ra ngắm thiên thạch
+    controls.maxDistance = 350;
     controls.minDistance = 8;
     controls.maxPolarAngle = Math.PI / 2 + 0.05;
     controls.minPolarAngle = 0.1;
@@ -1442,24 +1441,20 @@
     // ============================================================
     // LIGHTING
     // ============================================================
-    // Lighting tinh chỉnh - cân bằng giữa hiển thị rõ và không blow out
-    scene.add(new THREE.AmbientLight(0xb8c5e5, 0.25));  // Giảm từ 0.45 - không blow out half sáng
-    const hemiLight = new THREE.HemisphereLight(0x7da8d9, 0x1a0a2e, 0.2);  // Giảm từ 0.35
+    scene.add(new THREE.AmbientLight(0xb8c5e5, 0.25));
+    const hemiLight = new THREE.HemisphereLight(0x7da8d9, 0x1a0a2e, 0.2);
     scene.add(hemiLight);
     const coreLight = new THREE.PointLight(0xe85a8c, 22, 160, 1.8);
     scene.add(coreLight);
     const coreLight2 = new THREE.PointLight(0x9ec5e8, 12, 120, 1.4);
     scene.add(coreLight2);
-    // Fill light từ trên - giảm
-    const fillLight = new THREE.DirectionalLight(0xaab8d8, 0.15);  // Giảm từ 0.25
+    const fillLight = new THREE.DirectionalLight(0xaab8d8, 0.15);
     fillLight.position.set(0, 50, 30);
     scene.add(fillLight);
 
     // ============================================================
     // BẢN SẮC TEXTURE — MỖI NODE CÓ DNA RIÊNG
     // ============================================================
-
-    // Helper: tạo base canvas + gradient nền (có thể custom theo node)
     function createBaseCanvas(bgPalette) {
         const canvas = document.createElement('canvas');
         canvas.width = 2048;
@@ -1467,12 +1462,10 @@
         const ctx = canvas.getContext('2d');
         const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
         if (bgPalette) {
-            // Custom gradient (vd: xanh da trời, xanh lá)
             g.addColorStop(0, bgPalette[0]);
             g.addColorStop(0.5, bgPalette[1]);
             g.addColorStop(1, bgPalette[2]);
         } else {
-            // Default: nền tối cyberpunk
             g.addColorStop(0, '#04010a');
             g.addColorStop(0.5, '#0a0316');
             g.addColorStop(1, '#02010d');
@@ -1482,24 +1475,19 @@
         return { canvas, ctx };
     }
 
-    // Helper: finalize → trả về CanvasTexture
     function toTexture(canvas) {
         const texture = new THREE.CanvasTexture(canvas);
         texture.wrapS = THREE.RepeatWrapping;
         texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // Filter chất lượng cao - giữ sắc nét khi zoom
         texture.minFilter = THREE.LinearMipmapLinearFilter;
         texture.magFilter = THREE.LinearFilter;
         texture.generateMipmaps = true;
         return texture;
     }
 
-    // ============================================================
-    // 🌟 KENVINZONE CORE (star): trung tâm — lưới lượng tử + plasma
-    // ============================================================
+    // 🌟 KENVINZONE CORE
     function textureKenvinZone(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
-        // Plasma blobs - ít hơn và mờ hơn để không bị "phát nổ"
         for (let i = 0; i < 14; i++) {
             ctx.globalAlpha = Math.random() * 0.18 + 0.05;
             const cx = Math.random() * canvas.width;
@@ -1512,7 +1500,6 @@
             ctx.fillStyle = grad;
             ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
         }
-        // Quantum grid - thưa hơn
         ctx.strokeStyle = hexColor;
         ctx.lineWidth = 1;
         ctx.globalAlpha = 0.3;
@@ -1522,14 +1509,12 @@
         for (let x = 0; x < canvas.width; x += 80) {
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         }
-        // Equator band — vẫn rực rỡ nhưng vừa phải
         ctx.globalAlpha = 0.7;
         ctx.lineWidth = 5;
         ctx.beginPath();
         ctx.moveTo(0, canvas.height / 2);
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
-        // KV-CORE branding - ít hơn
         ctx.globalAlpha = 0.5;
         ctx.font = 'bold 26px "JetBrains Mono", monospace';
         ctx.fillStyle = '#ffffff';
@@ -1539,12 +1524,9 @@
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // 📈 VN-INDEX: candlestick chart pattern
-    // ============================================================
+    // 📈 VN-INDEX
     function textureVNIndex(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
-        // Background grid (chart paper)
         ctx.strokeStyle = hexColor;
         ctx.globalAlpha = 0.12;
         ctx.lineWidth = 1;
@@ -1555,7 +1537,6 @@
             ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
         }
 
-        // Candlesticks across multiple bands
         const bands = [180, 440, 720, 1000];
         bands.forEach(baseY => {
             let prevY = baseY;
@@ -1567,21 +1548,18 @@
                 const openClose = [high, low].sort((a, b) => a - b);
 
                 ctx.globalAlpha = 0.85;
-                // Wick
                 ctx.strokeStyle = candleColor;
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
                 ctx.moveTo(x + 8, openClose[0] - 8);
                 ctx.lineTo(x + 8, openClose[1] + 8);
                 ctx.stroke();
-                // Body
                 ctx.fillStyle = candleColor;
                 ctx.fillRect(x + 3, openClose[0], 10, openClose[1] - openClose[0]);
                 prevY = (openClose[0] + openClose[1]) / 2;
             }
         });
 
-        // VN-INDEX text tags
         ctx.globalAlpha = 0.6;
         ctx.font = 'bold 22px "JetBrains Mono", monospace';
         ctx.fillStyle = hexColor;
@@ -1591,7 +1569,6 @@
             ctx.fillText(`VNI ${(1200 + Math.random() * 100).toFixed(2)}`, tx, ty);
         }
 
-        // Volume bars at bottom
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = hexColor;
         for (let x = 0; x < canvas.width; x += 16) {
@@ -1601,13 +1578,9 @@
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // 🎓 AI CLASS: neural network nodes & connections
-    // ============================================================
+    // 🎓 AI CLASS
     function textureAIClass(hexColor, data) {
-        // Nền tối kiểu v5.7 (như bạn thích) - chi tiết sáng nổi bật trên nền tối
         const { canvas, ctx } = createBaseCanvas(['#02110a', '#051a12', '#010c08']);
-        // Generate neuron positions in layers
         const layers = 6;
         const layerWidth = canvas.width / layers;
         const neurons = [];
@@ -1622,7 +1595,6 @@
                 });
             }
         }
-        // Synaptic connections - xanh lá fresh, nổi bật trên nền tối
         ctx.strokeStyle = '#6bcb6b';
         ctx.lineWidth = 0.7;
         neurons.forEach(n1 => {
@@ -1636,7 +1608,6 @@
                 }
             });
         });
-        // Neuron nodes - xanh lá phát sáng
         neurons.forEach(n => {
             const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.size * 1.8);
             grad.addColorStop(0, '#a8f0a8');
@@ -1645,14 +1616,12 @@
             ctx.fillStyle = grad;
             ctx.globalAlpha = 0.85;
             ctx.fillRect(n.x - n.size * 1.8, n.y - n.size * 1.8, n.size * 3.6, n.size * 3.6);
-            // Core dot
             ctx.fillStyle = '#ffffff';
             ctx.globalAlpha = 0.95;
             ctx.beginPath();
             ctx.arc(n.x, n.y, n.size / 3, 0, Math.PI * 2);
             ctx.fill();
         });
-        // Math/AI notation - xanh lá nổi bật trên nền tối, không cần shadow
         const formulas = ['σ(z)', 'ReLU', 'softmax', '∇θ J', 'w·x+b', 'L(y,ŷ)', 'epoch+1', 'tanh', 'GELU', 'CrossEnt'];
         for (let i = 0; i < 14; i++) {
             const text = formulas[Math.floor(Math.random() * formulas.length)];
@@ -1666,37 +1635,28 @@
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // 🛠️ TRADING TOOL: technical indicators & ticker bars
-    // ============================================================
+    // 🛠️ TRADING TOOL
     function textureTradingTool(hexColor, data) {
-        // Nền tối kiểu v5.7 - rất dark navy
         const { canvas, ctx } = createBaseCanvas(['#020812', '#050f1a', '#01060c']);
-        // Ticker tape rows
         const rowH = 60;
         for (let row = 0; row < canvas.height / rowH; row++) {
             const y = row * rowH;
-            // Dark band còn tối hơn nền chút để tạo separation
             ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
             ctx.fillRect(0, y + 5, canvas.width, rowH - 10);
-            // Ticker symbols
             ctx.font = 'bold 16px "JetBrains Mono", monospace';
             let x = 20;
             while (x < canvas.width) {
                 const symbols = ['VIC', 'VHM', 'HPG', 'FPT', 'MWG', 'VNM', 'VCB', 'TCB'];
                 const sym = symbols[Math.floor(Math.random() * symbols.length)];
                 const isUp = Math.random() > 0.5;
-                // Symbol - xanh da trời sáng nổi bật trên nền tối
                 ctx.fillStyle = '#6bb8ff';
                 ctx.globalAlpha = 0.95;
                 ctx.fillText(sym, x, y + 25);
-                // Up/down - xanh lá / hồng nhẹ
                 ctx.fillStyle = isUp ? '#5dffa8' : '#ff7799';
                 ctx.fillText(`${isUp ? '▲' : '▼'}${(Math.random() * 5).toFixed(2)}%`, x + 50, y + 25);
                 x += 180;
             }
         }
-        // MACD-like wave - xanh da trời sáng
         ctx.strokeStyle = '#a8d8ff';
         ctx.lineWidth = 3;
         ctx.globalAlpha = 0.85;
@@ -1707,7 +1667,6 @@
             else ctx.lineTo(x, y);
         }
         ctx.stroke();
-        // Signal line - vàng nhạt
         ctx.strokeStyle = '#ffd99a';
         ctx.lineWidth = 2;
         ctx.globalAlpha = 0.7;
@@ -1718,7 +1677,6 @@
             else ctx.lineTo(x, y);
         }
         ctx.stroke();
-        // RSI bands - xanh da trời mờ
         ctx.fillStyle = '#6bb8ff';
         ctx.globalAlpha = 0.4;
         ctx.fillRect(0, canvas.height * 0.7, canvas.width, 4);
@@ -1726,12 +1684,9 @@
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // 🟡 GOLD & NASDAQ: metallic gold finish + market tickers
-    // ============================================================
+    // 🟡 GOLD & NASDAQ
     function textureGoldNasdaq(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
-        // Gold metallic gradient
         const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
         g.addColorStop(0, '#1a1005');
         g.addColorStop(0.3, '#3d2a0a');
@@ -1741,7 +1696,6 @@
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Brushed metal striations
         ctx.globalAlpha = 0.15;
         for (let i = 0; i < 300; i++) {
             ctx.strokeStyle = Math.random() > 0.5 ? '#ffd700' : '#3a2a0a';
@@ -1753,7 +1707,6 @@
             ctx.stroke();
         }
 
-        // NASDAQ ticker overlay
         ctx.globalAlpha = 0.85;
         ctx.font = 'bold 24px "JetBrains Mono", monospace';
         ctx.fillStyle = hexColor;
@@ -1764,7 +1717,6 @@
                 Math.random() * (canvas.width - 250), Math.random() * canvas.height);
         }
 
-        // Gold spot price tags
         ctx.fillStyle = '#ffd700';
         ctx.font = 'bold 32px "Major Mono Display", monospace';
         for (let i = 0; i < 4; i++) {
@@ -1775,14 +1727,9 @@
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // 📰 AI NEWS: scrolling headlines & data feed
-    // ============================================================
+    // 📰 AI NEWS
     function textureAINews(hexColor, data) {
-        // Nền tối với tint magenta nhẹ - không sáng như nền hồng đậm cũ
         const { canvas, ctx } = createBaseCanvas(['#15071a', '#1f0d28', '#0a0413']);
-
-        // Newspaper column dividers - hồng nhạt
         ctx.strokeStyle = '#ff99cc';
         ctx.globalAlpha = 0.18;
         ctx.lineWidth = 1;
@@ -1791,7 +1738,6 @@
             const x = (canvas.width / cols) * c;
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         }
-        // Headlines - mix hồng và violet sáng trên nền tối
         const headlines = [
             'GPT-5 RELEASED',
             'NEURAL BREAKTHROUGH',
@@ -1805,13 +1751,11 @@
         ctx.globalAlpha = 0.9;
         for (let i = 0; i < 18; i++) {
             ctx.font = `bold ${Math.random() * 14 + 18}px "JetBrains Mono", monospace`;
-            // Mix giữa hồng và violet sáng để có accent đa dạng
             const colors = ['#ffffff', '#ff99cc', '#b08fff'];
             ctx.fillStyle = colors[i % colors.length];
             ctx.fillText(headlines[i % headlines.length],
                 Math.random() * (canvas.width - 400), Math.random() * canvas.height);
         }
-        // Body text lines - hồng pastel
         ctx.globalAlpha = 0.35;
         ctx.font = '12px "JetBrains Mono", monospace';
         ctx.fillStyle = '#ff99cc';
@@ -1820,7 +1764,6 @@
             ctx.fillRect(Math.random() * (canvas.width - 200), Math.random() * canvas.height,
                 lineWidth, 2);
         }
-        // Date/timestamps - violet sáng
         ctx.globalAlpha = 0.7;
         ctx.font = '14px "JetBrains Mono", monospace';
         ctx.fillStyle = '#b08fff';
@@ -1831,18 +1774,158 @@
         return toTexture(canvas);
     }
 
+    // 🪙 CRYPTO INDEX
+    function textureCryptoIndex(hexColor, data) {
+        const { canvas, ctx } = createBaseCanvas(['#120500', '#200c02', '#0a0300']);
+        ctx.strokeStyle = '#ff7300';
+        ctx.globalAlpha = 0.15;
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 60) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 200, canvas.height); ctx.stroke();
+        }
+        
+        ctx.font = 'bold 16px "JetBrains Mono", monospace';
+        for (let i = 0; i < 25; i++) {
+            const x = Math.random() * (canvas.width - 200);
+            const y = Math.random() * (canvas.height - 40) + 20;
+            const size = Math.random() * 40 + 30;
+            
+            ctx.strokeStyle = '#ffa259';
+            ctx.globalAlpha = 0.25;
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(x, y, size, size);
+            
+            ctx.fillStyle = '#ff7300';
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#ffb380';
+            ctx.globalAlpha = 0.8;
+            ctx.font = '12px "JetBrains Mono", monospace';
+            ctx.fillText(`#${94000 + i}`, x + size + 8, y + 15);
+        }
+        
+        const cryptos = ['BTC ▲', 'ETH ▲', 'SOL ▼', 'BNB ▲', 'XRP ▼', 'ADA ▲', 'DOT ▼', 'LINK ▲', 'NEAR ▲'];
+        for (let i = 0; i < 15; i++) {
+            const coin = cryptos[Math.floor(Math.random() * cryptos.length)];
+            const tx = Math.random() * (canvas.width - 150);
+            const ty = Math.random() * (canvas.height - 30) + 25;
+            const isUp = coin.includes('▲');
+            
+            ctx.font = 'bold 22px "JetBrains Mono", monospace';
+            ctx.globalAlpha = 0.9;
+            ctx.fillStyle = isUp ? '#00ffaa' : '#ff3355';
+            ctx.fillText(coin, tx, ty);
+            
+            ctx.font = '12px "JetBrains Mono", monospace';
+            ctx.fillStyle = '#ff914d';
+            ctx.globalAlpha = 0.5;
+            ctx.fillText(`0x${Math.random().toString(16).substr(2, 6)}...${Math.random().toString(16).substr(2, 4)}`, tx, ty + 18);
+        }
+        
+        ctx.strokeStyle = '#ff7300';
+        ctx.lineWidth = 2.5;
+        ctx.globalAlpha = 0.75;
+        ctx.beginPath();
+        for (let x = 0; x < canvas.width; x += 10) {
+            const y = canvas.height * 0.75 + Math.sin(x * 0.008) * 60 + Math.cos(x * 0.02) * 20;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        return toTexture(canvas);
+    }
+
+    // 💱 FOREX INDEX (NEW PLANET)
+    function textureForexIndex(hexColor, data) {
+        const { canvas, ctx } = createBaseCanvas(['#000c08', '#001a12', '#000503']);
+        
+        ctx.strokeStyle = '#00ffaa';
+        ctx.globalAlpha = 0.1;
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 80) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        const currencySymbols = ['$', '€', '£', '¥', '₣'];
+        ctx.font = 'bold 120px "Syne", sans-serif';
+        ctx.fillStyle = '#00ffaa';
+        for (let i = 0; i < 8; i++) {
+            ctx.globalAlpha = 0.04;
+            const tx = Math.random() * (canvas.width - 150);
+            const ty = Math.random() * (canvas.height - 100) + 80;
+            ctx.fillText(currencySymbols[i % currencySymbols.length], tx, ty);
+        }
+
+        const forexPairs = [
+            'EUR/USD 1.0852 ▲', 'USD/JPY 154.34 ▼', 'GBP/USD 1.2688 ▲', 
+            'AUD/USD 0.6654 ▲', 'USD/CAD 1.3682 ▼', 'USD/CHF 0.9022 ▼',
+            'EUR/GBP 0.8552 ▼', 'GBP/JPY 195.84 ▲'
+        ];
+        
+        ctx.font = 'bold 20px "JetBrains Mono", monospace';
+        for (let i = 0; i < 15; i++) {
+            const pair = forexPairs[Math.floor(Math.random() * forexPairs.length)];
+            const tx = Math.random() * (canvas.width - 240);
+            const ty = Math.random() * (canvas.height - 40) + 20;
+            const isUp = pair.includes('▲');
+            
+            ctx.globalAlpha = 0.85;
+            ctx.fillStyle = isUp ? '#00ffaa' : '#ff3355';
+            ctx.fillText(pair, tx, ty);
+            
+            ctx.font = '11px "JetBrains Mono", monospace';
+            ctx.fillStyle = '#00ffaa';
+            ctx.globalAlpha = 0.4;
+            ctx.fillText(`BID: ${(Math.random() * 2).toFixed(4)} | ASK: ${(Math.random() * 2).toFixed(4)}`, tx, ty + 16);
+            ctx.font = 'bold 20px "JetBrains Mono", monospace';
+        }
+        
+        ctx.strokeStyle = '#00ffaa';
+        ctx.lineWidth = 2.0;
+        ctx.globalAlpha = 0.8;
+        ctx.beginPath();
+        for (let x = 0; x < canvas.width; x += 12) {
+            const y = canvas.height * 0.45 + Math.sin(x * 0.015) * 80 + Math.cos(x * 0.035) * 25;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        ctx.strokeStyle = '#26ffb0';
+        ctx.lineWidth = 1.2;
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        for (let x = 0; x < canvas.width; x += 12) {
+            const y = canvas.height * 0.45 + Math.sin(x * 0.015 - 0.5) * 75 + Math.cos(x * 0.035 + 0.2) * 20;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        return toTexture(canvas);
+    }
+
     // ============================================================
-    // ROUTER: chọn texture theo id
+    // ROUTER
     // ============================================================
     function createPlanetTexture(hexColor, isStar, data) {
         switch (data.id) {
-            case 'main':    return textureKenvinZone(hexColor, data);
-            case 'vnindex': return textureVNIndex(hexColor, data);
-            case 'aiclass': return textureAIClass(hexColor, data);
-            case 'trading': return textureTradingTool(hexColor, data);
-            case 'gold':    return textureGoldNasdaq(hexColor, data);
-            case 'ainews':  return textureAINews(hexColor, data);
-            default:        return textureKenvinZone(hexColor, data);
+            case 'main':        return textureKenvinZone(hexColor, data);
+            case 'vnindex':     return textureVNIndex(hexColor, data);
+            case 'aiclass':     return textureAIClass(hexColor, data);
+            case 'trading':     return textureTradingTool(hexColor, data);
+            case 'gold':        return textureGoldNasdaq(hexColor, data);
+            case 'ainews':      return textureAINews(hexColor, data);
+            case 'cryptoindex': return textureCryptoIndex(hexColor, data);
+            case 'forexindex':  return textureForexIndex(hexColor, data);
+            default:            return textureKenvinZone(hexColor, data);
         }
     }
 
@@ -1852,7 +1935,7 @@
         const mat = new THREE.ShaderMaterial({
             uniforms: {
                 uColor: { value: color },
-                uIntensity: { value: isStar ? 0.35 : 0.55 }  // Halo nhẹ hơn nhiều
+                uIntensity: { value: isStar ? 0.35 : 0.55 }
             },
             vertexShader: `
                 varying vec3 vNormal;
@@ -1900,9 +1983,9 @@
             map: texture,
             emissive: data.emissive || data.color,
             emissiveMap: texture,
-            emissiveIntensity: isStar ? 1.2 : 0.55,  // Tăng từ 0.25 - text trên bề mặt phát sáng tự thân
+            emissiveIntensity: isStar ? 1.2 : 0.55,
             roughness: isStar ? 0.5 : 0.85,
-            metalness: data.id === 'gold' ? 0.4 : 0.15
+            metalness: data.id === 'gold' || data.id === 'cryptoindex' || data.id === 'forexindex' ? 0.4 : 0.15
         });
         const mesh = new THREE.Mesh(geom, mat);
         mesh.userData = Object.assign({}, data, { baseEmissive: isStar ? 1.2 : 0.55 });
@@ -1912,9 +1995,7 @@
         mesh.userData.atmo = atmo;
 
         if (!isStar) {
-            // Mỗi hành tinh có style ring riêng
             if (data.id === 'gold') {
-                // 🟡 Gold: Saturn-style multiple rings (pastel gold tones)
                 const ringColors = [0xe8b768, 0xd4a04e, 0xb8884a];
                 ringColors.forEach((c, i) => {
                     const inner = data.radius * (1.5 + i * 0.18);
@@ -1922,7 +2003,7 @@
                     const rg = new THREE.RingGeometry(inner, outer, 96);
                     const rm = new THREE.MeshBasicMaterial({
                         color: c, side: THREE.DoubleSide,
-                        transparent: true, opacity: 0.4 - i * 0.08  // Giảm opacity
+                        transparent: true, opacity: 0.4 - i * 0.08
                     });
                     const r = new THREE.Mesh(rg, rm);
                     r.rotation.x = Math.PI / 2 + 0.4;
@@ -1931,7 +2012,6 @@
                 });
                 mesh.userData.satRing = mesh.children[mesh.children.length - 1];
             } else if (data.id === 'ainews') {
-                // 📰 AI News: asteroid belt - particles xoay xung quanh
                 const beltGeom = new THREE.BufferGeometry();
                 const beltCount = 120;
                 const beltPos = new Float32Array(beltCount * 3);
@@ -1947,7 +2027,7 @@
                     color: data.color,
                     size: 0.06,
                     transparent: true,
-                    opacity: 0.65,  // Giảm 0.85→0.65
+                    opacity: 0.65,
                     blending: THREE.AdditiveBlending,
                     sizeAttenuation: true
                 });
@@ -1955,7 +2035,6 @@
                 mesh.add(belt);
                 mesh.userData.satRing = belt;
             } else if (data.id === 'aiclass') {
-                // 🎓 AI Class: double ring perpendicular
                 const r1g = new THREE.RingGeometry(data.radius * 1.4, data.radius * 1.46, 64);
                 const r1m = new THREE.MeshBasicMaterial({
                     color: data.color, side: THREE.DoubleSide,
@@ -1976,23 +2055,62 @@
                 mesh.add(r2);
                 mesh.userData.satRing = r2;
             } else if (data.id === 'trading') {
-                // 🛠️ Trading: wireframe orbital cage
                 const cageGeo = new THREE.IcosahedronGeometry(data.radius * 1.55, 0);
                 const cageMat = new THREE.MeshBasicMaterial({
                     color: data.color,
                     wireframe: true,
                     transparent: true,
-                    opacity: 0.18  // Giảm 0.25→0.18
+                    opacity: 0.18
                 });
                 const cage = new THREE.Mesh(cageGeo, cageMat);
                 mesh.add(cage);
                 mesh.userData.satRing = cage;
+            } else if (data.id === 'cryptoindex') {
+                const r1g = new THREE.RingGeometry(data.radius * 1.42, data.radius * 1.5, 64);
+                const r1m = new THREE.MeshBasicMaterial({
+                    color: data.color, side: THREE.DoubleSide,
+                    transparent: true, opacity: 0.45
+                });
+                const r1 = new THREE.Mesh(r1g, r1m);
+                r1.rotation.x = Math.PI / 2 + 0.15;
+                mesh.add(r1);
+
+                const cageGeo = new THREE.IcosahedronGeometry(data.radius * 1.62, 1);
+                const cageMat = new THREE.MeshBasicMaterial({
+                    color: data.color,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.12
+                });
+                const cage = new THREE.Mesh(cageGeo, cageMat);
+                mesh.add(cage);
+                mesh.userData.satRing = r1;
+            } else if (data.id === 'forexindex') {
+                const r1g = new THREE.RingGeometry(data.radius * 1.45, data.radius * 1.52, 64);
+                const r1m = new THREE.MeshBasicMaterial({
+                    color: data.color, side: THREE.DoubleSide,
+                    transparent: true, opacity: 0.45
+                });
+                const r1 = new THREE.Mesh(r1g, r1m);
+                r1.rotation.x = Math.PI / 2 + 0.2;
+                r1.rotation.y = 0.1;
+                mesh.add(r1);
+
+                const r2g = new THREE.RingGeometry(data.radius * 1.55, data.radius * 1.6, 64);
+                const r2m = new THREE.MeshBasicMaterial({
+                    color: data.color, side: THREE.DoubleSide,
+                    transparent: true, opacity: 0.3
+                });
+                const r2 = new THREE.Mesh(r2g, r2m);
+                r2.rotation.x = -Math.PI / 2 + 0.2;
+                r2.rotation.y = -0.1;
+                mesh.add(r2);
+                mesh.userData.satRing = r1;
             } else {
-                // 📈 VN-Index và default
                 const ringGeom = new THREE.RingGeometry(data.radius * 1.35, data.radius * 1.4, 64);
                 const ringMat = new THREE.MeshBasicMaterial({
                     color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.4  // Giảm 0.55→0.4
+                    transparent: true, opacity: 0.4
                 });
                 const ring = new THREE.Mesh(ringGeom, ringMat);
                 ring.rotation.x = Math.PI / 2 + Math.random() * 0.4 - 0.2;
@@ -2007,7 +2125,7 @@
             const bigRing = new THREE.RingGeometry(data.radius * 1.6, data.radius * 2.4, 96);
             const bigMat = new THREE.MeshBasicMaterial({
                 color: 0xe85a8c, side: THREE.DoubleSide,
-                transparent: true, opacity: 0.1, wireframe: true  // Opacity 0.15 → 0.1
+                transparent: true, opacity: 0.1, wireframe: true
             });
             const sunRing = new THREE.Mesh(bigRing, bigMat);
             sunRing.rotation.x = Math.PI / 2 + 0.15;
@@ -2026,7 +2144,7 @@
             const orbitGeom = new THREE.RingGeometry(data.distance - 0.04, data.distance + 0.04, 256);
             const orbitMat = new THREE.MeshBasicMaterial({
                 color: data.color, side: THREE.DoubleSide,
-                transparent: true, opacity: 0.08  // Giảm 0.15→0.08
+                transparent: true, opacity: 0.08
             });
             const orbit = new THREE.Mesh(orbitGeom, orbitMat);
             orbit.rotation.x = Math.PI / 2;
@@ -2124,30 +2242,28 @@
         geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
         geom.setAttribute('color', new THREE.BufferAttribute(col, 3));
         const mat = new THREE.PointsMaterial({
-            size, vertexColors: true, transparent: true, opacity: 0.65,  // Opacity 0.85→0.65
+            size, vertexColors: true, transparent: true, opacity: 0.65,
             blending: THREE.AdditiveBlending, sizeAttenuation: true
         });
         const points = new THREE.Points(geom, mat);
         scene.add(points);
         starLayers.push({ mesh: points, speed });
     }
-    createStarfield(1200, 0.4, { min: 50, max: 140 }, 0xd070a0, 0.04);  // Pink dịu, ít hơn
-    createStarfield(1800, 0.55, { min: 100, max: 250 }, 0x8acbd6, 0.02);  // Cyan pastel
-    createStarfield(2200, 0.35, { min: 250, max: 500 }, 0xddddee, 0.008);  // Off-white
+    createStarfield(1200, 0.4, { min: 50, max: 140 }, 0xd070a0, 0.04);
+    createStarfield(1800, 0.55, { min: 100, max: 250 }, 0x8acbd6, 0.02);
+    createStarfield(2200, 0.35, { min: 250, max: 500 }, 0xddddee, 0.008);
 
-    const gridFloor = new THREE.GridHelper(180, 90, 0xe85a8c, 0x110528);  // Pastel rose grid
+    const gridFloor = new THREE.GridHelper(180, 90, 0xe85a8c, 0x110528);
     gridFloor.position.y = -9;
-    gridFloor.material.opacity = 0.15;  // Dịu hơn
+    gridFloor.material.opacity = 0.15;
     gridFloor.material.transparent = true;
     scene.add(gridFloor);
 
     // ============================================================
-    // 🚀 SPACESHIP — tàu vũ trụ bay qua hệ thống
+    // 🚀 SPACESHIP
     // ============================================================
     function createSpaceship() {
         const ship = new THREE.Group();
-
-        // Thân tàu - vật liệu pastel matching color scheme
         const bodyMat = new THREE.MeshStandardMaterial({
             color: 0xe8eaf6,
             emissive: 0x5dd5d5,
@@ -2156,25 +2272,21 @@
             metalness: 0.55
         });
 
-        // Mũi nhọn phía trước
         const noseGeom = new THREE.ConeGeometry(0.28, 0.9, 16);
         const nose = new THREE.Mesh(noseGeom, bodyMat);
         nose.position.y = 0.7;
         ship.add(nose);
 
-        // Thân trụ giữa
         const bodyGeom = new THREE.CylinderGeometry(0.28, 0.32, 0.8, 16);
         const body = new THREE.Mesh(bodyGeom, bodyMat);
         body.position.y = -0.15;
         ship.add(body);
 
-        // Đáy tàu (thu nhỏ)
         const tailGeom = new THREE.CylinderGeometry(0.32, 0.22, 0.4, 16);
         const tail = new THREE.Mesh(tailGeom, bodyMat);
         tail.position.y = -0.75;
         ship.add(tail);
 
-        // Stripe cyan trên thân
         const stripeGeom = new THREE.CylinderGeometry(0.281, 0.281, 0.08, 16);
         const stripeMat = new THREE.MeshBasicMaterial({
             color: 0x5dd5d5,
@@ -2185,7 +2297,6 @@
         stripe.position.y = 0.05;
         ship.add(stripe);
 
-        // Cockpit window
         const windowGeom = new THREE.SphereGeometry(0.1, 12, 8);
         const windowMat = new THREE.MeshBasicMaterial({
             color: 0xb08fd8,
@@ -2197,7 +2308,6 @@
         window1.scale.z = 0.3;
         ship.add(window1);
 
-        // 3 fin cánh tàu
         const finShape = new THREE.Shape();
         finShape.moveTo(0, 0);
         finShape.lineTo(0.35, -0.5);
@@ -2221,7 +2331,6 @@
             ship.add(fin);
         }
 
-        // Engine glow phía dưới
         const engineGlowGeom = new THREE.ConeGeometry(0.22, 0.8, 16, 1, true);
         const engineGlowMat = new THREE.ShaderMaterial({
             uniforms: {
@@ -2260,7 +2369,6 @@
         ship.add(engineGlow);
         ship.userData.engineGlow = engineGlow;
 
-        // Exhaust particle trail
         const trailCount = 60;
         const trailGeom = new THREE.BufferGeometry();
         const trailPos = new Float32Array(trailCount * 3);
@@ -2309,12 +2417,10 @@
     let shipVisible = true;
     let shipT = 0;
 
-    // Đường bay parametric
     function shipPathPosition(t) {
-        // Xoáy ốc: từ ngoài bay vào, lên cao rồi ra xa
         const angle = t * Math.PI * 2.5;
         const radius = 38 - t * 5;
-        const heightCurve = Math.sin(t * Math.PI);  // 0 → 1 → 0
+        const heightCurve = Math.sin(t * Math.PI);
         const y = -25 + heightCurve * 40;
 
         return new THREE.Vector3(
@@ -2325,10 +2431,9 @@
     }
 
     // ============================================================
-    // ☄️ GIANT ASTEROIDS — 2 thiên thạch khổng lồ bay ngang qua
+    // ☄️ GIANT ASTEROIDS
     // ============================================================
     function createAsteroidTexture(baseHex, accentHex) {
-        // === BASE TEXTURE (rock surface, không emissive) ===
         const baseCanvas = document.createElement('canvas');
         baseCanvas.width = 1024;
         baseCanvas.height = 512;
@@ -2341,7 +2446,6 @@
         bctx.fillStyle = g;
         bctx.fillRect(0, 0, baseCanvas.width, baseCanvas.height);
 
-        // Larger rock mass patches
         for (let i = 0; i < 25; i++) {
             const cx = Math.random() * baseCanvas.width;
             const cy = Math.random() * baseCanvas.height;
@@ -2355,7 +2459,6 @@
             bctx.fillRect(cx - r, cy - r, r * 2, r * 2);
         }
 
-        // Surface micro-noise (gives matte rock look)
         bctx.globalAlpha = 0.18;
         for (let i = 0; i < 1500; i++) {
             bctx.fillStyle = Math.random() > 0.5 ? '#aaa' : '#000';
@@ -2363,7 +2466,6 @@
                 Math.random() * 2 + 1, Math.random() * 2 + 1);
         }
 
-        // === EMISSIVE TEXTURE (Tron-style sharp glowing circuits) ===
         const emCanvas = document.createElement('canvas');
         emCanvas.width = 1024;
         emCanvas.height = 512;
@@ -2371,11 +2473,8 @@
         ectx.fillStyle = '#000';
         ectx.fillRect(0, 0, emCanvas.width, emCanvas.height);
 
-        // ── MAIN CIRCUIT LINES (Tron-style: chủ yếu thẳng + 90°/45° bend) ──
-        // Vẽ các đường mạch chính, rõ nét, có nhánh
         function drawCircuitPath(startX, startY, length, branchProb) {
             let x = startX, y = startY;
-            // Hướng ban đầu: 0°, 45°, 90°, 135° etc (8 hướng)
             const dirs = [
                 [1, 0], [1, 1], [0, 1], [-1, 1],
                 [-1, 0], [-1, -1], [0, -1], [1, -1]
@@ -2385,7 +2484,7 @@
             const norm = Math.hypot(dx, dy);
             dx /= norm; dy /= norm;
 
-            ectx.lineWidth = Math.random() * 1.5 + 2.0;  // line khá đậm
+            ectx.lineWidth = Math.random() * 1.5 + 2.0;
             ectx.lineCap = 'round';
             ectx.lineJoin = 'round';
             ectx.beginPath();
@@ -2398,9 +2497,7 @@
                 y += dy * segLen;
                 ectx.lineTo(x, y);
 
-                // Cơ hội đổi hướng (giữ kiểu 8-direction)
                 if (Math.random() < 0.4 && s < segments - 1) {
-                    // Xoay ±45° hoặc ±90°
                     const turn = (Math.random() < 0.5 ? 1 : -1) * (Math.random() < 0.5 ? 1 : 2);
                     dirIdx = (dirIdx + turn + 8) % 8;
                     [dx, dy] = dirs[dirIdx];
@@ -2410,21 +2507,17 @@
             }
             ectx.stroke();
 
-            // Endpoint node
             ectx.fillStyle = accentHex;
             ectx.beginPath();
             ectx.arc(x, y, 3, 0, Math.PI * 2);
             ectx.fill();
 
-            // Branch?
             if (Math.random() < branchProb && length > 30) {
                 drawCircuitPath(x, y, length * 0.6, branchProb * 0.5);
             }
         }
 
-        // Set glow stroke color cho main circuit lines
         ectx.strokeStyle = accentHex;
-        // Vẽ 12 main paths trên toàn texture
         for (let i = 0; i < 12; i++) {
             const sx = Math.random() * emCanvas.width;
             const sy = Math.random() * emCanvas.height;
@@ -2432,14 +2525,13 @@
             drawCircuitPath(sx, sy, len, 0.6);
         }
 
-        // ── HEXAGONAL / GEOMETRIC NODES (Tron hubs) ──
         ectx.strokeStyle = accentHex;
         ectx.fillStyle = accentHex;
         for (let i = 0; i < 15; i++) {
             const cx = Math.random() * emCanvas.width;
             const cy = Math.random() * emCanvas.height;
             const size = Math.random() * 10 + 6;
-            const sides = Math.random() < 0.5 ? 6 : 4;  // hex or square
+            const sides = Math.random() < 0.5 ? 6 : 4;
             ectx.lineWidth = 1.5;
             ectx.beginPath();
             for (let k = 0; k <= sides; k++) {
@@ -2450,13 +2542,11 @@
                 else ectx.lineTo(px, py);
             }
             ectx.stroke();
-            // Inner dot
             ectx.beginPath();
             ectx.arc(cx, cy, 2, 0, Math.PI * 2);
             ectx.fill();
         }
 
-        // ── DATA PACKETS — small bright dots along potential paths ──
         ectx.fillStyle = accentHex;
         for (let i = 0; i < 60; i++) {
             const x = Math.random() * emCanvas.width;
@@ -2467,11 +2557,9 @@
             ectx.fill();
         }
 
-        // ── BOLD CRACK TRENCHES — đường nứt to, sâu, sharp ──
         ectx.strokeStyle = accentHex;
         for (let i = 0; i < 4; i++) {
-            ectx.lineWidth = Math.random() * 2 + 3;  // rất đậm
-            ectx.lineCap = 'round';
+            ectx.lineWidth = Math.random() * 2 + 3;
             ectx.beginPath();
             let x = Math.random() * emCanvas.width;
             let y = Math.random() * emCanvas.height;
@@ -2497,15 +2585,11 @@
     }
 
     function createGiantAsteroid(config) {
-        // Subdivision cao hơn để có đủ vertex cho crater chi tiết
-        const geom = new THREE.IcosahedronGeometry(config.radius, 4);  // ~5120 triangles
+        const geom = new THREE.IcosahedronGeometry(config.radius, 4);
 
-        // === BƯỚC 1: Tạo crater seed points trên bề mặt sphere ===
-        // Mỗi crater là 1 point + radius ảnh hưởng + depth
         const craterCount = 8 + Math.floor(Math.random() * 5);
         const craters = [];
         for (let i = 0; i < craterCount; i++) {
-            // Random point on sphere surface
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
             const dir = new THREE.Vector3(
@@ -2515,53 +2599,39 @@
             );
             craters.push({
                 dir: dir,
-                radius: config.radius * (0.18 + Math.random() * 0.22),  // 18-40% bán kính asteroid
-                depth: config.radius * (0.08 + Math.random() * 0.12)    // hõm sâu 8-20%
+                radius: config.radius * (0.18 + Math.random() * 0.22),
+                depth: config.radius * (0.08 + Math.random() * 0.12)
             });
         }
 
-        // === BƯỚC 2: Distort vertices ===
         const posAttr = geom.attributes.position;
         const v = new THREE.Vector3();
         const vDir = new THREE.Vector3();
         for (let i = 0; i < posAttr.count; i++) {
             v.fromBufferAttribute(posAttr, i);
 
-            // Multi-frequency noise tổng cho bề mặt gồ ghề
             const baseNoise =
                 Math.sin(v.x * 0.08 + config.seed) * 4 +
                 Math.cos(v.y * 0.06 + config.seed * 2) * 3 +
                 Math.sin(v.z * 0.05 + config.seed * 3) * 5;
-            // Detail noise tần số cao tạo bumpy
             const detailNoise =
                 Math.sin(v.x * 0.25 + v.y * 0.2) * 1.2 +
                 Math.cos(v.y * 0.3 + v.z * 0.18) * 1.0 +
                 Math.sin(v.z * 0.35 + v.x * 0.22) * 0.8;
             const totalNoise = baseNoise + detailNoise;
 
-            // Direction từ tâm
             vDir.copy(v).normalize();
-
-            // Apply base radius + noise
             let displacement = config.radius + totalNoise;
 
-            // === BƯỚC 3: Crater carving — móc lõm các hõm tròn sâu ===
             for (const crater of craters) {
-                // Khoảng cách góc từ vertex direction tới crater direction
-                // dot = cos(angle), càng gần 1 = càng cùng hướng
                 const dot = vDir.dot(crater.dir);
                 if (dot > 0) {
-                    // Tính "arc distance" trên sphere — distance dọc theo bề mặt
                     const angle = Math.acos(Math.min(1, dot));
                     const arcDist = angle * config.radius;
 
-                    // Nếu trong vùng crater
                     if (arcDist < crater.radius) {
-                        // Smoothstep falloff: 1 ở tâm, 0 ở rìa
                         const t = 1 - (arcDist / crater.radius);
-                        // Smooth bowl shape (paraboloid-like)
-                        const bowl = t * t * (3 - 2 * t);  // smoothstep
-                        // Đẩy vertex vào trong (concave)
+                        const bowl = t * t * (3 - 2 * t);
                         displacement -= bowl * crater.depth;
                     }
                 }
@@ -2572,20 +2642,17 @@
         }
         geom.computeVertexNormals();
 
-        // Lưu crater info vào userData để dùng cho texture (vẽ ring quanh crater)
         const { baseTexture, emissiveTexture } = createAsteroidTexture(config.baseHex, config.accentHex);
 
-        // === CUSTOM SHADER: glow của rãnh nứt chỉ hiện khi camera gần ===
-        // Logic: tính khoảng cách từ vertex tới camera, mix giữa "không glow" và "glow mạnh"
         const mat = new THREE.ShaderMaterial({
             uniforms: {
                 uBaseMap: { value: baseTexture },
                 uEmissiveMap: { value: emissiveTexture },
                 uAccentColor: { value: new THREE.Color(config.accentHex) },
                 uTime: { value: 0 },
-                uNearDist: { value: 60 },    // sát hơn = bừng sáng full
-                uFarDist: { value: 250 },    // xa = tắt
-                uGlowStrength: { value: config.glowStrength || 3.5 },  // độ chói Tron-style
+                uNearDist: { value: 60 },
+                uFarDist: { value: 250 },
+                uGlowStrength: { value: config.glowStrength || 3.5 },
                 uPulseSpeed: { value: 0.6 },
                 uAmbient: { value: new THREE.Color(0xb8c5e5) },
                 uAmbientIntensity: { value: 0.4 },
@@ -2634,21 +2701,14 @@
 
                 void main() {
                     vec3 baseCol = texture2D(uBaseMap, vUv).rgb;
-
-                    // Diffuse lighting
                     float NdotL = max(dot(vNormal, uLightDir), 0.0);
                     vec3 diffuse = uLightColor * uLightIntensity * NdotL;
                     vec3 ambient = uAmbient * uAmbientIntensity;
                     vec3 litColor = baseCol * (ambient + diffuse);
 
-                    // Emissive mask
                     float crackMask = texture2D(uEmissiveMap, vUv).r;
-
-                    // Distance falloff: 1.0 ở near, 0.0 ở far
                     float distFactor = 1.0 - smoothstep(uNearDist, uFarDist, vCamDist);
 
-                    // === TRON-STYLE GLOW ===
-                    // Sample neighbors để fake bloom edges - quét 4 hướng và lấy max
                     float texelSize = 1.0 / 1024.0;
                     float maskCenter = crackMask;
                     float maskBlurred = maskCenter;
@@ -2658,19 +2718,14 @@
                     maskBlurred += texture2D(uEmissiveMap, vUv + vec2(0, -texelSize * 1.5)).r;
                     maskBlurred /= 5.0;
 
-                    // Pulse animation
                     float pulse = sin(uTime * uPulseSpeed) * 0.2 + 0.85;
 
-                    // Sharp core + soft halo (Tron Legacy style)
                     vec3 coreGlow = uAccentColor * maskCenter * distFactor * pulse * uGlowStrength;
                     vec3 haloGlow = uAccentColor * maskBlurred * distFactor * pulse * (uGlowStrength * 0.45);
 
-                    // Final compositing
-                    // Rock surface trở nên tối hơn ở chỗ có crack (như chỗ lõm) để contrast với glow
                     float crackDarken = 1.0 - maskCenter * 0.6 * distFactor;
                     vec3 finalColor = litColor * crackDarken + coreGlow + haloGlow;
 
-                    // Apply fog
                     float fogFactor = 1.0 - exp(-fogDensity * fogDensity * vCamDist * vCamDist);
                     finalColor = mix(finalColor, fogColor, fogFactor);
 
@@ -2687,30 +2742,25 @@
             startPos: config.startPos.clone(),
             resetDistance: 280,
             rotationSpeed: config.rotationSpeed,
-            material: mat  // giữ reference để update uTime
+            material: mat
         };
         scene.add(asteroid);
         return asteroid;
     }
 
     // ============================================================
-    // ☄️ ASTEROID CLUSTERS — bay theo nhóm, có chủ đích
+    // ☄️ ASTEROID CLUSTERS
     // ============================================================
-    // Mỗi cluster có 1 leader lớn + 2-3 follower nhỏ
-    // Toàn cluster di chuyển theo cùng 1 velocity (như đoàn phi thuyền)
-
     const clusters = [];
 
     function createAsteroidCluster(config) {
         const cluster = {
             velocity: config.velocity.clone(),
             members: [],
-            // Center của cluster (dùng để check reset)
             center: config.startPos.clone(),
             startPos: config.startPos.clone()
         };
 
-        // === LEADER (lớn nhất) ===
         const leader = createGiantAsteroid({
             radius: config.leaderRadius,
             seed: config.seed,
@@ -2718,26 +2768,23 @@
             accentHex: config.accentHex,
             glowStrength: 3.5,
             startPos: config.startPos.clone(),
-            velocity: new THREE.Vector3(0, 0, 0),  // velocity handle ở cluster
+            velocity: new THREE.Vector3(0, 0, 0),
             rotationSpeed: config.rotationSpeed
         });
         cluster.members.push({
             mesh: leader,
-            offset: new THREE.Vector3(0, 0, 0)  // leader ở center cluster
+            offset: new THREE.Vector3(0, 0, 0)
         });
 
-        // === FOLLOWERS (nhỏ hơn, có offset từ leader) ===
         const followerCount = config.followerCount || 3;
         for (let i = 0; i < followerCount; i++) {
-            // Random offset trong vùng hình cầu quanh leader
-            // Khoảng cách: 1.5x → 3x bán kính leader (đủ gần để thành nhóm)
             const distMult = 1.6 + Math.random() * 1.4;
             const offsetDist = config.leaderRadius * distMult;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
             const offset = new THREE.Vector3(
                 Math.sin(phi) * Math.cos(theta) * offsetDist,
-                Math.sin(phi) * Math.sin(theta) * offsetDist * 0.6,  // dẹt theo Y
+                Math.sin(phi) * Math.sin(theta) * offsetDist * 0.6,
                 Math.cos(phi) * offsetDist
             );
 
@@ -2766,25 +2813,23 @@
         return cluster;
     }
 
-    // === CLUSTER 1: cyan ancient, bay từ trên-trái → dưới-phải ===
     createAsteroidCluster({
         leaderRadius: 42,
         followerCount: 3,
         seed: 1.3,
         baseHex: '#1f1828',
-        accentHex: '#5dd5d5',  // Cyan Tron
+        accentHex: '#5dd5d5',
         startPos: new THREE.Vector3(-220, 50, -160),
-        velocity: new THREE.Vector3(0.10, -0.035, 0.075),  // 0.13 unit/sec
+        velocity: new THREE.Vector3(0.10, -0.035, 0.075),
         rotationSpeed: new THREE.Vector3(0.00012, 0.0002, 0.00008)
     });
 
-    // === CLUSTER 2: red-orange ancient, bay từ dưới-phải → trên-trái ===
     createAsteroidCluster({
         leaderRadius: 38,
         followerCount: 2,
         seed: 7.7,
         baseHex: '#1a1418',
-        accentHex: '#ff5544',  // Red-orange Tron (theo gợi ý của bạn)
+        accentHex: '#ff5544',
         startPos: new THREE.Vector3(210, -70, 175),
         velocity: new THREE.Vector3(-0.085, 0.045, -0.10),
         rotationSpeed: new THREE.Vector3(-0.00018, -0.00012, 0.00025)
@@ -2792,25 +2837,18 @@
 
     function updateAsteroids(dt, elapsed) {
         clusters.forEach(cluster => {
-            // Di chuyển toàn cluster theo cùng velocity (như đoàn phi thuyền)
             cluster.center.x += cluster.velocity.x;
             cluster.center.y += cluster.velocity.y;
             cluster.center.z += cluster.velocity.z;
 
-            // Update từng member: position = cluster.center + offset
             cluster.members.forEach(m => {
                 m.mesh.position.copy(cluster.center).add(m.offset);
-
-                // Update shader uTime
                 m.mesh.userData.material.uniforms.uTime.value = elapsed;
-
-                // Tự xoay
                 m.mesh.rotation.x += m.mesh.userData.rotationSpeed.x;
                 m.mesh.rotation.y += m.mesh.userData.rotationSpeed.y;
                 m.mesh.rotation.z += m.mesh.userData.rotationSpeed.z;
             });
 
-            // Reset cluster khi quá xa
             const distFromCenter = cluster.center.length();
             if (distFromCenter > 320) {
                 cluster.center.copy(cluster.startPos);
@@ -2823,7 +2861,7 @@
     // HOLOGRAM BEAM
     // ============================================================
     function createHologramBeam(color) {
-        const beamGeom = new THREE.CylinderGeometry(0.03, 0.6, 8, 12, 1, true);  // mảnh và ngắn hơn
+        const beamGeom = new THREE.CylinderGeometry(0.03, 0.6, 8, 12, 1, true);
         const beamMat = new THREE.ShaderMaterial({
             uniforms: { uColor: { value: new THREE.Color(color) }, uTime: { value: 0 } },
             vertexShader: `
@@ -2884,16 +2922,13 @@
         document.getElementById('cursor-inner').style.top = e.clientY + 'px';
 
         raycaster.setFromCamera(mouse, camera);
-        // recursive: false — chỉ check planet meshes chính, không check children (rings, cage, belt)
         const hits = raycaster.intersectObjects(planetMeshes, false);
         if (hits.length > 0) {
             const obj = hits[0].object;
-            // Safety guard: chỉ accept nếu object có userData.atmo (planet mesh chính)
             if (!obj.userData || !obj.userData.atmo) return;
             if (hoveredMesh !== obj) {
                 if (hoveredMesh) resetHover(hoveredMesh);
                 hoveredMesh = obj;
-                // Khi hover: atmosphere "bừng sáng" mạnh - đây là accent neon
                 obj.userData.atmo.material.uniforms.uIntensity.value = 1.8;
                 document.body.classList.add('cursor-hover');
             }
@@ -2907,7 +2942,6 @@
     }
     function resetHover(m) {
         if (!m || !m.userData || !m.userData.atmo) return;
-        // Star có base intensity 0.35, planet 0.55
         const baseIntensity = m.userData.type === 'star' ? 0.35 : 0.55;
         m.userData.atmo.material.uniforms.uIntensity.value = baseIntensity;
     }
@@ -2917,7 +2951,7 @@
     function onClick(e) {
         if (isOverUI(e.target)) return;
         raycaster.setFromCamera(mouse, camera);
-        const hits = raycaster.intersectObjects(planetMeshes, false);  // non-recursive
+        const hits = raycaster.intersectObjects(planetMeshes, false);
         if (hits.length > 0 && hits[0].object.userData && hits[0].object.userData.atmo) {
             selectPlanet(hits[0].object);
         } else {
@@ -2983,7 +3017,7 @@
     });
 
     window.addEventListener('keydown', (e) => {
-        if (e.key >= '0' && e.key <= '5') {
+        if (e.key >= '0' && e.key <= '7') {
             const idx = parseInt(e.key);
             if (SYSTEM[idx]) {
                 const targetData = SYSTEM[idx];
@@ -3047,27 +3081,28 @@
     // ============================================================
     // AI INTEGRATION
     // ============================================================
-    // ⚠️ Đây là API key gốc của bạn. Hãy chuyển sang Cloudflare Worker proxy trước khi deploy public!
-    const apiKey = "AIzaSyAt2Ia8Vyt8A5lks6VsGG2b5dZzQr8NG6Q";
-    const MODEL = "gemini-2.5-flash";  // Cập nhật từ 2.0-flash → quota free tier tốt hơn
+    const apiKey = "";
+    const MODEL = "gemini-2.5-flash-preview-09-2025";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
 
-    const systemPrompt = `Bạn là KV-Core v5.0 — Quantum Neural AI vận hành hệ thống Quantum Observatory của KenvinZone.
+    const systemPrompt = `Bạn là KV-Core v5.18 — Quantum Neural AI vận hành hệ thống Quantum Observatory của KenvinZone.
 
-Ecosystem gồm 6 node:
+Ecosystem gồm 8 node:
 • 0x00 — KenvinZone (kenvinzone.com): tổ hợp trung tâm, gateway lượng tử
 • 0x01 — VN-Index (vnindex.kenvinzone.com): bảng giá & chỉ số TTCK VN real-time
 • 0x02 — AI Class (aiclass.kenvinzone.com): training & workshop AI thế hệ mới
 • 0x03 — Trading Tool (tradingtool.kenvinzone.com): công cụ phân tích kỹ thuật & trợ lý trading
 • 0x04 — Gold & Nasdaq (gold-nasdaq.kenvinzone.com): tín hiệu vàng & NASDAQ toàn cầu
 • 0x05 — AI News (ainews.kenvinzone.com): tin AI/LLM/neural network curated daily
+• 0x06 — Crypto Index (cryptoindex.kenvinzone.com): chỉ số & biến động thị trường tiền mã hóa blockchain real-time
+• 0x07 — Forex Index (forex-index.kenvinzone.com): bảng chỉ số tỷ giá & phân tích biến động thị trường ngoại hối toàn cầu Forex real-time
 
 GIỌNG ĐIỆU:
 - Tiếng Việt 100%, tone cyberpunk, terminal, kỹ thuật cao nhưng dễ tiếp cận
 - Dùng bullet points, không viết đoạn dài lê thê
-- Decorate vừa phải: emoji 🪐⚡🧬🚀, tag [QUANTUM-LINK], [SYSTEM]
-- Khi đề cập một node, đính kèm code (vd: 0x01 · VN-Index)
-- Phản hồi gọn, sắc, có thể call-to-action dẫn người dùng vào subdomain tương ứng`;
+- Decorate vừa phải: emoji 🪙💱🪐⚡🧬🚀, tag [QUANTUM-LINK], [SYSTEM]
+- Khi đề cập một node, đính kèm code (vd: 0x07 · Forex Index)
+- Phản hồi gọn, sắc, có thể chi tiết thông số và kêu gọi truy cập subdomain tương ứng`;
 
     let conversationHistory = [];
 
@@ -3137,9 +3172,9 @@ GIỌNG ĐIỆU:
             };
 
             let response, attempts = 0;
-            let delay = 1500;
+            let delayTime = 1000;
             let lastStatus = 0;
-            while (attempts < 3) {
+            while (attempts < 5) {
                 try {
                     response = await fetch(apiUrl, {
                         method: 'POST',
@@ -3148,23 +3183,21 @@ GIỌNG ĐIỆU:
                     });
                     if (response.ok) break;
                     lastStatus = response.status;
-                    // 429 = rate limit, cần backoff lâu hơn
                     if (response.status === 429) {
                         throw new Error('RATE_LIMIT');
                     }
                     throw new Error(`HTTP ${response.status}`);
                 } catch (err) {
                     attempts++;
-                    if (attempts >= 3) {
+                    if (attempts >= 5) {
                         if (lastStatus === 429 || err.message === 'RATE_LIMIT') {
                             throw new Error('RATE_LIMIT_FINAL');
                         }
                         throw err;
                     }
-                    // 429 → backoff lâu hơn (5-10s) vì quota cần thời gian reset
-                    const waitMs = lastStatus === 429 ? Math.max(delay, 5000) : delay;
+                    const waitMs = lastStatus === 429 ? Math.max(delayTime, 5000) : delayTime;
                     await new Promise(r => setTimeout(r, waitMs));
-                    delay *= 2;
+                    delayTime *= 2;
                 }
             }
 
@@ -3190,16 +3223,16 @@ GIỌNG ĐIỆU:
             let errorMsg, hint;
             if (err.message === 'RATE_LIMIT_FINAL' || err.message === 'RATE_LIMIT') {
                 errorMsg = '⏱ [RATE LIMIT] Quá nhiều request';
-                hint = 'Gemini API free tier đã hết quota. Vui lòng đợi 1-2 phút rồi thử lại, hoặc nâng cấp lên paid tier.';
+                hint = 'Hệ thống đã chạm ngưỡng giới hạn truy vấn tạm thời. Hãy nghỉ tay 1 phút rồi truy vấn tiếp nhé.';
             } else if (err.message.includes('403')) {
-                errorMsg = '🔒 [AUTH ERROR] API key không hợp lệ';
-                hint = 'Kiểm tra lại API key hoặc đảm bảo Gemini API được enable.';
+                errorMsg = '🔒 [AUTH ERROR] API link failure';
+                hint = 'Vui lòng cấu hình API Key hợp lệ hoặc kiểm tra proxy định tuyến.';
             } else if (err.message.includes('400')) {
-                errorMsg = '✗ [BAD REQUEST] Sai format';
-                hint = 'Vui lòng thử lại với câu hỏi khác.';
+                errorMsg = '✗ [BAD REQUEST] Sai định dạng';
+                hint = 'Vui lòng thử nghiệm lại bằng một câu hỏi khác.';
             } else {
                 errorMsg = '⚠ [QUANTUM-LINK ERROR] ' + escapeHtml(err.message);
-                hint = 'Kiểm tra kết nối hoặc thử lại sau.';
+                hint = 'Cổng truyền lượng tử gặp gián đoạn tạm thời. Vui lòng kiểm tra đường truyền.';
             }
             target.innerHTML = `<strong style="color: var(--neon-magenta);">${errorMsg}</strong><br><span style="color: var(--text-dim); font-size: 0.85em;">${hint}</span>`;
             document.getElementById('status-ai').textContent = 'ERROR';
@@ -3209,7 +3242,7 @@ GIỌNG ĐIỆU:
     }
 
     function askAIAbout(data) {
-        const q = `Phân tích sâu node ${data.code} · ${data.name} (${data.url}): nó cung cấp gì, ai nên dùng, và lý do truy cập?`;
+        const q = `Phân tích sâu node ${data.code} · ${data.name} (${data.url}): nó cung cấp dịch vụ gì, ai nên dùng và lý do tại sao nên truy cập?`;
         appendUserMessage(`Truy vấn: ${data.code} · ${data.name}`);
         callGemini(q);
     }
@@ -3265,28 +3298,27 @@ GIỌNG ĐIỆU:
         const target = appendAIPlaceholder();
         const greeting = `**[QUANTUM-LINK ESTABLISHED]** 🌐
 
-Chào mừng đến **Quantum Observatory v5.0**. Tôi là **KV-Core Neural AI** — vận hành 6 node của ecosystem KenvinZone.
+Chào mừng bạn đến với **Quantum Observatory v5.18**. Tôi là **KV-Core Neural AI** — trí tuệ nhân tạo kiểm soát hệ thống dữ liệu 8 node của KenvinZone.
 
-🪐 **Cách tương tác:**
-- Click hành tinh hoặc dùng panel nav bên trái để focus
-- Phím \`0-5\` jump nhanh giữa các node
-- Phím \`/\` để focus vào ô input
-- Phím \`ESC\` để thoát focus
+🪐 **Hướng dẫn tương tác lượng tử:**
+- Click trực tiếp vào hành tinh hoặc dùng thanh Side-Nav bên trái để Lock-on & Fly-to
+- Nhấn phím nhanh từ \`0-7\` để dịch chuyển ống kính tức thời tới các Node vệ tinh
+- Nhấn phím \`/\` để kích hoạt nhanh bảng nhập văn bản
+- Nhấn phím \`ESC\` để hủy khóa (Deselect) hành tinh
 
-Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu hỏi nhé! ⚡`;
+Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click vào các phím Quick Action bên dưới nhé! ⚡`;
         await typewriterRender(target, greeting, 10);
     })();
 
     // ============================================================
-    // SOUND & YOUTUBE BACKGROUND MUSIC (OFFICIAL PLAYER API)
+    // SOUND & YOUTUBE BACKGROUND MUSIC
     // ============================================================
     let audioCtx = null;
     let soundEnabled = false;
-    const videoId = "gCWaRhNUvfc"; // YouTube video ID của bạn
+    const videoId = "gCWaRhNUvfc";
     let ytPlayer = null;
     let ytApiReady = false;
 
-    // Khởi tạo khung chứa iframe ẩn đặc thù đẩy hẳn ra ngoài viewport
     const ytDiv = document.createElement('div');
     ytDiv.id = 'yt-player-container';
     ytDiv.style.position = 'fixed';
@@ -3297,13 +3329,11 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     ytDiv.style.pointerEvents = 'none';
     document.body.appendChild(ytDiv);
 
-    // Tải động YouTube SDK để tương tác an toàn
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // YouTube SDK gọi lại khi sẵn sàng
     window.onYouTubeIframeAPIReady = function() {
         ytPlayer = new YT.Player('yt-player-container', {
             height: '270',
@@ -3325,7 +3355,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
                     consoleLog('[AUDIO] Quantum audio receiver synced', 'cyan');
                 },
                 onStateChange: (e) => {
-                    // Fallback lặp nhạc của YouTube
                     if (e.data === YT.PlayerState.ENDED) {
                         ytPlayer.playVideo();
                     }
@@ -3393,7 +3422,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
                 console.error('[AUDIO] Embed interaction failure', e);
             }
         } else {
-            // Chờ API tải xong nếu người dùng kích hoạt quá nhanh
             setTimeout(startAmbient, 300);
         }
     }
@@ -3423,7 +3451,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
         }
     });
 
-    // Spaceship toggle
     document.getElementById('ship-toggle').addEventListener('click', () => {
         shipVisible = !shipVisible;
         const btn = document.getElementById('ship-toggle');
@@ -3452,7 +3479,7 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     }
     consoleLog('[SYSTEM] Boot sequence complete', 'cyan');
     consoleLog('[RENDER] Bloom + chromatic + grain active', 'amber');
-    consoleLog('[OBSERVATORY] All 6 nodes synced', 'cyan');
+    consoleLog('[OBSERVATORY] All 8 nodes synced', 'cyan');
 
     // ============================================================
     // MINIMAP
@@ -3520,7 +3547,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
         mctx.lineTo(camX, camY + 4);
         mctx.stroke();
 
-        // Spaceship marker
         if (shipVisible) {
             const sx = cx + spaceship.position.x * scale;
             const sy = cy + spaceship.position.z * scale;
@@ -3528,7 +3554,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
             mctx.beginPath();
             mctx.arc(sx, sy, 2.5, 0, Math.PI * 2);
             mctx.fill();
-            // Outer ring để dễ thấy
             mctx.strokeStyle = 'rgba(93, 213, 213, 0.5)';
             mctx.lineWidth = 0.8;
             mctx.beginPath();
@@ -3536,20 +3561,16 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
             mctx.stroke();
         }
 
-        // Asteroid clusters markers (vùng triangle ngoài rìa)
-        // Vì asteroid ở xa hơn nhiều, dùng scale thấp hơn để fit vào map
         const astScale = 0.35;
         clusters.forEach(cluster => {
             const ax = cx + cluster.center.x * astScale;
             const ay = cy + cluster.center.z * astScale;
-            // Chỉ vẽ nếu nằm trong frame minimap (có border 6px)
             if (ax > 6 && ax < w - 6 && ay > 6 && ay < h - 6) {
                 const memberAcc = cluster.members[0].mesh.material.uniforms.uAccentColor.value;
                 const r = Math.floor(memberAcc.r * 255);
                 const g = Math.floor(memberAcc.g * 255);
                 const b = Math.floor(memberAcc.b * 255);
                 mctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.8)`;
-                // Vẽ triangle nhỏ
                 mctx.beginPath();
                 mctx.moveTo(ax, ay - 3);
                 mctx.lineTo(ax - 3, ay + 2);
@@ -3561,7 +3582,7 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     }
 
     // ============================================================
-    // CURVED TEXT OVERLAY — text uốn cong phía trên hành tinh được focus
+    // CURVED TEXT OVERLAY
     // ============================================================
     const curvedTextEl = document.getElementById('curved-text');
     const curvedSvg = document.getElementById('curved-svg');
@@ -3574,14 +3595,10 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
     const arcTextpathMain = document.getElementById('arc-textpath-main');
     const arcTextpathCode = document.getElementById('arc-textpath-code');
 
-    // Helper: tính screen radius của 1 sphere ở world position
     function screenRadius(worldPos, worldRadius) {
-        // Project center + một điểm trên rìa sang screen space
         const center = worldPos.clone().project(camera);
-        // Lấy điểm trên rìa: dùng "up" axis ở camera space
         const right = new THREE.Vector3();
         camera.getWorldDirection(right);
-        // Vector vuông góc với view direction trong mặt phẳng XZ
         right.cross(camera.up).normalize();
         const edgePos = worldPos.clone().add(right.multiplyScalar(worldRadius));
         const edge = edgePos.project(camera);
@@ -3603,53 +3620,41 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
         const sr = screenRadius(selectedMesh.position, data.radius);
 
         if (!sr.inFront || sr.r < 30) {
-            // Quá nhỏ hoặc khuất sau camera → ẩn
             curvedTextEl.classList.remove('visible');
             return;
         }
 
-        // Set màu accent theo hành tinh
         const hexColor = '#' + data.color.toString(16).padStart(6, '0');
         curvedTextEl.style.setProperty('--arc-color', hexColor);
 
-        // Position SVG container ở vị trí hành tinh
         const svgSize = Math.max(sr.r * 4.5, 240);
         curvedTextEl.style.width = svgSize + 'px';
         curvedTextEl.style.height = svgSize + 'px';
         curvedTextEl.style.left = (sr.cx - svgSize / 2) + 'px';
         curvedTextEl.style.top = (sr.cy - svgSize / 2) + 'px';
 
-        // Update viewBox để có toạ độ -size/2 → size/2 với center ở (0,0)
         const half = svgSize / 2;
         curvedSvg.setAttribute('width', svgSize);
         curvedSvg.setAttribute('height', svgSize);
         curvedSvg.setAttribute('viewBox', `${-half} ${-half} ${svgSize} ${svgSize}`);
 
-        // Arc radius — lớn hơn planet radius một chút để cách bề mặt
         const arcR = sr.r * 1.35;
-        const arcR2 = sr.r * 1.15;  // arc nhỏ hơn cho code text
+        const arcR2 = sr.r * 1.15;
 
-        // Đường cong ở phía TRÊN hành tinh (semicircle từ trái-trên qua đỉnh xuống phải-trên)
-        // SVG arc: M startX startY A rx ry x-axis-rotation large-arc sweep endX endY
-        // Bắt đầu từ góc 200° (trái dưới đỉnh), kết thúc 340° (phải dưới đỉnh)
-        // → tạo đường cong "ôm" phần trên của hành tinh
-        const startAngle = Math.PI * 1.15;  // ~207°
-        const endAngle   = Math.PI * 1.85;  // ~333°
+        const startAngle = Math.PI * 1.15;
+        const endAngle   = Math.PI * 1.85;
         const sx = Math.cos(startAngle) * arcR;
         const sy = Math.sin(startAngle) * arcR;
         const ex = Math.cos(endAngle) * arcR;
         const ey = Math.sin(endAngle) * arcR;
-        // sweep=0 vì SVG y axis ngược (text dạng úp)
         arcPathTop.setAttribute('d', `M ${sx} ${sy} A ${arcR} ${arcR} 0 0 1 ${ex} ${ey}`);
 
-        // Arc dưới (code text) — nhỏ hơn và nằm dưới arc chính
         const sx2 = Math.cos(startAngle) * arcR2;
         const sy2 = Math.sin(startAngle) * arcR2;
         const ex2 = Math.cos(endAngle) * arcR2;
         const ey2 = Math.sin(endAngle) * arcR2;
         arcPathBottom.setAttribute('d', `M ${sx2} ${sy2} A ${arcR2} ${arcR2} 0 0 1 ${ex2} ${ey2}`);
 
-        // Dashed outer arc (decorative) - rộng hơn nữa
         const arcRouter = sr.r * 1.55;
         const sxo = Math.cos(startAngle - 0.15) * arcRouter;
         const syo = Math.sin(startAngle - 0.15) * arcRouter;
@@ -3657,7 +3662,6 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
         const eyo = Math.sin(endAngle + 0.15) * arcRouter;
         arcOuter.setAttribute('d', `M ${sxo} ${syo} A ${arcRouter} ${arcRouter} 0 0 1 ${exo} ${eyo}`);
 
-        // Tick marks dọc theo arc
         arcTicks.innerHTML = '';
         const tickCount = 7;
         for (let i = 0; i < tickCount; i++) {
@@ -3679,15 +3683,13 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
             arcTicks.appendChild(tick);
         }
 
-        // Endpoint dots
         arcDotLeft.setAttribute('cx', sx);
         arcDotLeft.setAttribute('cy', sy);
         arcDotRight.setAttribute('cx', ex);
         arcDotRight.setAttribute('cy', ey);
 
-        // Update text content (chỉ khi đổi planet để tránh re-layout liên tục)
         if (curvedTextEl.dataset.currentId !== data.id) {
-            arcTextpathMain.textContent = data.subtitle;  // Giữ nguyên case
+            arcTextpathMain.textContent = data.subtitle;
             arcTextpathCode.textContent = `[ ${data.code} · ${data.name.toUpperCase()} ]`;
             curvedTextEl.dataset.currentId = data.id;
         }
@@ -3766,53 +3768,43 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
                 b.label.style.opacity = '1';
                 b.label.style.pointerEvents = 'auto';
                 const x = (screenPos.x * 0.5 + 0.5) * window.innerWidth;
-                // Tăng offset Y để label nằm rõ trên đầu hành tinh
                 const yOffset = b.data.type === 'star' ? -110 : -70;
                 const y = (-screenPos.y * 0.5 + 0.5) * window.innerHeight + yOffset;
                 const scale = Math.max(0.55, Math.min(1.1, 1.15 - screenPos.z * 0.6));
                 b.label.style.left = x + 'px';
                 b.label.style.top = y + 'px';
                 b.label.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                // Mark selected state
                 b.label.classList.toggle('selected', selectedMesh === b.mesh);
             }
         });
 
-        // === CURVED TEXT OVERLAY UPDATE ===
         updateCurvedText();
 
         coreLight.intensity = 22 + Math.sin(elapsed * 1.5) * 5;
 
-        // === ASTEROIDS UPDATE ===
         updateAsteroids(dt, elapsed);
 
-        // === SPACESHIP UPDATE ===
         if (shipVisible) {
-            shipT += dt * 0.025;  // Tốc độ - 1 vòng full mất ~40 giây
-            if (shipT > 1) shipT -= 1;  // Loop
+            shipT += dt * 0.025;
+            if (shipT > 1) shipT -= 1;
 
             const pos = shipPathPosition(shipT);
             spaceship.position.copy(pos);
 
-            // Hướng tàu theo tangent của curve (mũi chỉ về phía trước)
             const next = shipPathPosition(Math.min(1, shipT + 0.005));
             spaceship.lookAt(next);
-            // Rotate vì mũi tàu mặc định hướng theo Y axis
             spaceship.rotateX(Math.PI / 2);
 
-            // Engine glow flicker
             if (spaceship.userData.engineGlow) {
                 spaceship.userData.engineGlow.material.uniforms.uTime.value = elapsed;
             }
 
-            // Update particle trail (shift back rồi đặt đầu trail vào vị trí engine)
             const trailPos = spaceship.userData.trailPositions;
             for (let i = trailPos.length / 3 - 1; i > 0; i--) {
                 trailPos[i * 3] = trailPos[(i - 1) * 3];
                 trailPos[i * 3 + 1] = trailPos[(i - 1) * 3 + 1];
                 trailPos[i * 3 + 2] = trailPos[(i - 1) * 3 + 2];
             }
-            // Vị trí engine = vị trí ship + offset xuống dưới theo hướng tàu
             const engineOffset = new THREE.Vector3(0, -1.5, 0);
             engineOffset.applyQuaternion(spaceship.quaternion);
             trailPos[0] = pos.x + engineOffset.x;
@@ -3840,7 +3832,7 @@ Bắt đầu bằng cách click một quick-action bên dưới hoặc gõ câu 
         }, 600);
     }, 2400);
 
-    } // end initApp
+    }
     </script>
 </body>
 </html>
