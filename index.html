@@ -1083,12 +1083,12 @@
             filter: drop-shadow(0 0 4px var(--arc-color, #5dd5d5));
         }
 
-        /* Responsive Overhaul */
         @media (max-width: 900px) {
             .top-bar { padding: 1rem; flex-direction: column; gap: 0.75rem; align-items: stretch; }
             .brand-block { align-items: center; }
             .status-block { display: none; }
             .side-nav { left: 0.75rem; gap: 0.65rem; }
+            
             .ai-terminal {
                 width: calc(100% - 1.5rem);
                 right: 0.75rem;
@@ -1096,8 +1096,29 @@
                 bottom: 0.75rem;
                 transform: none;
                 max-height: 40vh;
+                height: 40vh;
+                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
-            .ai-terminal.collapsed { max-height: 50px; }
+            .ai-terminal.collapsed { 
+                max-height: 50px; 
+                height: 50px;
+            }
+
+            /* Tối ưu hóa Quick Actions trên Mobile dạng thanh cuộn ngang cực kỳ sịn sò */
+            .quick-actions {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 0.6rem 0.8rem;
+                gap: 0.4rem;
+            }
+            .quick-actions::-webkit-scrollbar {
+                display: none; /* Ẩn thanh cuộn để giữ giao diện tối giản sạch sẽ */
+            }
+            .quick-btn {
+                flex-shrink: 0;
+            }
+
             .minimap, .console-log { display: none; }
 
             .sound-toggle {
@@ -1111,49 +1132,89 @@
                 width: 40px; height: 40px;
             }
 
+            /* Định vị động của Planet HUD bám sát theo trạng thái đóng/mở của Terminal */
             .planet-hud {
-                bottom: calc(40vh + 1.25rem);
+                bottom: 5.5rem; /* Vị trí mặc định khi Terminal đang thu nhỏ */
                 left: 0.75rem;
                 right: 0.75rem;
                 width: auto;
                 min-width: 0;
                 transform: translateY(20px);
-                flex-direction: column;
+                flex-direction: row;
                 border-radius: 6px;
+                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
             .planet-hud.visible {
                 transform: translateY(0);
             }
+
+            /* Khi Terminal mở rộng trên Mobile, đẩy Planet HUD lên trên tầm che khuất */
+            .ai-terminal:not(.collapsed) ~ .planet-hud {
+                bottom: calc(40vh + 1.5rem);
+            }
+
             .planet-hud-emoji {
-                width: 100%;
-                height: 50px;
-                font-size: 2rem;
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.06);
+                width: 52px;
+                height: auto;
+                min-width: 52px;
+                font-size: 1.6rem;
+                border-right: 1px solid rgba(255,255,255,0.06);
+                border-bottom: none;
+                padding: 0.5rem;
             }
             .planet-hud-emoji::after {
                 top: 6px; left: 6px;
                 width: 10px; height: 10px;
             }
             .planet-hud-info {
-                padding: 0.85rem 1.25rem;
-                text-align: center;
-                align-items: center;
+                padding: 0.55rem 0.8rem;
+                min-width: 0;
+                flex: 1;
+                overflow: hidden;
+                align-items: flex-start;
+                text-align: left;
             }
-            .planet-hud-name { font-size: 1.35rem; }
+            .planet-hud-id {
+                font-size: 0.5rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 0.15rem;
+            }
+            .planet-hud-name {
+                font-size: 1rem;
+                line-height: 1.1;
+                margin-bottom: 0.2rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .planet-hud-desc {
+                font-size: 0.62rem;
+                line-height: 1.35;
+                max-width: none;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
             .planet-hud-actions {
-                border-left: none;
-                border-top: 1px solid rgba(255,255,255,0.06);
-                flex-direction: row;
+                border-left: 1px solid rgba(255,255,255,0.06);
+                border-top: none;
+                flex-direction: column;
+                flex-shrink: 0;
             }
             .hud-btn {
                 flex: 1;
                 justify-content: center;
-                padding: 0.75rem 0.5rem;
-                font-size: 0.65rem;
-                border-right: 1px solid rgba(255,255,255,0.06);
+                padding: 0.5rem 0.7rem;
+                font-size: 0.55rem;
+                letter-spacing: 0.08em;
+                gap: 0.3rem;
+                min-width: 0;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
             }
-            .hud-btn:last-child { border-right: none; }
+            .hud-btn:last-child { border-bottom: none; }
+            .hud-btn i { font-size: 0.85rem; }
         }
     </style>
 </head>
