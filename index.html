@@ -24,10 +24,17 @@
             --neon-emerald: #00ffaa;
             --text-primary: #e8eaf6;
             --text-dim: #6b7299;
-            --grid-line: rgba(0, 240, 255, 0.06);
+            --grid-line: rgba(0, 240, 255, 0.05);
+            --card-glass: rgba(5, 2, 24, 0.65);
+            --border-glass: rgba(0, 240, 255, 0.15);
+            --active-glow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+            user-select: none;
+            -webkit-user-drag: none;
+        }
 
         html, body {
             margin: 0;
@@ -48,24 +55,24 @@
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: screen;
-            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1);
         }
         #cursor-outer {
-            width: 32px; height: 32px;
-            border: 1px solid var(--neon-cyan);
+            width: 36px; height: 36px;
+            border: 1.5px solid var(--neon-cyan);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 12px rgba(0,240,255,0.5);
+            box-shadow: 0 0 14px rgba(0,240,255,0.4);
         }
         #cursor-inner {
-            width: 4px; height: 4px;
+            width: 5px; height: 5px;
             background: var(--neon-magenta);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 8px var(--neon-magenta);
         }
         .cursor-hover #cursor-outer {
-            transform: translate(-50%, -50%) scale(1.6);
+            transform: translate(-50%, -50%) scale(1.5);
             border-color: var(--neon-magenta);
             box-shadow: 0 0 24px var(--neon-magenta);
         }
@@ -94,8 +101,8 @@
             background-size: 64px 64px;
             pointer-events: none;
             z-index: 2;
-            mask-image: radial-gradient(circle at center, transparent 0%, black 80%);
-            -webkit-mask-image: radial-gradient(circle at center, transparent 0%, black 80%);
+            mask-image: radial-gradient(circle at center, transparent 15%, black 90%);
+            -webkit-mask-image: radial-gradient(circle at center, transparent 15%, black 90%);
         }
 
         .vfx-overlay {
@@ -109,16 +116,16 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%),
-                linear-gradient(90deg, rgba(255,0,127,0.02), rgba(0,240,255,0.02));
-            background-size: 100% 3px, 100% 100%;
-            opacity: 0.4;
+                linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.12) 50%),
+                linear-gradient(90deg, rgba(255,0,127,0.01), rgba(0,240,255,0.01));
+            background-size: 100% 4px, 100% 100%;
+            opacity: 0.35;
         }
         .vfx-overlay::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
         }
 
         #loading {
@@ -130,7 +137,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
         }
         #loading.hidden {
             opacity: 0;
@@ -152,31 +159,31 @@
             content: 'v5.18';
             position: absolute;
             top: 0.4em;
-            right: -2.2em;
-            font-size: 0.2em;
+            right: -2.4em;
+            font-size: 0.22em;
             font-family: 'JetBrains Mono', monospace;
             background: var(--neon-magenta);
             color: white;
-            padding: 2px 6px;
-            -webkit-background-clip: initial;
-            background-clip: initial;
-            font-weight: 400;
+            padding: 2px 8px;
+            font-weight: 500;
             letter-spacing: 0;
+            border-radius: 2px;
         }
         .loading-subtitle {
             font-family: 'Major Mono Display', monospace;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--neon-cyan);
             letter-spacing: 0.5em;
             text-transform: uppercase;
             margin-bottom: 3rem;
-            opacity: 0.7;
+            opacity: 0.75;
         }
         .loading-progress-bar {
-            width: min(320px, 70vw);
-            height: 2px;
-            background: rgba(255,255,255,0.05);
+            width: min(340px, 75vw);
+            height: 3px;
+            background: rgba(255,255,255,0.06);
             position: relative;
+            border-radius: 1px;
             overflow: hidden;
         }
         .loading-progress-fill {
@@ -186,16 +193,16 @@
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
-            box-shadow: 0 0 20px var(--neon-cyan);
-            transition: width 0.3s ease;
+            box-shadow: 0 0 14px var(--neon-cyan);
+            transition: width 0.25s ease;
         }
         .loading-status {
-            margin-top: 1rem;
+            margin-top: 1.25rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
             letter-spacing: 0.1em;
-            height: 1rem;
+            height: 1.2rem;
         }
         .loading-status::before {
             content: '> ';
@@ -203,15 +210,16 @@
         }
         .loading-error {
             margin-top: 1.5rem;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem 1.25rem;
             border: 1px solid var(--neon-magenta);
             background: rgba(255, 0, 127, 0.08);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             color: var(--neon-magenta);
-            max-width: 380px;
+            max-width: 400px;
             text-align: center;
             display: none;
+            border-radius: 4px;
         }
         .loading-error.show { display: block; }
 
@@ -235,15 +243,15 @@
             font-size: 0.65rem;
             color: var(--neon-cyan);
             letter-spacing: 0.3em;
-            opacity: 0.7;
-            margin-bottom: 0.25rem;
+            opacity: 0.75;
+            margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .brand-tag::before {
             content: '';
-            width: 6px; height: 6px;
+            width: 7px; height: 7px;
             background: var(--neon-cyan);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--neon-cyan);
@@ -270,25 +278,32 @@
             font-size: 0.55rem;
             background: var(--neon-magenta);
             color: white;
-            padding: 1px 6px;
-            margin-left: 0.5rem;
+            padding: 1.5px 7px;
+            margin-left: 0.6rem;
             vertical-align: middle;
             letter-spacing: 0.1em;
+            border-radius: 2px;
         }
 
         .status-block {
             text-align: right;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
+            background: rgba(5,2,24,0.4);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
         }
         .status-row {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.25rem;
             color: var(--text-dim);
         }
+        .status-row:last-child { margin-bottom: 0; }
         .status-row strong {
             color: var(--text-primary);
             font-weight: 500;
@@ -310,20 +325,20 @@
             z-index: 15;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.85rem;
             pointer-events: auto;
         }
         .nav-node {
             position: relative;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.25rem;
             padding: 0;
             cursor: none;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .nav-node-dot {
-            width: 10px; height: 10px;
+            width: 12px; height: 12px;
             background: transparent;
             border: 1.5px solid var(--node-color, var(--text-dim));
             border-radius: 50%;
@@ -331,20 +346,20 @@
             flex-shrink: 0;
         }
         .nav-node-line {
-            width: 16px;
+            width: 20px;
             height: 1px;
             background: var(--node-color, var(--text-dim));
-            opacity: 0.4;
+            opacity: 0.35;
             transition: all 0.3s ease;
         }
         .nav-node-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--text-dim);
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(-12px);
             transition: all 0.3s ease;
             white-space: nowrap;
         }
@@ -354,7 +369,7 @@
             transform: scale(1.3);
         }
         .nav-node:hover .nav-node-line {
-            width: 32px;
+            width: 36px;
             opacity: 1;
         }
         .nav-node:hover .nav-node-label {
@@ -372,58 +387,122 @@
             color: var(--node-color);
         }
 
+        /* High-Tech Terminal Container */
         .ai-terminal {
             position: fixed;
             right: 2rem;
             top: 50%;
             transform: translateY(-50%);
             z-index: 15;
-            width: 400px;
-            max-height: 70vh;
+            width: 420px;
+            max-height: 72vh;
             display: flex;
             flex-direction: column;
-            background: rgba(5, 2, 24, 0.6);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         .ai-terminal::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 1px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, var(--neon-magenta), transparent);
         }
         .ai-terminal::after {
             content: '';
             position: absolute;
             top: -1px; right: -1px;
-            width: 24px; height: 24px;
-            border-top: 1px solid var(--neon-cyan);
-            border-right: 1px solid var(--neon-cyan);
+            width: 28px; height: 28px;
+            border-top: 1.5px solid var(--neon-cyan);
+            border-right: 1.5px solid var(--neon-cyan);
+            pointer-events: none;
         }
-        .ai-terminal.collapsed {
-            max-height: 56px;
+
+        @media (min-width: 901px) {
+            .ai-terminal {
+                transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                            max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                            background 0.4s ease, 
+                            border-color 0.4s ease,
+                            box-shadow 0.4s ease;
+            }
+            .ai-terminal.collapsed {
+                width: 60px;
+                max-height: 72vh; 
+                background: rgba(4, 2, 20, 0.85);
+                border-left: 2px solid var(--neon-magenta);
+                box-shadow: -5px 0 25px rgba(255, 0, 127, 0.25);
+                cursor: pointer;
+            }
+            .ai-terminal.collapsed .chat-box,
+            .ai-terminal.collapsed .quick-actions,
+            .ai-terminal.collapsed .input-area {
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+            .ai-terminal .chat-box,
+            .ai-terminal .quick-actions,
+            .ai-terminal .input-area {
+                transition: opacity 0.4s ease 0.1s;
+            }
+            .ai-terminal.collapsed .terminal-header {
+                border-bottom: none;
+                background: transparent;
+                height: 100%;
+                width: 100%;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 1.5rem 0;
+                gap: 2.5rem;
+            }
+            .ai-terminal.collapsed .terminal-title {
+                font-size: 0;
+                color: transparent;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+            }
+            .ai-terminal.collapsed .terminal-title-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .ai-terminal.collapsed .terminal-action {
+                writing-mode: vertical-lr;
+                text-orientation: mixed;
+                padding: 0.8rem 0.4rem;
+                font-size: 0.62rem;
+                border: 1px solid rgba(255, 0, 127, 0.4);
+                color: var(--neon-magenta);
+                box-shadow: 0 0 10px rgba(255, 0, 127, 0.15);
+                white-space: nowrap;
+                margin-top: 1rem;
+            }
         }
 
         .terminal-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.9rem 1.1rem;
+            padding: 1rem 1.25rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             cursor: none;
             flex-shrink: 0;
         }
         .terminal-title {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
             font-family: 'Major Mono Display', monospace;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--neon-magenta);
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -440,34 +519,36 @@
             background: var(--neon-magenta);
         }
         .terminal-title-dot::after {
-            animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
         @keyframes ping {
-            75%, 100% { transform: scale(2.5); opacity: 0; }
+            75%, 100% { transform: scale(2.8); opacity: 0; }
         }
         .terminal-action {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
             color: var(--neon-cyan);
             background: transparent;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            padding: 0.35rem 0.7rem;
             letter-spacing: 0.1em;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             cursor: none;
+            border-radius: 2px;
         }
         .terminal-action:hover {
             background: var(--neon-cyan);
             color: var(--bg-void);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
         .chat-box {
             flex: 1;
             overflow-y: auto;
-            padding: 1.25rem;
+            padding: 1.5rem 1.25rem;
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
         .chat-box::-webkit-scrollbar { width: 3px; }
         .chat-box::-webkit-scrollbar-track { background: transparent; }
@@ -477,32 +558,35 @@
 
         .msg {
             display: flex;
-            gap: 0.75rem;
-            animation: msg-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 0.85rem;
+            animation: msg-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes msg-in {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .msg-avatar {
-            width: 28px; height: 28px;
+            width: 32px; height: 32px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Major Mono Display', monospace;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             letter-spacing: 0.1em;
+            border-radius: 4px;
         }
         .msg.ai .msg-avatar {
             background: rgba(255, 0, 127, 0.1);
             border: 1px solid var(--neon-magenta);
             color: var(--neon-magenta);
+            box-shadow: 0 0 8px rgba(255,0,127,0.2);
         }
         .msg.user .msg-avatar {
             background: rgba(0, 240, 255, 0.1);
             border: 1px solid var(--neon-cyan);
             color: var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(0,240,255,0.2);
         }
         .msg-body {
             flex: 1;
@@ -513,31 +597,33 @@
         .msg.ai .msg-body { color: #e8eaf6; }
         .msg.user .msg-body {
             color: var(--neon-cyan);
-            opacity: 0.85;
-            font-size: 0.72rem;
-            padding-top: 0.4rem;
+            opacity: 0.9;
+            font-size: 0.75rem;
+            padding-top: 0.35rem;
         }
-        .msg-body p { margin: 0 0 0.5rem 0; }
+        .msg-body p { margin: 0 0 0.65rem 0; }
         .msg-body p:last-child { margin-bottom: 0; }
         .msg-body strong {
             color: var(--neon-amber);
-            font-weight: 500;
+            font-weight: 600;
         }
         .msg-body em {
             color: var(--neon-magenta);
             font-style: normal;
         }
         .msg-body code {
-            background: rgba(0, 240, 255, 0.1);
-            padding: 1px 5px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            padding: 2px 6px;
             color: var(--neon-cyan);
-            font-size: 0.9em;
+            font-size: 0.85em;
+            border-radius: 3px;
         }
         .msg-body ul, .msg-body ol {
-            padding-left: 1.2rem;
+            padding-left: 1.25rem;
             margin: 0.5rem 0;
         }
-        .msg-body li { margin-bottom: 0.25rem; }
+        .msg-body li { margin-bottom: 0.35rem; }
         .msg-body a {
             color: var(--neon-cyan);
             text-decoration: none;
@@ -547,10 +633,10 @@
         .typing-cursor {
             display: inline-block;
             width: 8px;
-            height: 1em;
+            height: 1.1em;
             background: var(--neon-magenta);
             vertical-align: text-bottom;
-            margin-left: 2px;
+            margin-left: 3px;
             animation: blink 1s steps(2) infinite;
         }
         @keyframes blink {
@@ -561,10 +647,10 @@
         .quick-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            padding: 0.75rem 1rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.2);
+            gap: 0.45rem;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            background: rgba(0,0,0,0.15);
             flex-shrink: 0;
         }
         .quick-btn {
@@ -573,11 +659,12 @@
             background: transparent;
             border: 1px solid var(--btn-color, var(--neon-cyan));
             color: var(--btn-color, var(--neon-cyan));
-            padding: 0.35rem 0.7rem;
+            padding: 0.4rem 0.8rem;
             letter-spacing: 0.05em;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: none;
-            opacity: 0.7;
+            opacity: 0.75;
+            border-radius: 3px;
         }
         .quick-btn:hover {
             background: var(--btn-color);
@@ -588,39 +675,41 @@
 
         .input-area {
             display: flex;
-            gap: 0.5rem;
-            padding: 0.75rem 1rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.3);
+            gap: 0.6rem;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            background: rgba(0,0,0,0.25);
             flex-shrink: 0;
         }
         .input-area input {
             flex: 1;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(0,240,255,0.2);
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(0,240,255,0.15);
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            padding: 0.55rem 0.75rem;
+            padding: 0.65rem 0.85rem;
             outline: none;
             cursor: none;
-            transition: border-color 0.2s ease;
+            border-radius: 3px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
         .input-area input:focus {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
         }
         .input-area input::placeholder { color: var(--text-dim); }
         .send-btn {
             background: transparent;
             border: 1px solid var(--neon-magenta);
             color: var(--neon-magenta);
-            padding: 0 1rem;
+            padding: 0 1.2rem;
             font-family: 'Major Mono Display', monospace;
             font-size: 0.7rem;
             letter-spacing: 0.15em;
             cursor: none;
-            transition: all 0.2s ease;
+            border-radius: 3px;
+            transition: all 0.25s ease;
         }
         .send-btn:hover {
             background: var(--neon-magenta);
@@ -630,21 +719,24 @@
 
         .planet-hud {
             position: fixed;
-            bottom: 2rem;
+            bottom: 2.5rem;
             left: 50%;
-            transform: translate(-50%, 40px);
+            transform: translate(-50%, 50px);
             z-index: 18;
             opacity: 0;
             pointer-events: none;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: stretch;
-            background: rgba(5, 2, 24, 0.75);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(5, 2, 24, 0.8);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
             max-width: 90vw;
-            min-width: 480px;
+            min-width: 520px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
         }
         .planet-hud.visible {
             opacity: 1;
@@ -654,35 +746,35 @@
         .planet-hud::before {
             content: '';
             position: absolute;
-            bottom: -1px; left: 0; right: 0;
-            height: 2px;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--hud-color, var(--neon-magenta)), transparent);
         }
 
         .planet-hud-emoji {
-            width: 80px;
+            width: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             border-right: 1px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.25);
             position: relative;
         }
         .planet-hud-emoji::after {
             content: '';
             position: absolute;
             top: 8px; left: 8px;
-            width: 12px; height: 12px;
-            border-top: 1px solid var(--hud-color);
-            border-left: 1px solid var(--hud-color);
+            width: 14px; height: 14px;
+            border-top: 1.5px solid var(--hud-color);
+            border-left: 1.5px solid var(--hud-color);
         }
         .planet-hud-info {
-            padding: 1rem 1.5rem;
+            padding: 1.25rem 1.75rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-width: 200px;
+            min-width: 240px;
         }
         .planet-hud-id {
             font-family: 'JetBrains Mono', monospace;
@@ -690,23 +782,23 @@
             color: var(--text-dim);
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.35rem;
         }
         .planet-hud-name {
             font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
+            font-weight: 800;
+            font-size: 1.65rem;
             color: var(--hud-color, white);
             line-height: 1;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
         .planet-hud-desc {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             color: var(--text-dim);
-            line-height: 1.5;
-            max-width: 280px;
+            line-height: 1.6;
+            max-width: 320px;
         }
         .planet-hud-actions {
             display: flex;
@@ -715,23 +807,24 @@
         .hud-btn {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0 1.5rem;
+            gap: 0.6rem;
+            padding: 0 1.75rem;
             background: transparent;
             border: none;
             border-right: 1px solid rgba(255,255,255,0.06);
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             cursor: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .hud-btn:last-child { border-right: none; }
         .hud-btn:hover {
             background: var(--hud-color);
             color: var(--bg-void);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
         }
         .hud-btn.primary { color: var(--neon-cyan); }
         .hud-btn.primary:hover {
@@ -741,33 +834,34 @@
 
         .minimap {
             position: fixed;
-            bottom: 2rem;
-            left: 2rem;
+            bottom: 2.5rem;
+            left: 2.5rem;
             z-index: 15;
             width: 140px;
             height: 140px;
             background: rgba(5, 2, 24, 0.7);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-radius: 4px;
+            backdrop-filter: blur(12px);
             pointer-events: none;
         }
         .minimap-label {
             position: absolute;
-            top: -18px;
+            top: -22px;
             left: 0;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.55rem;
             color: var(--neon-cyan);
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.8;
         }
         .minimap-canvas { width: 100%; height: 100%; }
 
         .console-log {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 2.5rem;
+            right: 2.5rem;
             z-index: 15;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.6rem;
@@ -776,9 +870,9 @@
             max-width: 320px;
             text-align: right;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.75;
         }
-        .console-log div { margin-bottom: 1px; }
+        .console-log div { margin-bottom: 2px; }
         .console-log .log-cyan { color: var(--neon-cyan); }
         .console-log .log-magenta { color: var(--neon-magenta); }
         .console-log .log-amber { color: var(--neon-amber); }
@@ -792,32 +886,33 @@
         }
         .label-inner {
             position: relative;
-            padding: 0.35rem 0.7rem 0.4rem 0.7rem;
-            background: rgba(5, 2, 24, 0.7);
+            padding: 0.45rem 0.9rem 0.5rem 0.9rem;
+            background: rgba(5, 2, 24, 0.75);
             border: 1px solid var(--label-color, var(--neon-cyan));
             font-family: 'JetBrains Mono', monospace;
             white-space: nowrap;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 0 16px rgba(var(--label-rgb, 0, 240, 255), 0.4),
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 0 16px rgba(var(--label-rgb, 0, 240, 255), 0.3),
                         inset 0 0 12px rgba(var(--label-rgb, 0, 240, 255), 0.08);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1px;
+            gap: 2px;
+            border-radius: 3px;
         }
         .label-code {
-            font-size: 0.55rem;
+            font-size: 0.58rem;
             color: var(--label-color);
-            opacity: 0.7;
+            opacity: 0.85;
             letter-spacing: 0.25em;
             text-transform: uppercase;
         }
         .label-name {
             font-family: 'Syne', sans-serif;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: #fff;
             letter-spacing: 0.05em;
             text-shadow: 0 0 8px var(--label-color);
@@ -851,7 +946,7 @@
             top: 100%;
             left: 50%;
             width: 1px;
-            height: 36px;
+            height: 38px;
             background: linear-gradient(180deg, var(--label-color), transparent);
             transform: translateX(-50%);
             opacity: 0.7;
@@ -862,15 +957,15 @@
             bottom: 0;
             left: 50%;
             transform: translate(-50%, 50%);
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border: 1px solid var(--label-color);
             background: var(--bg-void);
             border-radius: 50%;
         }
         .planet-label.star-label .label-inner {
             border-color: var(--neon-amber);
-            box-shadow: 0 0 24px rgba(255, 170, 0, 0.6),
+            box-shadow: 0 0 24px rgba(255, 170, 0, 0.5),
                         inset 0 0 14px rgba(255, 170, 0, 0.1);
         }
         .planet-label.star-label .label-code,
@@ -889,58 +984,58 @@
         .planet-label.selected .label-name { color: var(--bg-void); text-shadow: none; }
         .planet-label.selected .label-code { color: var(--bg-void); opacity: 0.9; }
 
-        /* Sound + Ship toggles - DESKTOP */
         .sound-toggle {
             position: fixed;
-            bottom: calc(2rem + 160px);
-            left: 2rem;
+            bottom: calc(2.5rem + 160px);
+            left: 2.5rem;
             z-index: 14;
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(5, 2, 24, 0.7);
+            background: rgba(5, 2, 24, 0.75);
             border: 1px solid rgba(0, 240, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--neon-cyan);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             cursor: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .sound-toggle:hover {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px var(--neon-cyan);
+            box-shadow: var(--active-glow);
+            transform: scale(1.08);
         }
         .sound-toggle.muted { color: var(--text-dim); border-color: var(--text-dim); }
         .sound-toggle.muted:hover { box-shadow: none; }
 
         .ship-toggle {
             position: fixed;
-            bottom: calc(2rem + 160px);
-            left: calc(2rem + 56px);
+            bottom: calc(2.5rem + 160px);
+            left: calc(2.5rem + 56px);
             z-index: 14;
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(5, 2, 24, 0.7);
+            background: rgba(5, 2, 24, 0.75);
             border: 1px solid rgba(0, 240, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--neon-cyan);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             cursor: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .ship-toggle:hover {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px var(--neon-cyan);
+            box-shadow: var(--active-glow);
+            transform: scale(1.08);
         }
         .ship-toggle.hidden-ship { color: var(--text-dim); border-color: var(--text-dim); }
         .ship-toggle.hidden-ship:hover { box-shadow: none; }
 
-        /* === CURVED TEXT OVERLAY === */
         .curved-text-overlay {
             position: fixed;
             pointer-events: none;
@@ -960,7 +1055,6 @@
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.08em;
-            text-transform: none;
             fill: var(--arc-color, #5dd5d5);
             filter: drop-shadow(0 0 4px var(--arc-color, #5dd5d5));
         }
@@ -971,7 +1065,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             fill: var(--arc-color, #5dd5d5);
-            opacity: 0.6;
+            opacity: 0.65;
         }
         .curved-text-overlay .arc-marker {
             stroke: var(--arc-color, #5dd5d5);
@@ -989,129 +1083,77 @@
             filter: drop-shadow(0 0 4px var(--arc-color, #5dd5d5));
         }
 
+        /* Responsive Overhaul */
         @media (max-width: 900px) {
-            .top-bar { padding: 1rem; }
-            .side-nav { left: 1rem; gap: 0.5rem; }
+            .top-bar { padding: 1rem; flex-direction: column; gap: 0.75rem; align-items: stretch; }
+            .brand-block { align-items: center; }
+            .status-block { display: none; }
+            .side-nav { left: 0.75rem; gap: 0.65rem; }
             .ai-terminal {
-                width: calc(100% - 2rem);
-                right: 1rem;
+                width: calc(100% - 1.5rem);
+                right: 0.75rem;
                 top: auto;
-                bottom: 1rem;
+                bottom: 0.75rem;
                 transform: none;
-                max-height: 50vh;
+                max-height: 40vh;
             }
-            .ai-terminal.collapsed { max-height: 56px; }
+            .ai-terminal.collapsed { max-height: 50px; }
             .minimap, .console-log { display: none; }
 
-            /* Mobile: sound + ship toggle */
-            .side-nav {
-                left: 0.75rem;
-                top: 50%;
-                transform: translateY(-50%);
-                gap: 0.5rem;
-            }
             .sound-toggle {
-                position: fixed;
-                bottom: 9rem;
-                top: auto;
+                bottom: 8.5rem;
                 left: 0.75rem;
-                right: auto;
-                margin: 0;
-                transform: none;
-                width: 40px;
-                height: 40px;
-                font-size: 0.9rem;
+                width: 40px; height: 40px;
             }
             .ship-toggle {
-                position: fixed;
-                bottom: calc(9rem + 50px);
-                top: auto;
+                bottom: calc(8.5rem + 46px);
                 left: 0.75rem;
-                right: auto;
-                margin: 0;
-                transform: none;
-                width: 40px;
-                height: 40px;
-                font-size: 0.9rem;
+                width: 40px; height: 40px;
             }
 
-            /* Mobile: Planet HUD */
             .planet-hud {
-                bottom: auto;
-                top: auto;
-                bottom: calc(56px + 1rem + 12px);
+                bottom: calc(40vh + 1.25rem);
                 left: 0.75rem;
                 right: 0.75rem;
                 width: auto;
                 min-width: 0;
-                max-width: none;
                 transform: translateY(20px);
-                flex-direction: row;
+                flex-direction: column;
                 border-radius: 6px;
             }
             .planet-hud.visible {
                 transform: translateY(0);
             }
             .planet-hud-emoji {
-                width: 52px;
-                height: auto;
-                min-width: 52px;
-                font-size: 1.6rem;
-                border-right: 1px solid rgba(255,255,255,0.06);
-                border-bottom: none;
-                padding: 0.5rem;
+                width: 100%;
+                height: 50px;
+                font-size: 2rem;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
             }
             .planet-hud-emoji::after {
-                top: 5px; left: 5px;
-                width: 8px; height: 8px;
+                top: 6px; left: 6px;
+                width: 10px; height: 10px;
             }
             .planet-hud-info {
-                padding: 0.55rem 0.8rem;
-                min-width: 0;
-                flex: 1;
-                overflow: hidden;
+                padding: 0.85rem 1.25rem;
+                text-align: center;
+                align-items: center;
             }
-            .planet-hud-id {
-                font-size: 0.5rem;
-                letter-spacing: 0.2em;
-                margin-bottom: 0.15rem;
-            }
-            .planet-hud-name {
-                font-size: 1rem;
-                line-height: 1.1;
-                margin-bottom: 0.2rem;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            .planet-hud-desc {
-                font-size: 0.62rem;
-                line-height: 1.35;
-                max-width: none;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
+            .planet-hud-name { font-size: 1.35rem; }
             .planet-hud-actions {
-                border-left: 1px solid rgba(255,255,255,0.06);
-                border-top: none;
-                flex-direction: column;
-                flex-shrink: 0;
+                border-left: none;
+                border-top: 1px solid rgba(255,255,255,0.06);
+                flex-direction: row;
             }
             .hud-btn {
                 flex: 1;
                 justify-content: center;
-                padding: 0.5rem 0.7rem;
-                font-size: 0.55rem;
-                letter-spacing: 0.08em;
-                gap: 0.3rem;
-                min-width: 0;
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.06);
+                padding: 0.75rem 0.5rem;
+                font-size: 0.65rem;
+                border-right: 1px solid rgba(255,255,255,0.06);
             }
-            .hud-btn:last-child { border-bottom: none; }
-            .hud-btn i { font-size: 0.85rem; }
+            .hud-btn:last-child { border-right: none; }
         }
     </style>
 </head>
@@ -1201,7 +1243,6 @@
         <i class="fa-solid fa-rocket"></i>
     </button>
 
-    <!-- Curved text overlay -->
     <div class="curved-text-overlay" id="curved-text">
         <svg id="curved-svg" width="600" height="400" viewBox="-300 -200 600 400">
             <defs>
@@ -1225,7 +1266,7 @@
         </svg>
     </div>
 
-    <!-- Three.js UMD bundle -->
+    <!-- Three.js UMD bundles -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.135.0/examples/js/postprocessing/Pass.js"></script>
@@ -1268,10 +1309,6 @@
     waitForLibraries(initApp);
 
     function initApp() {
-    // ============================================================
-    // KENVINZONE v5.18 — QUANTUM OBSERVATORY (UMD VERSION)
-    // ============================================================
-
     const SYSTEM = [
         { id: 'main', code: '0x00', name: 'KenvinZone', type: 'star',
           url: 'https://kenvinzone.com',
@@ -1386,7 +1423,7 @@
             tDiffuse: { value: null },
             uTime: { value: 0 },
             uAberration: { value: 0.0003 },
-            uGrain: { value: 0.015 }
+            uGrain: { value: 0.012 }
         },
         vertexShader: `
             varying vec2 vUv;
@@ -1453,7 +1490,7 @@
     scene.add(fillLight);
 
     // ============================================================
-    // BẢN SẮC TEXTURE — MỖI NODE CÓ DNA RIÊNG
+    // PROCEDURAL TEXTURE GENERATORS
     // ============================================================
     function createBaseCanvas(bgPalette) {
         const canvas = document.createElement('canvas');
@@ -1485,7 +1522,6 @@
         return texture;
     }
 
-    // 🌟 KENVINZONE CORE
     function textureKenvinZone(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
         for (let i = 0; i < 14; i++) {
@@ -1509,12 +1545,6 @@
         for (let x = 0; x < canvas.width; x += 80) {
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         }
-        ctx.globalAlpha = 0.7;
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.moveTo(0, canvas.height / 2);
-        ctx.lineTo(canvas.width, canvas.height / 2);
-        ctx.stroke();
         ctx.globalAlpha = 0.5;
         ctx.font = 'bold 26px "JetBrains Mono", monospace';
         ctx.fillStyle = '#ffffff';
@@ -1524,7 +1554,6 @@
         return toTexture(canvas);
     }
 
-    // 📈 VN-INDEX
     function textureVNIndex(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
         ctx.strokeStyle = hexColor;
@@ -1568,17 +1597,9 @@
             const ty = Math.random() * canvas.height;
             ctx.fillText(`VNI ${(1200 + Math.random() * 100).toFixed(2)}`, tx, ty);
         }
-
-        ctx.globalAlpha = 0.3;
-        ctx.fillStyle = hexColor;
-        for (let x = 0; x < canvas.width; x += 16) {
-            const h = Math.random() * 80 + 20;
-            ctx.fillRect(x, canvas.height - h, 10, h);
-        }
         return toTexture(canvas);
     }
 
-    // 🎓 AI CLASS
     function textureAIClass(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas(['#02110a', '#051a12', '#010c08']);
         const layers = 6;
@@ -1616,26 +1637,10 @@
             ctx.fillStyle = grad;
             ctx.globalAlpha = 0.85;
             ctx.fillRect(n.x - n.size * 1.8, n.y - n.size * 1.8, n.size * 3.6, n.size * 3.6);
-            ctx.fillStyle = '#ffffff';
-            ctx.globalAlpha = 0.95;
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.size / 3, 0, Math.PI * 2);
-            ctx.fill();
         });
-        const formulas = ['σ(z)', 'ReLU', 'softmax', '∇θ J', 'w·x+b', 'L(y,ŷ)', 'epoch+1', 'tanh', 'GELU', 'CrossEnt'];
-        for (let i = 0; i < 14; i++) {
-            const text = formulas[Math.floor(Math.random() * formulas.length)];
-            const tx = Math.random() * (canvas.width - 150);
-            const ty = Math.random() * (canvas.height - 30) + 25;
-            ctx.font = 'bold 20px "JetBrains Mono", monospace';
-            ctx.globalAlpha = 0.85;
-            ctx.fillStyle = '#a8f0a8';
-            ctx.fillText(text, tx, ty);
-        }
         return toTexture(canvas);
     }
 
-    // 🛠️ TRADING TOOL
     function textureTradingTool(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas(['#020812', '#050f1a', '#01060c']);
         const rowH = 60;
@@ -1667,24 +1672,9 @@
             else ctx.lineTo(x, y);
         }
         ctx.stroke();
-        ctx.strokeStyle = '#ffd99a';
-        ctx.lineWidth = 2;
-        ctx.globalAlpha = 0.7;
-        ctx.beginPath();
-        for (let x = 0; x < canvas.width; x += 5) {
-            const y = canvas.height / 2 + Math.sin(x * 0.012 - 0.3) * 70 + Math.cos(x * 0.04) * 35;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-        ctx.fillStyle = '#6bb8ff';
-        ctx.globalAlpha = 0.4;
-        ctx.fillRect(0, canvas.height * 0.7, canvas.width, 4);
-        ctx.fillRect(0, canvas.height * 0.3, canvas.width, 4);
         return toTexture(canvas);
     }
 
-    // 🟡 GOLD & NASDAQ
     function textureGoldNasdaq(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas();
         const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -1706,28 +1696,9 @@
             ctx.lineTo(canvas.width, y + (Math.random() - 0.5) * 20);
             ctx.stroke();
         }
-
-        ctx.globalAlpha = 0.85;
-        ctx.font = 'bold 24px "JetBrains Mono", monospace';
-        ctx.fillStyle = hexColor;
-        const tickers = ['AAPL', 'NVDA', 'MSFT', 'TSLA', 'AMZN', 'META', 'GOOGL'];
-        for (let i = 0; i < 10; i++) {
-            const sym = tickers[Math.floor(Math.random() * tickers.length)];
-            ctx.fillText(`${sym} ${(100 + Math.random() * 400).toFixed(2)}`,
-                Math.random() * (canvas.width - 250), Math.random() * canvas.height);
-        }
-
-        ctx.fillStyle = '#ffd700';
-        ctx.font = 'bold 32px "Major Mono Display", monospace';
-        for (let i = 0; i < 4; i++) {
-            ctx.globalAlpha = 0.6;
-            ctx.fillText(`XAU $${(2000 + Math.random() * 200).toFixed(0)}`,
-                Math.random() * (canvas.width - 300), Math.random() * canvas.height);
-        }
         return toTexture(canvas);
     }
 
-    // 📰 AI NEWS
     function textureAINews(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas(['#15071a', '#1f0d28', '#0a0413']);
         ctx.strokeStyle = '#ff99cc';
@@ -1738,43 +1709,16 @@
             const x = (canvas.width / cols) * c;
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         }
-        const headlines = [
-            'GPT-5 RELEASED',
-            'NEURAL BREAKTHROUGH',
-            'LLM SCALING LAW',
-            'AGI TIMELINE',
-            'TRANSFORMER 2.0',
-            'QUANTUM AI',
-            'MULTIMODAL ERA',
-            'BENCHMARK SOTA'
-        ];
+        const headlines = ['GPT-5 RELEASED', 'NEURAL BREAKTHROUGH', 'LLM SCALING LAW', 'AGI TIMELINE', 'TRANSFORMER 2.0'];
         ctx.globalAlpha = 0.9;
         for (let i = 0; i < 18; i++) {
             ctx.font = `bold ${Math.random() * 14 + 18}px "JetBrains Mono", monospace`;
-            const colors = ['#ffffff', '#ff99cc', '#b08fff'];
-            ctx.fillStyle = colors[i % colors.length];
-            ctx.fillText(headlines[i % headlines.length],
-                Math.random() * (canvas.width - 400), Math.random() * canvas.height);
-        }
-        ctx.globalAlpha = 0.35;
-        ctx.font = '12px "JetBrains Mono", monospace';
-        ctx.fillStyle = '#ff99cc';
-        for (let i = 0; i < 60; i++) {
-            const lineWidth = Math.random() * 180 + 60;
-            ctx.fillRect(Math.random() * (canvas.width - 200), Math.random() * canvas.height,
-                lineWidth, 2);
-        }
-        ctx.globalAlpha = 0.7;
-        ctx.font = '14px "JetBrains Mono", monospace';
-        ctx.fillStyle = '#b08fff';
-        for (let i = 0; i < 8; i++) {
-            ctx.fillText(`2026.${(Math.random() * 12 | 0).toString().padStart(2,'0')}.${(Math.random() * 28 | 0).toString().padStart(2,'0')}`,
-                Math.random() * canvas.width, Math.random() * canvas.height);
+            ctx.fillStyle = '#ff99cc';
+            ctx.fillText(headlines[i % headlines.length], Math.random() * (canvas.width - 400), Math.random() * canvas.height);
         }
         return toTexture(canvas);
     }
 
-    // 🪙 CRYPTO INDEX
     function textureCryptoIndex(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas(['#120500', '#200c02', '#0a0300']);
         ctx.strokeStyle = '#ff7300';
@@ -1783,138 +1727,20 @@
         for (let x = 0; x < canvas.width; x += 60) {
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 200, canvas.height); ctx.stroke();
         }
-        
-        ctx.font = 'bold 16px "JetBrains Mono", monospace';
-        for (let i = 0; i < 25; i++) {
-            const x = Math.random() * (canvas.width - 200);
-            const y = Math.random() * (canvas.height - 40) + 20;
-            const size = Math.random() * 40 + 30;
-            
-            ctx.strokeStyle = '#ffa259';
-            ctx.globalAlpha = 0.25;
-            ctx.lineWidth = 1.5;
-            ctx.strokeRect(x, y, size, size);
-            
-            ctx.fillStyle = '#ff7300';
-            ctx.globalAlpha = 0.6;
-            ctx.beginPath();
-            ctx.arc(x, y, 3, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = '#ffb380';
-            ctx.globalAlpha = 0.8;
-            ctx.font = '12px "JetBrains Mono", monospace';
-            ctx.fillText(`#${94000 + i}`, x + size + 8, y + 15);
-        }
-        
-        const cryptos = ['BTC ▲', 'ETH ▲', 'SOL ▼', 'BNB ▲', 'XRP ▼', 'ADA ▲', 'DOT ▼', 'LINK ▲', 'NEAR ▲'];
-        for (let i = 0; i < 15; i++) {
-            const coin = cryptos[Math.floor(Math.random() * cryptos.length)];
-            const tx = Math.random() * (canvas.width - 150);
-            const ty = Math.random() * (canvas.height - 30) + 25;
-            const isUp = coin.includes('▲');
-            
-            ctx.font = 'bold 22px "JetBrains Mono", monospace';
-            ctx.globalAlpha = 0.9;
-            ctx.fillStyle = isUp ? '#00ffaa' : '#ff3355';
-            ctx.fillText(coin, tx, ty);
-            
-            ctx.font = '12px "JetBrains Mono", monospace';
-            ctx.fillStyle = '#ff914d';
-            ctx.globalAlpha = 0.5;
-            ctx.fillText(`0x${Math.random().toString(16).substr(2, 6)}...${Math.random().toString(16).substr(2, 4)}`, tx, ty + 18);
-        }
-        
-        ctx.strokeStyle = '#ff7300';
-        ctx.lineWidth = 2.5;
-        ctx.globalAlpha = 0.75;
-        ctx.beginPath();
-        for (let x = 0; x < canvas.width; x += 10) {
-            const y = canvas.height * 0.75 + Math.sin(x * 0.008) * 60 + Math.cos(x * 0.02) * 20;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-
         return toTexture(canvas);
     }
 
-    // 💱 FOREX INDEX (NEW PLANET)
     function textureForexIndex(hexColor, data) {
         const { canvas, ctx } = createBaseCanvas(['#000c08', '#001a12', '#000503']);
-        
         ctx.strokeStyle = '#00ffaa';
         ctx.globalAlpha = 0.1;
         ctx.lineWidth = 1;
         for (let x = 0; x < canvas.width; x += 80) {
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         }
-        for (let y = 0; y < canvas.height; y += 40) {
-            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-        }
-
-        const currencySymbols = ['$', '€', '£', '¥', '₣'];
-        ctx.font = 'bold 120px "Syne", sans-serif';
-        ctx.fillStyle = '#00ffaa';
-        for (let i = 0; i < 8; i++) {
-            ctx.globalAlpha = 0.04;
-            const tx = Math.random() * (canvas.width - 150);
-            const ty = Math.random() * (canvas.height - 100) + 80;
-            ctx.fillText(currencySymbols[i % currencySymbols.length], tx, ty);
-        }
-
-        const forexPairs = [
-            'EUR/USD 1.0852 ▲', 'USD/JPY 154.34 ▼', 'GBP/USD 1.2688 ▲', 
-            'AUD/USD 0.6654 ▲', 'USD/CAD 1.3682 ▼', 'USD/CHF 0.9022 ▼',
-            'EUR/GBP 0.8552 ▼', 'GBP/JPY 195.84 ▲'
-        ];
-        
-        ctx.font = 'bold 20px "JetBrains Mono", monospace';
-        for (let i = 0; i < 15; i++) {
-            const pair = forexPairs[Math.floor(Math.random() * forexPairs.length)];
-            const tx = Math.random() * (canvas.width - 240);
-            const ty = Math.random() * (canvas.height - 40) + 20;
-            const isUp = pair.includes('▲');
-            
-            ctx.globalAlpha = 0.85;
-            ctx.fillStyle = isUp ? '#00ffaa' : '#ff3355';
-            ctx.fillText(pair, tx, ty);
-            
-            ctx.font = '11px "JetBrains Mono", monospace';
-            ctx.fillStyle = '#00ffaa';
-            ctx.globalAlpha = 0.4;
-            ctx.fillText(`BID: ${(Math.random() * 2).toFixed(4)} | ASK: ${(Math.random() * 2).toFixed(4)}`, tx, ty + 16);
-            ctx.font = 'bold 20px "JetBrains Mono", monospace';
-        }
-        
-        ctx.strokeStyle = '#00ffaa';
-        ctx.lineWidth = 2.0;
-        ctx.globalAlpha = 0.8;
-        ctx.beginPath();
-        for (let x = 0; x < canvas.width; x += 12) {
-            const y = canvas.height * 0.45 + Math.sin(x * 0.015) * 80 + Math.cos(x * 0.035) * 25;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-
-        ctx.strokeStyle = '#26ffb0';
-        ctx.lineWidth = 1.2;
-        ctx.globalAlpha = 0.5;
-        ctx.beginPath();
-        for (let x = 0; x < canvas.width; x += 12) {
-            const y = canvas.height * 0.45 + Math.sin(x * 0.015 - 0.5) * 75 + Math.cos(x * 0.035 + 0.2) * 20;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-
         return toTexture(canvas);
     }
 
-    // ============================================================
-    // ROUTER
-    // ============================================================
     function createPlanetTexture(hexColor, isStar, data) {
         switch (data.id) {
             case 'main':        return textureKenvinZone(hexColor, data);
@@ -1929,13 +1755,17 @@
         }
     }
 
+    // ============================================================
+    // CLASSIC HIGH-SPEED ATMOSPHERE SHADER
+    // ============================================================
     function createAtmosphereMesh(radius, colorHex, isStar) {
         const color = new THREE.Color(colorHex);
-        const geom = new THREE.SphereGeometry(radius * (isStar ? 1.1 : 1.14), 48, 48);
+        const geom = new THREE.SphereGeometry(radius * (isStar ? 1.12 : 1.16), 48, 48);
         const mat = new THREE.ShaderMaterial({
             uniforms: {
                 uColor: { value: color },
-                uIntensity: { value: isStar ? 0.35 : 0.55 }
+                uIntensity: { value: isStar ? 0.35 : 0.55 },
+                uTime: { value: 0 }
             },
             vertexShader: `
                 varying vec3 vNormal;
@@ -1950,12 +1780,19 @@
             fragmentShader: `
                 uniform vec3 uColor;
                 uniform float uIntensity;
+                uniform float uTime;
                 varying vec3 vNormal;
                 varying vec3 vViewDir;
                 void main() {
                     float fresnel = 1.0 - dot(vNormal, vViewDir);
-                    fresnel = pow(fresnel, 3.5);
-                    gl_FragColor = vec4(uColor, fresnel * uIntensity);
+                    fresnel = pow(fresnel, 3.2);
+                    
+                    // Nhịp thở được làm chậm lại để tạo cảm giác trôi dạt hữu cơ, sang trọng
+                    float breathing = 0.85 + 0.15 * sin(uTime * 0.80);
+                    
+                    // Sóng năng lượng di chuyển chậm rãi từ tốn
+                    float wave = sin(fresnel * 16.0 - uTime * 1.25) * 0.15 + 0.85;
+                    gl_FragColor = vec4(uColor, fresnel * uIntensity * breathing * wave);
                 }
             `,
             side: THREE.BackSide,
@@ -1967,7 +1804,175 @@
     }
 
     // ============================================================
-    // PLANET CONSTRUCTION
+    // ⭐ ADVANCED 3D SIMPLEX NOISE ORGANIC LIQUID SHADER (SÓNG CHẤT LỎNG CHẬM)
+    // Applied to Central Gateway (main) & AI Class (aiclass)
+    // ============================================================
+    function createOrganicAtmosphereMesh(radius, colorHex, isStar, distortionStrength) {
+        const color = new THREE.Color(colorHex);
+        const geom = new THREE.SphereGeometry(radius * (isStar ? 1.15 : 1.2), 64, 64);
+        
+        // Simplex Noise algorithm compiled directly into GLSL to enable liquid morphing and organic ink bleeding
+        const simplexNoiseGLSL = `
+            vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+            vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+            float snoise(vec3 v){
+              const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+              const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+              vec3 i  = floor(v + dot(v, C.yyy));
+              vec3 x0 = v - i + dot(i, C.xxx);
+              vec3 g = step(x0.yzx, x0.xyz);
+              vec3 l = 1.0 - g;
+              vec3 i1 = min(g.xyz, l.zxy);
+              vec3 i2 = max(g.xyz, l.zxy);
+              vec3 x1 = x0 - i1 + C.xxx;
+              vec3 x2 = x0 - i2 + C.yyy;
+              vec3 x3 = x0 - D.yyy;
+              i = mod(i, 289.0);
+              vec4 p = permute(permute(permute(
+                         i.z + vec4(0.0, i1.z, i2.z, 1.0))
+                       + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+                       + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+              float n_ = 0.142857142857;
+              vec3 ns = n_ * D.wyz - D.xzx;
+              vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+              vec4 x_ = floor(j * ns.z);
+              vec4 y_ = floor(j - 7.0 * x_);
+              vec4 x = x_ *ns.x + ns.yyyy;
+              vec4 y = y_ *ns.x + ns.yyyy;
+              vec4 h = 1.0 - abs(x) - abs(y);
+              vec4 b0 = vec4(x.xy, y.xy);
+              vec4 b1 = vec4(x.zw, y.zw);
+              vec4 s0 = floor(b0)*2.0 + 1.0;
+              vec4 s1 = floor(b1)*2.0 + 1.0;
+              vec4 sh = -step(h, vec4(0.0));
+              vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+              vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+              vec3 p0 = vec3(a0.xy, h.x);
+              vec3 p1 = vec3(a0.zw, h.y);
+              vec3 p2 = vec3(a1.xy, h.z);
+              vec3 p3 = vec3(a1.zw, h.w);
+              vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+              p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+              vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+              m = m * m;
+              return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+            }
+        `;
+
+        const mat = new THREE.ShaderMaterial({
+            uniforms: {
+                uColor: { value: color },
+                uIntensity: { value: isStar ? 0.6 : 0.8 },
+                uTime: { value: 0 },
+                uDistortion: { value: distortionStrength }
+            },
+            vertexShader: `
+                varying vec3 vNormal;
+                varying vec3 vViewDir;
+                varying vec3 vWorldPosition;
+                uniform float uTime;
+                uniform float uDistortion;
+                ${simplexNoiseGLSL}
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+                    vViewDir = normalize(-mvPos.xyz);
+                    vWorldPosition = position;
+                    
+                    // --- 1. DYNAMIC FLUID BORDER DISPLACEMENT ---
+                    // Tốc độ dòng chảy (flowTime) được giảm mạnh từ 1.6 xuống 0.25 để có bước chuyển dịch uyển chuyển
+                    float flowTime = uTime * 0.25;
+                    float noiseVal = snoise(position * (0.35 / uDistortion) + vec3(0.0, 0.0, flowTime));
+                    
+                    // Biến đổi biên dạng chất lỏng siêu chậm
+                    vec3 displacedPos = position + normal * noiseVal * (uDistortion * 0.18);
+                    
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(displacedPos, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 uColor;
+                uniform float uIntensity;
+                uniform float uTime;
+                uniform float uDistortion;
+                varying vec3 vNormal;
+                varying vec3 vViewDir;
+                varying vec3 vWorldPosition;
+                ${simplexNoiseGLSL}
+                void main() {
+                    // Fresnel hiệu chỉnh viền
+                    float fresnel = 1.0 - dot(vNormal, vViewDir);
+                    fresnel = pow(fresnel, 2.2);
+                    
+                    // --- 2. ORGANIC INK DIFFUSION ALGORITHM ---
+                    // Giảm tốc độ loang mực từ 1.1 xuống còn 0.15 (Chậm hơn gần 8 lần!)
+                    float flowTime = uTime * 0.15;
+                    float inkBleed = snoise(vWorldPosition * 0.48 - vec3(flowTime * 0.3, flowTime * 0.5, flowTime * 0.2));
+                    
+                    // Pha trộn Fresnel với màng loang mực siêu chậm hữu cơ
+                    float edgeCutoff = smoothstep(0.08, 0.92, fresnel + inkBleed * 0.32);
+                    
+                    // Nhịp đập hào quang sâu thẳm, chậm hơn
+                    float heartBeat = 0.90 + 0.10 * sin(uTime * 0.85);
+                    
+                    gl_FragColor = vec4(uColor, edgeCutoff * uIntensity * heartBeat);
+                }
+            `,
+            side: THREE.BackSide,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            depthWrite: false
+        });
+        return new THREE.Mesh(geom, mat);
+    }
+
+    // ============================================================
+    // RADIAL SHADER ON PLANET CORES (RADIAL RIPPLE WAVE SHADER - GỢN SÓNG TÂM CHẬM)
+    // ============================================================
+    function createPlanetRippleMesh(radius, colorHex) {
+        const geom = new THREE.SphereGeometry(radius * 1.008, 48, 48);
+        const mat = new THREE.ShaderMaterial({
+            uniforms: {
+                uColor: { value: new THREE.Color(colorHex) },
+                uTime: { value: 0 }
+            },
+            vertexShader: `
+                varying vec3 vPosition;
+                void main() {
+                    vPosition = position;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 uColor;
+                uniform float uTime;
+                varying vec3 vPosition;
+                void main() {
+                    // Khoảng cách trắc địa từ cực bắc của hành tinh (0, R, 0)
+                    float dist = acos(normalize(vPosition).y);
+                    
+                    // Sóng lan tỏa được giảm tốc độ xuống còn 1.15 (Thay vì 4.2)
+                    float ripple = sin(dist * 14.0 - uTime * 1.15) * 0.5 + 0.5;
+                    float ring = pow(ripple, 6.0) * 0.38;
+                    
+                    // Lớp sóng phụ mờ ảo chuyển động siêu chậm (0.45 thay vì 1.8)
+                    float ripple2 = sin(dist * 7.0 - uTime * 0.45) * 0.5 + 0.5;
+                    float ring2 = pow(ripple2, 4.0) * 0.18;
+                    
+                    float finalGlow = (ring + ring2) * 0.5;
+                    
+                    gl_FragColor = vec4(uColor, finalGlow);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        return new THREE.Mesh(geom, mat);
+    }
+
+    // ============================================================
+    // PLANET & SYSTEM GENERATION
     // ============================================================
     const bodies = [];
     const planetMeshes = [];
@@ -1985,15 +1990,26 @@
             emissiveMap: texture,
             emissiveIntensity: isStar ? 1.2 : 0.55,
             roughness: isStar ? 0.5 : 0.85,
-            metalness: data.id === 'gold' || data.id === 'cryptoindex' || data.id === 'forexindex' ? 0.4 : 0.15
+            metalness: ['gold', 'cryptoindex', 'forexindex'].includes(data.id) ? 0.4 : 0.15
         });
         const mesh = new THREE.Mesh(geom, mat);
         mesh.userData = Object.assign({}, data, { baseEmissive: isStar ? 1.2 : 0.55 });
 
-        const atmo = createAtmosphereMesh(data.radius, data.atmoColor, isStar);
+        // Áp dụng thuật toán Simplex Noise cao cấp cho 0x00 KenvinZone và 0x02 AI Class
+        const isOrganicNode = (data.id === 'main' || data.id === 'aiclass');
+        const atmo = isOrganicNode 
+            ? createOrganicAtmosphereMesh(data.radius, data.atmoColor, isStar, data.id === 'main' ? 1.35 : 0.95)
+            : createAtmosphereMesh(data.radius, data.atmoColor, isStar);
+        
         mesh.add(atmo);
         mesh.userData.atmo = atmo;
 
+        // Add Core Radial Energy Ripple Overlay
+        const ripple = createPlanetRippleMesh(data.radius, data.color);
+        mesh.add(ripple);
+        mesh.userData.ripple = ripple;
+
+        // Custom Satellite Rings based on IDs
         if (!isStar) {
             if (data.id === 'gold') {
                 const ringColors = [0xe8b768, 0xd4a04e, 0xb8884a];
@@ -2024,99 +2040,25 @@
                 }
                 beltGeom.setAttribute('position', new THREE.BufferAttribute(beltPos, 3));
                 const beltMat = new THREE.PointsMaterial({
-                    color: data.color,
-                    size: 0.06,
-                    transparent: true,
-                    opacity: 0.65,
-                    blending: THREE.AdditiveBlending,
-                    sizeAttenuation: true
+                    color: data.color, size: 0.06, transparent: true, opacity: 0.65,
+                    blending: THREE.AdditiveBlending, sizeAttenuation: true
                 });
                 const belt = new THREE.Points(beltGeom, beltMat);
                 mesh.add(belt);
                 mesh.userData.satRing = belt;
             } else if (data.id === 'aiclass') {
                 const r1g = new THREE.RingGeometry(data.radius * 1.4, data.radius * 1.46, 64);
-                const r1m = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.4
-                });
+                const r1m = new THREE.MeshBasicMaterial({ color: data.color, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
                 const r1 = new THREE.Mesh(r1g, r1m);
                 r1.rotation.x = Math.PI / 2;
                 mesh.add(r1);
-
-                const r2g = new THREE.RingGeometry(data.radius * 1.5, data.radius * 1.54, 64);
-                const r2m = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.3
-                });
-                const r2 = new THREE.Mesh(r2g, r2m);
-                r2.rotation.x = 0;
-                r2.rotation.y = Math.PI / 4;
-                mesh.add(r2);
-                mesh.userData.satRing = r2;
+                mesh.userData.satRing = r1;
             } else if (data.id === 'trading') {
                 const cageGeo = new THREE.IcosahedronGeometry(data.radius * 1.55, 0);
-                const cageMat = new THREE.MeshBasicMaterial({
-                    color: data.color,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.18
-                });
+                const cageMat = new THREE.MeshBasicMaterial({ color: data.color, wireframe: true, transparent: true, opacity: 0.18 });
                 const cage = new THREE.Mesh(cageGeo, cageMat);
                 mesh.add(cage);
                 mesh.userData.satRing = cage;
-            } else if (data.id === 'cryptoindex') {
-                const r1g = new THREE.RingGeometry(data.radius * 1.42, data.radius * 1.5, 64);
-                const r1m = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.45
-                });
-                const r1 = new THREE.Mesh(r1g, r1m);
-                r1.rotation.x = Math.PI / 2 + 0.15;
-                mesh.add(r1);
-
-                const cageGeo = new THREE.IcosahedronGeometry(data.radius * 1.62, 1);
-                const cageMat = new THREE.MeshBasicMaterial({
-                    color: data.color,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.12
-                });
-                const cage = new THREE.Mesh(cageGeo, cageMat);
-                mesh.add(cage);
-                mesh.userData.satRing = r1;
-            } else if (data.id === 'forexindex') {
-                const r1g = new THREE.RingGeometry(data.radius * 1.45, data.radius * 1.52, 64);
-                const r1m = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.45
-                });
-                const r1 = new THREE.Mesh(r1g, r1m);
-                r1.rotation.x = Math.PI / 2 + 0.2;
-                r1.rotation.y = 0.1;
-                mesh.add(r1);
-
-                const r2g = new THREE.RingGeometry(data.radius * 1.55, data.radius * 1.6, 64);
-                const r2m = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.3
-                });
-                const r2 = new THREE.Mesh(r2g, r2m);
-                r2.rotation.x = -Math.PI / 2 + 0.2;
-                r2.rotation.y = -0.1;
-                mesh.add(r2);
-                mesh.userData.satRing = r1;
-            } else {
-                const ringGeom = new THREE.RingGeometry(data.radius * 1.35, data.radius * 1.4, 64);
-                const ringMat = new THREE.MeshBasicMaterial({
-                    color: data.color, side: THREE.DoubleSide,
-                    transparent: true, opacity: 0.4
-                });
-                const ring = new THREE.Mesh(ringGeom, ringMat);
-                ring.rotation.x = Math.PI / 2 + Math.random() * 0.4 - 0.2;
-                ring.rotation.z = Math.random() * 0.3;
-                mesh.add(ring);
-                mesh.userData.satRing = ring;
             }
         }
 
@@ -2124,8 +2066,7 @@
             mesh.position.set(0, 0, 0);
             const bigRing = new THREE.RingGeometry(data.radius * 1.6, data.radius * 2.4, 96);
             const bigMat = new THREE.MeshBasicMaterial({
-                color: 0xe85a8c, side: THREE.DoubleSide,
-                transparent: true, opacity: 0.1, wireframe: true
+                color: 0xe85a8c, side: THREE.DoubleSide, transparent: true, opacity: 0.1, wireframe: true
             });
             const sunRing = new THREE.Mesh(bigRing, bigMat);
             sunRing.rotation.x = Math.PI / 2 + 0.15;
@@ -2140,17 +2081,65 @@
         scene.add(mesh);
         planetMeshes.push(mesh);
 
+        // Orbit Guide Rings with Custom Tech-Pulse Shader
+        let orbitMesh = null;
         if (!isStar) {
-            const orbitGeom = new THREE.RingGeometry(data.distance - 0.04, data.distance + 0.04, 256);
-            const orbitMat = new THREE.MeshBasicMaterial({
-                color: data.color, side: THREE.DoubleSide,
-                transparent: true, opacity: 0.08
+            const orbitGeom = new THREE.RingGeometry(data.distance - 0.05, data.distance + 0.05, 256);
+            const orbitShaderMat = new THREE.ShaderMaterial({
+                uniforms: {
+                    uColor: { value: new THREE.Color(data.color) },
+                    uTime: { value: 0 },
+                    uSpeed: { value: data.speed * 2.5 } // Đồng bộ tốc độ quét sáng với hành tinh
+                },
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 uColor;
+                    uniform float uTime;
+                    uniform float uSpeed;
+                    varying vec2 vUv;
+                    void main() {
+                        // vUv.x biểu diễn góc quay theta xung quanh quỹ đạo tròn
+                        float theta = vUv.x * 6.2831853;
+                        
+                        // 1. Tạo hiệu ứng gạch đứt nét công nghệ cao (HUD Radar lines)
+                        float dash = step(0.35, sin(vUv.x * 128.0));
+                        
+                        // 2. Tạo điểm xung sáng (Pulse Node) trượt dọc theo quỹ đạo
+                        float pulse = sin(theta + uTime * uSpeed) * 0.5 + 0.5;
+                        float laser = pow(pulse, 16.0) * 2.5; // Nén cường độ sáng hẹp rực rỡ
+                        
+                        // 3. Kết hợp nền quỹ đạo mờ nhạt và xung laser sáng rực
+                        float baseGrid = 0.08;
+                        float finalAlpha = (baseGrid + laser) * dash;
+                        
+                        // 4. Bo tròn cạnh của nét vẽ theo hướng radial (Y)
+                        float radialFade = sin(vUv.y * 3.1415926);
+                        finalAlpha *= pow(radialFade, 1.5);
+                        
+                        // Pha trộn một chút sắc trắng vào tâm tia quét laser cực mạnh
+                        vec3 colorMix = mix(uColor, vec3(1.0, 1.0, 1.0), laser * 0.35);
+                        
+                        gl_FragColor = vec4(colorMix, finalAlpha);
+                    }
+                `,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                side: THREE.DoubleSide
             });
-            const orbit = new THREE.Mesh(orbitGeom, orbitMat);
+            const orbit = new THREE.Mesh(orbitGeom, orbitShaderMat);
             orbit.rotation.x = Math.PI / 2;
             scene.add(orbit);
+            orbitMesh = orbit;
         }
 
+        // Labels
         const label = document.createElement('div');
         label.className = 'planet-label' + (isStar ? ' star-label' : '');
         label.dataset.id = data.id;
@@ -2171,8 +2160,9 @@
         label.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         document.body.appendChild(label);
 
-        const bodyObj = { mesh, data, label };
+        const bodyObj = { mesh, data, label, orbitMesh };
 
+        // Real-time Planet Trails
         if (!isStar) {
             const trailCount = 80;
             const trailGeom = new THREE.BufferGeometry();
@@ -2219,7 +2209,7 @@
     });
 
     // ============================================================
-    // STARFIELDS
+    // STARFIELD BACKGROUNDS
     // ============================================================
     const starLayers = [];
     function createStarfield(count, size, range, colorHex, speed) {
@@ -2260,16 +2250,12 @@
     scene.add(gridFloor);
 
     // ============================================================
-    // 🚀 SPACESHIP
+    // SPACESHIP ASSEMBLY
     // ============================================================
     function createSpaceship() {
         const ship = new THREE.Group();
         const bodyMat = new THREE.MeshStandardMaterial({
-            color: 0xe8eaf6,
-            emissive: 0x5dd5d5,
-            emissiveIntensity: 0.15,
-            roughness: 0.4,
-            metalness: 0.55
+            color: 0xe8eaf6, emissive: 0x5dd5d5, emissiveIntensity: 0.15, roughness: 0.4, metalness: 0.55
         });
 
         const noseGeom = new THREE.ConeGeometry(0.28, 0.9, 16);
@@ -2288,48 +2274,10 @@
         ship.add(tail);
 
         const stripeGeom = new THREE.CylinderGeometry(0.281, 0.281, 0.08, 16);
-        const stripeMat = new THREE.MeshBasicMaterial({
-            color: 0x5dd5d5,
-            transparent: true,
-            opacity: 0.85
-        });
+        const stripeMat = new THREE.MeshBasicMaterial({ color: 0x5dd5d5, transparent: true, opacity: 0.85 });
         const stripe = new THREE.Mesh(stripeGeom, stripeMat);
         stripe.position.y = 0.05;
         ship.add(stripe);
-
-        const windowGeom = new THREE.SphereGeometry(0.1, 12, 8);
-        const windowMat = new THREE.MeshBasicMaterial({
-            color: 0xb08fd8,
-            transparent: true,
-            opacity: 0.9
-        });
-        const window1 = new THREE.Mesh(windowGeom, windowMat);
-        window1.position.set(0, 0.4, 0.22);
-        window1.scale.z = 0.3;
-        ship.add(window1);
-
-        const finShape = new THREE.Shape();
-        finShape.moveTo(0, 0);
-        finShape.lineTo(0.35, -0.5);
-        finShape.lineTo(0.05, -0.5);
-        finShape.lineTo(0, -0.3);
-        finShape.lineTo(0, 0);
-        const finExtrude = { depth: 0.03, bevelEnabled: false };
-        const finGeom = new THREE.ExtrudeGeometry(finShape, finExtrude);
-        const finMat = new THREE.MeshStandardMaterial({
-            color: 0xc8cce8,
-            emissive: 0x5dd5d5,
-            emissiveIntensity: 0.08,
-            roughness: 0.5,
-            metalness: 0.4
-        });
-        for (let i = 0; i < 3; i++) {
-            const fin = new THREE.Mesh(finGeom, finMat);
-            const angle = (i / 3) * Math.PI * 2;
-            fin.position.set(Math.cos(angle) * 0.28, -0.4, Math.sin(angle) * 0.28);
-            fin.rotation.y = angle + Math.PI / 2;
-            ship.add(fin);
-        }
 
         const engineGlowGeom = new THREE.ConeGeometry(0.22, 0.8, 16, 1, true);
         const engineGlowMat = new THREE.ShaderMaterial({
@@ -2358,10 +2306,7 @@
                     gl_FragColor = vec4(col, alpha);
                 }
             `,
-            transparent: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false,
-            side: THREE.DoubleSide
+            transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide
         });
         const engineGlow = new THREE.Mesh(engineGlowGeom, engineGlowMat);
         engineGlow.position.y = -1.3;
@@ -2400,9 +2345,7 @@
                     gl_FragColor = vec4(uColor, vAlpha * (1.0 - d * 2.0) * 0.7);
                 }
             `,
-            transparent: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending
+            transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
         });
         const trail = new THREE.Points(trailGeom, trailMat);
         scene.add(trail);
@@ -2422,228 +2365,90 @@
         const radius = 38 - t * 5;
         const heightCurve = Math.sin(t * Math.PI);
         const y = -25 + heightCurve * 40;
-
-        return new THREE.Vector3(
-            Math.cos(angle) * radius,
-            y,
-            Math.sin(angle) * radius
-        );
+        return new THREE.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
     }
 
     // ============================================================
-    // ☄️ GIANT ASTEROIDS
+    // PROCEDURAL ASTEROID FIELDS (EMISSIVE DNA GLOW)
     // ============================================================
     function createAsteroidTexture(baseHex, accentHex) {
         const baseCanvas = document.createElement('canvas');
-        baseCanvas.width = 1024;
-        baseCanvas.height = 512;
+        baseCanvas.width = 1024; baseCanvas.height = 512;
         const bctx = baseCanvas.getContext('2d');
-
         const g = bctx.createLinearGradient(0, 0, 0, baseCanvas.height);
-        g.addColorStop(0, '#1a1622');
-        g.addColorStop(0.5, baseHex);
-        g.addColorStop(1, '#0a0712');
-        bctx.fillStyle = g;
-        bctx.fillRect(0, 0, baseCanvas.width, baseCanvas.height);
+        g.addColorStop(0, '#1a1622'); g.addColorStop(0.5, baseHex); g.addColorStop(1, '#0a0712');
+        bctx.fillStyle = g; bctx.fillRect(0, 0, baseCanvas.width, baseCanvas.height);
 
         for (let i = 0; i < 25; i++) {
             const cx = Math.random() * baseCanvas.width;
             const cy = Math.random() * baseCanvas.height;
             const r = Math.random() * 120 + 40;
             const patch = bctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-            const variation = Math.random() > 0.5 ? '#252030' : '#0d0a15';
-            patch.addColorStop(0, variation);
+            patch.addColorStop(0, Math.random() > 0.5 ? '#252030' : '#0d0a15');
             patch.addColorStop(1, 'transparent');
-            bctx.fillStyle = patch;
-            bctx.globalAlpha = Math.random() * 0.5 + 0.3;
+            bctx.fillStyle = patch; bctx.globalAlpha = Math.random() * 0.5 + 0.3;
             bctx.fillRect(cx - r, cy - r, r * 2, r * 2);
         }
 
-        bctx.globalAlpha = 0.18;
-        for (let i = 0; i < 1500; i++) {
-            bctx.fillStyle = Math.random() > 0.5 ? '#aaa' : '#000';
-            bctx.fillRect(Math.random() * baseCanvas.width, Math.random() * baseCanvas.height,
-                Math.random() * 2 + 1, Math.random() * 2 + 1);
-        }
-
         const emCanvas = document.createElement('canvas');
-        emCanvas.width = 1024;
-        emCanvas.height = 512;
+        emCanvas.width = 1024; emCanvas.height = 512;
         const ectx = emCanvas.getContext('2d');
-        ectx.fillStyle = '#000';
-        ectx.fillRect(0, 0, emCanvas.width, emCanvas.height);
+        ectx.fillStyle = '#000'; ectx.fillRect(0, 0, emCanvas.width, emCanvas.height);
 
         function drawCircuitPath(startX, startY, length, branchProb) {
             let x = startX, y = startY;
-            const dirs = [
-                [1, 0], [1, 1], [0, 1], [-1, 1],
-                [-1, 0], [-1, -1], [0, -1], [1, -1]
-            ];
+            const dirs = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
             let dirIdx = Math.floor(Math.random() * 8);
             let [dx, dy] = dirs[dirIdx];
-            const norm = Math.hypot(dx, dy);
-            dx /= norm; dy /= norm;
+            const norm = Math.hypot(dx, dy); dx /= norm; dy /= norm;
 
             ectx.lineWidth = Math.random() * 1.5 + 2.0;
-            ectx.lineCap = 'round';
-            ectx.lineJoin = 'round';
-            ectx.beginPath();
-            ectx.moveTo(x, y);
+            ectx.lineCap = 'round'; ectx.lineJoin = 'round';
+            ectx.beginPath(); ectx.moveTo(x, y);
 
             const segments = 5 + Math.floor(Math.random() * 8);
             for (let s = 0; s < segments; s++) {
                 const segLen = length / segments * (0.7 + Math.random() * 0.6);
-                x += dx * segLen;
-                y += dy * segLen;
+                x += dx * segLen; y += dy * segLen;
                 ectx.lineTo(x, y);
-
                 if (Math.random() < 0.4 && s < segments - 1) {
-                    const turn = (Math.random() < 0.5 ? 1 : -1) * (Math.random() < 0.5 ? 1 : 2);
-                    dirIdx = (dirIdx + turn + 8) % 8;
+                    dirIdx = (dirIdx + (Math.random() < 0.5 ? 1 : -1) + 8) % 8;
                     [dx, dy] = dirs[dirIdx];
-                    const n = Math.hypot(dx, dy);
-                    dx /= n; dy /= n;
+                    const n = Math.hypot(dx, dy); dx /= n; dy /= n;
                 }
             }
             ectx.stroke();
-
-            ectx.fillStyle = accentHex;
-            ectx.beginPath();
-            ectx.arc(x, y, 3, 0, Math.PI * 2);
-            ectx.fill();
-
-            if (Math.random() < branchProb && length > 30) {
-                drawCircuitPath(x, y, length * 0.6, branchProb * 0.5);
-            }
         }
 
         ectx.strokeStyle = accentHex;
         for (let i = 0; i < 12; i++) {
-            const sx = Math.random() * emCanvas.width;
-            const sy = Math.random() * emCanvas.height;
-            const len = 80 + Math.random() * 200;
-            drawCircuitPath(sx, sy, len, 0.6);
-        }
-
-        ectx.strokeStyle = accentHex;
-        ectx.fillStyle = accentHex;
-        for (let i = 0; i < 15; i++) {
-            const cx = Math.random() * emCanvas.width;
-            const cy = Math.random() * emCanvas.height;
-            const size = Math.random() * 10 + 6;
-            const sides = Math.random() < 0.5 ? 6 : 4;
-            ectx.lineWidth = 1.5;
-            ectx.beginPath();
-            for (let k = 0; k <= sides; k++) {
-                const a = (k / sides) * Math.PI * 2 - Math.PI / 2;
-                const px = cx + Math.cos(a) * size;
-                const py = cy + Math.sin(a) * size;
-                if (k === 0) ectx.moveTo(px, py);
-                else ectx.lineTo(px, py);
-            }
-            ectx.stroke();
-            ectx.beginPath();
-            ectx.arc(cx, cy, 2, 0, Math.PI * 2);
-            ectx.fill();
-        }
-
-        ectx.fillStyle = accentHex;
-        for (let i = 0; i < 60; i++) {
-            const x = Math.random() * emCanvas.width;
-            const y = Math.random() * emCanvas.height;
-            const r = Math.random() * 1.5 + 0.8;
-            ectx.beginPath();
-            ectx.arc(x, y, r, 0, Math.PI * 2);
-            ectx.fill();
-        }
-
-        ectx.strokeStyle = accentHex;
-        for (let i = 0; i < 4; i++) {
-            ectx.lineWidth = Math.random() * 2 + 3;
-            ectx.beginPath();
-            let x = Math.random() * emCanvas.width;
-            let y = Math.random() * emCanvas.height;
-            ectx.moveTo(x, y);
-            const segs = 4 + Math.floor(Math.random() * 4);
-            for (let s = 0; s < segs; s++) {
-                x += (Math.random() - 0.3) * 150;
-                y += (Math.random() - 0.3) * 100;
-                ectx.lineTo(x, y);
-            }
-            ectx.stroke();
+            drawCircuitPath(Math.random() * emCanvas.width, Math.random() * emCanvas.height, 80 + Math.random() * 200, 0.6);
         }
 
         const baseTexture = new THREE.CanvasTexture(baseCanvas);
         baseTexture.wrapS = THREE.RepeatWrapping;
-        baseTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-
         const emissiveTexture = new THREE.CanvasTexture(emCanvas);
         emissiveTexture.wrapS = THREE.RepeatWrapping;
-        emissiveTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
         return { baseTexture, emissiveTexture };
     }
 
     function createGiantAsteroid(config) {
         const geom = new THREE.IcosahedronGeometry(config.radius, 4);
-
-        const craterCount = 8 + Math.floor(Math.random() * 5);
-        const craters = [];
-        for (let i = 0; i < craterCount; i++) {
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            const dir = new THREE.Vector3(
-                Math.sin(phi) * Math.cos(theta),
-                Math.sin(phi) * Math.sin(theta),
-                Math.cos(phi)
-            );
-            craters.push({
-                dir: dir,
-                radius: config.radius * (0.18 + Math.random() * 0.22),
-                depth: config.radius * (0.08 + Math.random() * 0.12)
-            });
-        }
-
         const posAttr = geom.attributes.position;
         const v = new THREE.Vector3();
         const vDir = new THREE.Vector3();
+
         for (let i = 0; i < posAttr.count; i++) {
             v.fromBufferAttribute(posAttr, i);
-
-            const baseNoise =
-                Math.sin(v.x * 0.08 + config.seed) * 4 +
-                Math.cos(v.y * 0.06 + config.seed * 2) * 3 +
-                Math.sin(v.z * 0.05 + config.seed * 3) * 5;
-            const detailNoise =
-                Math.sin(v.x * 0.25 + v.y * 0.2) * 1.2 +
-                Math.cos(v.y * 0.3 + v.z * 0.18) * 1.0 +
-                Math.sin(v.z * 0.35 + v.x * 0.22) * 0.8;
-            const totalNoise = baseNoise + detailNoise;
-
+            const totalNoise = Math.sin(v.x * 0.08 + config.seed) * 4 + Math.cos(v.y * 0.06 + config.seed * 2) * 3 + Math.sin(v.z * 0.05 + config.seed * 3) * 5;
             vDir.copy(v).normalize();
-            let displacement = config.radius + totalNoise;
-
-            for (const crater of craters) {
-                const dot = vDir.dot(crater.dir);
-                if (dot > 0) {
-                    const angle = Math.acos(Math.min(1, dot));
-                    const arcDist = angle * config.radius;
-
-                    if (arcDist < crater.radius) {
-                        const t = 1 - (arcDist / crater.radius);
-                        const bowl = t * t * (3 - 2 * t);
-                        displacement -= bowl * crater.depth;
-                    }
-                }
-            }
-
-            v.copy(vDir).multiplyScalar(displacement);
+            v.copy(vDir).multiplyScalar(config.radius + totalNoise);
             posAttr.setXYZ(i, v.x, v.y, v.z);
         }
         geom.computeVertexNormals();
 
         const { baseTexture, emissiveTexture } = createAsteroidTexture(config.baseHex, config.accentHex);
-
         const mat = new THREE.ShaderMaterial({
             uniforms: {
                 uBaseMap: { value: baseTexture },
@@ -2693,22 +2498,20 @@
                 uniform float uLightIntensity;
                 uniform vec3 fogColor;
                 uniform float fogDensity;
-
                 varying vec2 vUv;
                 varying vec3 vNormal;
                 varying vec3 vWorldPos;
                 varying float vCamDist;
-
                 void main() {
                     vec3 baseCol = texture2D(uBaseMap, vUv).rgb;
                     float NdotL = max(dot(vNormal, uLightDir), 0.0);
                     vec3 diffuse = uLightColor * uLightIntensity * NdotL;
                     vec3 ambient = uAmbient * uAmbientIntensity;
                     vec3 litColor = baseCol * (ambient + diffuse);
-
                     float crackMask = texture2D(uEmissiveMap, vUv).r;
                     float distFactor = 1.0 - smoothstep(uNearDist, uFarDist, vCamDist);
-
+                    
+                    // Xử lý nhòe để tạo Hào quang phát sáng (Halo Glow)
                     float texelSize = 1.0 / 1024.0;
                     float maskCenter = crackMask;
                     float maskBlurred = maskCenter;
@@ -2718,18 +2521,25 @@
                     maskBlurred += texture2D(uEmissiveMap, vUv + vec2(0, -texelSize * 1.5)).r;
                     maskBlurred /= 5.0;
 
-                    float pulse = sin(uTime * uPulseSpeed) * 0.2 + 0.85;
+                    // Nhịp đập cơ bản của các rãnh năng lượng
+                    float pulse = sin(uTime * uPulseSpeed) * 0.12 + 0.88;
+
+                    // --- 3. HIỆU ỨNG TIA LASER CHẠY DỌC RÃNH NĂNG LƯỢNG (CREVICE LASER TRACER) ---
+                    float laserCoord = vUv.x * 5.0 + vUv.y * 2.0 - uTime * 7.5;
+                    float laserTracer = smoothstep(0.85, 0.99, sin(laserCoord) * 0.5 + 0.5);
+                    float creviceLaser = laserTracer * crackMask;
+
+                    vec3 laserColor = mix(uAccentColor, vec3(1.0, 1.0, 1.0), 0.85);
 
                     vec3 coreGlow = uAccentColor * maskCenter * distFactor * pulse * uGlowStrength;
                     vec3 haloGlow = uAccentColor * maskBlurred * distFactor * pulse * (uGlowStrength * 0.45);
+                    vec3 laserGlow = laserColor * creviceLaser * distFactor * (uGlowStrength * 4.5);
 
                     float crackDarken = 1.0 - maskCenter * 0.6 * distFactor;
-                    vec3 finalColor = litColor * crackDarken + coreGlow + haloGlow;
-
+                    vec3 finalColor = litColor * crackDarken + coreGlow + haloGlow + laserGlow;
+                    
                     float fogFactor = 1.0 - exp(-fogDensity * fogDensity * vCamDist * vCamDist);
-                    finalColor = mix(finalColor, fogColor, fogFactor);
-
-                    gl_FragColor = vec4(finalColor, 1.0);
+                    gl_FragColor = vec4(mix(finalColor, fogColor, fogFactor), 1.0);
                 }
             `,
             fog: false
@@ -2748,11 +2558,7 @@
         return asteroid;
     }
 
-    // ============================================================
-    // ☄️ ASTEROID CLUSTERS
-    // ============================================================
     const clusters = [];
-
     function createAsteroidCluster(config) {
         const cluster = {
             velocity: config.velocity.clone(),
@@ -2762,24 +2568,15 @@
         };
 
         const leader = createGiantAsteroid({
-            radius: config.leaderRadius,
-            seed: config.seed,
-            baseHex: config.baseHex,
-            accentHex: config.accentHex,
-            glowStrength: 3.5,
-            startPos: config.startPos.clone(),
-            velocity: new THREE.Vector3(0, 0, 0),
+            radius: config.leaderRadius, seed: config.seed, baseHex: config.baseHex, accentHex: config.accentHex,
+            glowStrength: 3.5, startPos: config.startPos.clone(), velocity: new THREE.Vector3(0, 0, 0),
             rotationSpeed: config.rotationSpeed
         });
-        cluster.members.push({
-            mesh: leader,
-            offset: new THREE.Vector3(0, 0, 0)
-        });
+        cluster.members.push({ mesh: leader, offset: new THREE.Vector3(0, 0, 0) });
 
-        const followerCount = config.followerCount || 3;
+        const followerCount = config.followerCount || 2;
         for (let i = 0; i < followerCount; i++) {
-            const distMult = 1.6 + Math.random() * 1.4;
-            const offsetDist = config.leaderRadius * distMult;
+            const offsetDist = config.leaderRadius * (1.6 + Math.random() * 1.4);
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
             const offset = new THREE.Vector3(
@@ -2788,59 +2585,32 @@
                 Math.cos(phi) * offsetDist
             );
 
-            const followerRadius = config.leaderRadius * (0.25 + Math.random() * 0.25);
             const follower = createGiantAsteroid({
-                radius: followerRadius,
-                seed: config.seed + i * 3.7,
-                baseHex: config.baseHex,
-                accentHex: config.accentHex,
-                glowStrength: 3.0,
-                startPos: new THREE.Vector3().addVectors(config.startPos, offset),
-                velocity: new THREE.Vector3(0, 0, 0),
-                rotationSpeed: new THREE.Vector3(
-                    (Math.random() - 0.5) * 0.0006,
-                    (Math.random() - 0.5) * 0.0006,
-                    (Math.random() - 0.5) * 0.0006
-                )
+                radius: config.leaderRadius * (0.25 + Math.random() * 0.25),
+                seed: config.seed + i * 3.7, baseHex: config.baseHex, accentHex: config.accentHex, glowStrength: 3.0,
+                startPos: new THREE.Vector3().addVectors(config.startPos, offset), velocity: new THREE.Vector3(0, 0, 0),
+                rotationSpeed: new THREE.Vector3((Math.random() - 0.5) * 0.0006, (Math.random() - 0.5) * 0.0006, (Math.random() - 0.5) * 0.0006)
             });
-            cluster.members.push({
-                mesh: follower,
-                offset: offset
-            });
+            cluster.members.push({ mesh: follower, offset: offset });
         }
-
         clusters.push(cluster);
-        return cluster;
     }
 
     createAsteroidCluster({
-        leaderRadius: 42,
-        followerCount: 3,
-        seed: 1.3,
-        baseHex: '#1f1828',
-        accentHex: '#5dd5d5',
-        startPos: new THREE.Vector3(-220, 50, -160),
-        velocity: new THREE.Vector3(0.10, -0.035, 0.075),
+        leaderRadius: 42, followerCount: 3, seed: 1.3, baseHex: '#1f1828', accentHex: '#5dd5d5',
+        startPos: new THREE.Vector3(-220, 50, -160), velocity: new THREE.Vector3(0.10, -0.035, 0.075),
         rotationSpeed: new THREE.Vector3(0.00012, 0.0002, 0.00008)
     });
 
     createAsteroidCluster({
-        leaderRadius: 38,
-        followerCount: 2,
-        seed: 7.7,
-        baseHex: '#1a1418',
-        accentHex: '#ff5544',
-        startPos: new THREE.Vector3(210, -70, 175),
-        velocity: new THREE.Vector3(-0.085, 0.045, -0.10),
+        leaderRadius: 38, followerCount: 2, seed: 7.7, baseHex: '#1a1418', accentHex: '#ff5544',
+        startPos: new THREE.Vector3(210, -70, 175), velocity: new THREE.Vector3(-0.085, 0.045, -0.10),
         rotationSpeed: new THREE.Vector3(-0.00018, -0.00012, 0.00025)
     });
 
     function updateAsteroids(dt, elapsed) {
         clusters.forEach(cluster => {
-            cluster.center.x += cluster.velocity.x;
-            cluster.center.y += cluster.velocity.y;
-            cluster.center.z += cluster.velocity.z;
-
+            cluster.center.add(cluster.velocity);
             cluster.members.forEach(m => {
                 m.mesh.position.copy(cluster.center).add(m.offset);
                 m.mesh.userData.material.uniforms.uTime.value = elapsed;
@@ -2848,17 +2618,14 @@
                 m.mesh.rotation.y += m.mesh.userData.rotationSpeed.y;
                 m.mesh.rotation.z += m.mesh.userData.rotationSpeed.z;
             });
-
-            const distFromCenter = cluster.center.length();
-            if (distFromCenter > 320) {
-                cluster.center.copy(cluster.startPos);
-                cluster.center.multiplyScalar(-1);
+            if (cluster.center.length() > 320) {
+                cluster.center.copy(cluster.startPos).multiplyScalar(-1);
             }
         });
     }
 
     // ============================================================
-    // HOLOGRAM BEAM
+    // HOLOGRAM SELECTOR BEAMS
     // ============================================================
     function createHologramBeam(color) {
         const beamGeom = new THREE.CylinderGeometry(0.03, 0.6, 8, 12, 1, true);
@@ -2881,8 +2648,7 @@
                     gl_FragColor = vec4(uColor, a * 0.3 + pulse * 0.15);
                 }
             `,
-            transparent: true, side: THREE.DoubleSide,
-            depthWrite: false, blending: THREE.AdditiveBlending
+            transparent: true, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending
         });
         const mesh = new THREE.Mesh(beamGeom, beamMat);
         mesh.position.y = 4;
@@ -2903,7 +2669,7 @@
     }
 
     // ============================================================
-    // INTERACTION
+    // SELECTION & INTERACTIVE RAYCASTING
     // ============================================================
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
@@ -2940,14 +2706,16 @@
             if (!isOverUI(e.target)) document.body.classList.remove('cursor-hover');
         }
     }
+
     function resetHover(m) {
         if (!m || !m.userData || !m.userData.atmo) return;
-        const baseIntensity = m.userData.type === 'star' ? 0.35 : 0.55;
-        m.userData.atmo.material.uniforms.uIntensity.value = baseIntensity;
+        m.userData.atmo.material.uniforms.uIntensity.value = m.userData.type === 'star' ? 0.35 : 0.55;
     }
+
     function isOverUI(el) {
-        return el && (el.closest && el.closest('.planet-label, button, input, .ai-terminal, .planet-hud, .side-nav, .terminal-action'));
+        return el && (el.closest('.planet-label, button, input, .ai-terminal, .planet-hud, .side-nav, .terminal-action'));
     }
+
     function onClick(e) {
         if (isOverUI(e.target)) return;
         raycaster.setFromCamera(mouse, camera);
@@ -2967,8 +2735,7 @@
         controls.autoRotate = false;
 
         const hud = document.getElementById('planet-hud');
-        const hex = '#' + data.color.toString(16).padStart(6, '0');
-        hud.style.setProperty('--hud-color', hex);
+        hud.style.setProperty('--hud-color', '#' + data.color.toString(16).padStart(6, '0'));
         document.getElementById('hud-emoji').textContent = data.emoji;
         document.getElementById('hud-id').textContent = `NODE / ${data.code}`;
         document.getElementById('hud-name').textContent = data.name;
@@ -2985,11 +2752,7 @@
 
         const isStar = data.type === 'star';
         const offset = isStar ? 15 : 7;
-        targetCamPos.set(
-            mesh.position.x + offset,
-            mesh.position.y + (isStar ? 8 : 4),
-            mesh.position.z + offset
-        );
+        targetCamPos.set(mesh.position.x + offset, mesh.position.y + (isStar ? 8 : 4), mesh.position.z + offset);
         targetCamLook.copy(mesh.position);
         transitionProgress = 0;
 
@@ -3020,8 +2783,7 @@
         if (e.key >= '0' && e.key <= '7') {
             const idx = parseInt(e.key);
             if (SYSTEM[idx]) {
-                const targetData = SYSTEM[idx];
-                const targetMesh = planetMeshes.find(m => m.userData.id === targetData.id);
+                const targetMesh = planetMeshes.find(m => m.userData.id === SYSTEM[idx].id);
                 if (targetMesh) selectPlanet(targetMesh);
             }
         }
@@ -3033,7 +2795,7 @@
     });
 
     // ============================================================
-    // SIDE NAV
+    // SIDE NAVIGATION
     // ============================================================
     const sideNav = document.getElementById('side-nav');
     SYSTEM.forEach(data => {
@@ -3058,7 +2820,6 @@
         sideNav.appendChild(node);
     });
 
-    // URL Routing
     function updateURL(planetId) {
         try {
             const url = new URL(window.location);
@@ -3079,10 +2840,9 @@
     }
 
     // ============================================================
-    // AI INTEGRATION
+    // NATIVE RESILIENT GEMINI CLIENT (DIRECT COGNITIVE CONTROL)
     // ============================================================
-    const apiUrl = "https://kv-gemini-proxy.kenvinzone.workers.dev";
-
+    const apiKey = ""; // Provided securely by host runtime
     const systemPrompt = `Bạn là KV-Core v5.18 — Quantum Neural AI vận hành hệ thống Quantum Observatory của KenvinZone.
 
 Ecosystem gồm 8 node:
@@ -3096,11 +2856,11 @@ Ecosystem gồm 8 node:
 • 0x07 — Forex Index (forex-index.kenvinzone.com): bảng chỉ số tỷ giá & phân tích biến động thị trường ngoại hối toàn cầu Forex real-time
 
 GIỌNG ĐIỆU:
-- Tiếng Việt 100%, tone cyberpunk, terminal, kỹ thuật cao nhưng dễ tiếp cận
-- Dùng bullet points, không viết đoạn dài lê thê
-- Decorate vừa phải: emoji 🪙💱🪐⚡🧬🚀, tag [QUANTUM-LINK], [SYSTEM]
-- Khi đề cập một node, đính kèm code (vd: 0x07 · Forex Index)
-- Phản hồi gọn, sắc, có thể chi tiết thông số và kêu gọi truy cập subdomain tương ứng`;
+- Tiếng Việt 100%, tone cyberpunk, terminal, kỹ thuật cao nhưng dễ tiếp cận.
+- Dùng bullet points, không viết đoạn dài lê thê.
+- Đính kèm emoji 🪙💱🪐⚡🧬🚀, tag [QUANTUM-LINK], [SYSTEM] một cách tinh tế.
+- Khi đề cập một node, luôn kèm mã code (ví dụ: 0x07 · Forex Index).
+- Phản hồi gọn, sắc sảo, có tính hành động cao và định hướng người dùng click các nút subdomain.`;
 
     let conversationHistory = [];
 
@@ -3133,8 +2893,7 @@ GIỌNG ĐIỆU:
         return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
-    async function typewriterRender(target, fullText, speed) {
-        speed = speed || 8;
+    async function typewriterRender(target, fullText, speed = 8) {
         target.innerHTML = '';
         const cursor = document.createElement('span');
         cursor.className = 'typing-cursor';
@@ -3149,93 +2908,64 @@ GIỌNG ĐIỆU:
             let delay = speed;
             if (/[.!?]/.test(fullText[i])) delay = speed * 6;
             else if (/[,;:]/.test(fullText[i])) delay = speed * 3;
-            else if (/\s/.test(fullText[i])) delay = speed * 0.5;
             await new Promise(r => setTimeout(r, delay));
         }
         cursor.remove();
     }
 
+    // Direct Gemini execution with Exponential Backoff Retries
     async function callGemini(userText) {
         document.getElementById('status-ai').textContent = 'PROCESSING';
         document.getElementById('status-ai').style.color = 'var(--neon-amber)';
         consoleLog('[AI] Quantum link initiated', 'magenta');
 
         const target = appendAIPlaceholder();
+        const payload = {
+            contents: [...conversationHistory, { role: 'user', parts: [{ text: userText }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+        };
+
+        const maxRetries = 5;
+        let attempts = 0;
+        let response = null;
+
+        while (attempts < maxRetries) {
+            try {
+                response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) break;
+            } catch (err) {}
+            attempts++;
+            if (attempts < maxRetries) {
+                const backoffDelay = Math.pow(2, attempts) * 1000;
+                await new Promise(r => setTimeout(r, backoffDelay));
+            }
+        }
 
         try {
-            const payload = {
-                contents: [...conversationHistory, { role: 'user', parts: [{ text: userText }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-                generationConfig: { temperature: 0.85, maxOutputTokens: 1024 }
-            };
-
-            let response, attempts = 0;
-            let delayTime = 1000;
-            let lastStatus = 0;
-            while (attempts < 5) {
-                try {
-                    response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (response.ok) break;
-                    lastStatus = response.status;
-                    if (response.status === 429) {
-                        throw new Error('RATE_LIMIT');
-                    }
-                    throw new Error(`HTTP ${response.status}`);
-                } catch (err) {
-                    attempts++;
-                    if (attempts >= 5) {
-                        if (lastStatus === 429 || err.message === 'RATE_LIMIT') {
-                            throw new Error('RATE_LIMIT_FINAL');
-                        }
-                        throw err;
-                    }
-                    const waitMs = lastStatus === 429 ? Math.max(delayTime, 5000) : delayTime;
-                    await new Promise(r => setTimeout(r, waitMs));
-                    delayTime *= 2;
-                }
+            if (!response || !response.ok) {
+                throw new Error(response ? `Status Code ${response.status}` : 'Unknown Connection Error');
             }
-
             const result = await response.json();
             const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (!aiText) throw new Error('Empty response from Gemini');
+            if (!aiText) throw new Error('Data Empty');
 
             conversationHistory.push({ role: 'user', parts: [{ text: userText }] });
             conversationHistory.push({ role: 'model', parts: [{ text: aiText }] });
-            if (conversationHistory.length > 12) {
-                conversationHistory.splice(0, 2);
-            }
-            saveHistory();
+            if (conversationHistory.length > 10) conversationHistory.splice(0, 2);
 
             await typewriterRender(target, aiText, 8);
             playSound('msg');
             document.getElementById('status-ai').textContent = 'READY';
             document.getElementById('status-ai').style.color = 'var(--text-primary)';
             consoleLog('[AI] Response synced', 'cyan');
-
         } catch (err) {
-            console.error(err);
-            let errorMsg, hint;
-            if (err.message === 'RATE_LIMIT_FINAL' || err.message === 'RATE_LIMIT') {
-                errorMsg = '⏱ [RATE LIMIT] Quá nhiều request';
-                hint = 'Hệ thống đã chạm ngưỡng giới hạn truy vấn tạm thời. Hãy nghỉ tay 1 phút rồi truy vấn tiếp nhé.';
-            } else if (err.message.includes('403')) {
-                errorMsg = '🔒 [AUTH ERROR] API link failure';
-                hint = 'Vui lòng cấu hình API Key hợp lệ hoặc kiểm tra proxy định tuyến.';
-            } else if (err.message.includes('400')) {
-                errorMsg = '✗ [BAD REQUEST] Sai định dạng';
-                hint = 'Vui lòng thử nghiệm lại bằng một câu hỏi khác.';
-            } else {
-                errorMsg = '⚠ [QUANTUM-LINK ERROR] ' + escapeHtml(err.message);
-                hint = 'Cổng truyền lượng tử gặp gián đoạn tạm thời. Vui lòng kiểm tra đường truyền.';
-            }
-            target.innerHTML = `<strong style="color: var(--neon-magenta);">${errorMsg}</strong><br><span style="color: var(--text-dim); font-size: 0.85em;">${hint}</span>`;
+            target.innerHTML = `<strong style="color: var(--neon-magenta);">✗ [LINK FAILURE] AI CORE OFFLINE</strong><br><span style="color: var(--text-dim); font-size: 0.85em;">Cổng lượng tử gặp gián đoạn (${err.message}). Vui lòng thử lại.</span>`;
             document.getElementById('status-ai').textContent = 'ERROR';
             document.getElementById('status-ai').style.color = 'var(--neon-magenta)';
-            consoleLog('[AI] Link failure', 'magenta');
         }
     }
 
@@ -3244,17 +2974,6 @@ GIỌNG ĐIỆU:
         appendUserMessage(`Truy vấn: ${data.code} · ${data.name}`);
         callGemini(q);
     }
-
-    function saveHistory() {
-        try { sessionStorage.setItem('kv_history', JSON.stringify(conversationHistory)); } catch (e) {}
-    }
-    function loadHistory() {
-        try {
-            const saved = sessionStorage.getItem('kv_history');
-            if (saved) conversationHistory = JSON.parse(saved);
-        } catch (e) {}
-    }
-    loadHistory();
 
     const aiInput = document.getElementById('ai-input');
     document.getElementById('send-btn').onclick = () => {
@@ -3270,6 +2989,38 @@ GIỌNG ĐIỆU:
             document.getElementById('send-btn').click();
         }
     });
+
+    // Hàm thực hiện chuyển đổi trạng thái đóng/mở Terminal
+    function toggleTerminal(forceState) {
+        const terminal = document.getElementById('ai-terminal');
+        const toggleBtn = document.getElementById('terminal-toggle');
+        
+        if (forceState === 'expand' || terminal.classList.contains('collapsed')) {
+            terminal.classList.remove('collapsed');
+            toggleBtn.textContent = '— MINIMIZE';
+            consoleLog('[AI] Terminal expanded', 'cyan');
+        } else {
+            terminal.classList.add('collapsed');
+            toggleBtn.textContent = '+ EXPAND';
+            consoleLog('[AI] Terminal minimized', 'amber');
+        }
+        playSound('select');
+    }
+
+    // Sự kiện Click trực tiếp vào nút bấm gốc
+    document.getElementById('terminal-toggle').onclick = (e) => {
+        e.stopPropagation(); // Ngăn chặn sự kiện nổi bọt gây kích hoạt đúp
+        toggleTerminal();
+    };
+
+    // Sự kiện Click vào toàn bộ thanh dọc khi Terminal đang bị thu nhỏ (Áp dụng cho PC)
+    document.getElementById('ai-terminal').onclick = function(e) {
+        if (this.classList.contains('collapsed')) {
+            e.stopPropagation();
+            toggleTerminal('expand');
+        }
+    };
+
     document.querySelectorAll('.quick-btn').forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             document.body.classList.add('cursor-hover');
@@ -3277,39 +3028,29 @@ GIỌNG ĐIỆU:
         });
         btn.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         btn.addEventListener('click', () => {
-            const prompt = btn.dataset.prompt;
             appendUserMessage(btn.textContent.trim());
-            callGemini(prompt);
+            callGemini(btn.dataset.prompt);
         });
     });
 
-    document.getElementById('terminal-toggle').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const t = document.getElementById('ai-terminal');
-        t.classList.toggle('collapsed');
-        e.target.textContent = t.classList.contains('collapsed') ? '+ EXPAND' : '— MINIMIZE';
-    });
-
-    // Greeting
+    // Dynamic System Greetings
     (async () => {
-        await new Promise(r => setTimeout(r, 2400));
+        await new Promise(r => setTimeout(r, 2200));
         const target = appendAIPlaceholder();
         const greeting = `**[QUANTUM-LINK ESTABLISHED]** 🌐
 
-Chào mừng bạn đến với **Quantum Observatory v5.18**. Tôi là **KV-Core Neural AI** — trí tuệ nhân tạo kiểm soát hệ thống dữ liệu 8 node của KenvinZone.
+Chào mừng bạn đến với **Quantum Observatory v5.18**. Tôi là **KV-Core Neural AI** — hệ thống vận hành 8 node thông tin của KenvinZone.
 
-🪐 **Hướng dẫn tương tác lượng tử:**
-- Click trực tiếp vào hành tinh hoặc dùng thanh Side-Nav bên trái để Lock-on & Fly-to
-- Nhấn phím nhanh từ \`0-7\` để dịch chuyển ống kính tức thời tới các Node vệ tinh
-- Nhấn phím \`/\` để kích hoạt nhanh bảng nhập văn bản
-- Nhấn phím \`ESC\` để hủy khóa (Deselect) hành tinh
-
-Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click vào các phím Quick Action bên dưới nhé! ⚡`;
+🪐 **Giao thức tương tác lượng tử:**
+- Click trực tiếp vào các thiên thể để xem thông tin chi tiết (Lock-on & Orbit).
+- Nhấn các phím từ \`0-7\` để dịch chuyển ống kính nhanh tới Node tương ứng.
+- Nhấn phím \`/\` để kích hoạt nhanh bảng nhập văn bản truy vấn.
+- Nhấn phím \`ESC\` để hủy khóa (Deselect) hành tinh.`;
         await typewriterRender(target, greeting, 10);
     })();
 
     // ============================================================
-    // SOUND & YOUTUBE BACKGROUND MUSIC
+    // PROFESSIONAL AUDIO DESIGN ENGINE
     // ============================================================
     let audioCtx = null;
     let soundEnabled = false;
@@ -3319,186 +3060,126 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
 
     const ytDiv = document.createElement('div');
     ytDiv.id = 'yt-player-container';
-    ytDiv.style.position = 'fixed';
-    ytDiv.style.left = '-9999px';
-    ytDiv.style.top = '-9999px';
-    ytDiv.style.width = '480px';
-    ytDiv.style.height = '270px';
-    ytDiv.style.pointerEvents = 'none';
+    ytDiv.style.position = 'fixed'; ytDiv.style.left = '-9999px'; ytDiv.style.top = '-9999px';
     document.body.appendChild(ytDiv);
 
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    document.body.appendChild(tag);
 
     window.onYouTubeIframeAPIReady = function() {
         ytPlayer = new YT.Player('yt-player-container', {
-            height: '270',
-            width: '480',
-            videoId: videoId,
-            playerVars: {
-                autoplay: 0,
-                loop: 1,
-                playlist: videoId,
-                controls: 0,
-                showinfo: 0,
-                rel: 0,
-                enablejsapi: 1,
-                origin: window.location.origin
-            },
+            height: '100', width: '100', videoId: videoId,
+            playerVars: { autoplay: 0, loop: 1, playlist: videoId, controls: 0, enablejsapi: 1 },
             events: {
                 onReady: () => {
                     ytApiReady = true;
-                    consoleLog('[AUDIO] Quantum audio receiver synced', 'cyan');
-                },
-                onStateChange: (e) => {
-                    if (e.data === YT.PlayerState.ENDED) {
-                        ytPlayer.playVideo();
-                    }
+                    consoleLog('[AUDIO] Ambient receiver synced', 'cyan');
                 }
             }
         });
     };
 
-    function initAudio() {
-        if (audioCtx) return;
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
     function playSound(type) {
-        if (!soundEnabled || !audioCtx) return;
+        if (!soundEnabled) return;
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const now = audioCtx.currentTime;
+
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.connect(gain);
+        const filter = audioCtx.createBiquadFilter();
+
+        osc.connect(filter);
+        filter.connect(gain);
         gain.connect(audioCtx.destination);
 
         switch (type) {
             case 'hover':
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(800, now);
-                osc.frequency.exponentialRampToValueAtTime(1200, now + 0.05);
-                gain.gain.setValueAtTime(0.03, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-                osc.start(now); osc.stop(now + 0.1);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(900, now);
+                osc.frequency.exponentialRampToValueAtTime(1400, now + 0.05);
+                filter.type = 'highpass';
+                filter.frequency.setValueAtTime(800, now);
+                gain.gain.setValueAtTime(0.02, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+                osc.start(now); osc.stop(now + 0.06);
                 break;
             case 'select':
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(220, now);
                 osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
-                gain.gain.setValueAtTime(0.06, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1200, now);
+                gain.gain.setValueAtTime(0.04, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                osc.start(now); osc.stop(now + 0.25);
                 break;
             case 'launch':
-                osc.type = 'sawtooth';
+                osc.type = 'sine';
                 osc.frequency.setValueAtTime(110, now);
-                osc.frequency.exponentialRampToValueAtTime(1760, now + 0.5);
-                gain.gain.setValueAtTime(0.08, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-                osc.start(now); osc.stop(now + 0.6);
+                osc.frequency.exponentialRampToValueAtTime(1760, now + 0.4);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2000, now);
+                gain.gain.setValueAtTime(0.06, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
                 break;
             case 'msg':
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(1320, now);
-                gain.gain.setValueAtTime(0.04, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-                osc.start(now); osc.stop(now + 0.15);
+                osc.frequency.setValueAtTime(1200, now);
+                osc.frequency.setValueAtTime(1500, now + 0.06);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2500, now);
+                gain.gain.setValueAtTime(0.03, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+                osc.start(now); osc.stop(now + 0.16);
                 break;
         }
     }
 
-    function startAmbient() {
-        if (ytPlayer && ytApiReady && typeof ytPlayer.playVideo === 'function') {
-            try {
-                ytPlayer.unMute();
-                ytPlayer.setVolume(100);
-                ytPlayer.playVideo();
-                consoleLog('[AUDIO] Ambient music initiated', 'cyan');
-            } catch (e) {
-                console.error('[AUDIO] Embed interaction failure', e);
-            }
-        } else {
-            setTimeout(startAmbient, 300);
-        }
-    }
-
-    function stopAmbient() {
-        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-            try {
-                ytPlayer.pauseVideo();
-            } catch(e) {}
-        }
-        consoleLog('[AUDIO] Silent mode active', 'amber');
-    }
-
     document.getElementById('sound-toggle').addEventListener('click', () => {
-        initAudio();
         soundEnabled = !soundEnabled;
         const btn = document.getElementById('sound-toggle');
         const icon = document.getElementById('sound-icon');
         if (soundEnabled) {
             btn.classList.remove('muted');
             icon.className = 'fa-solid fa-volume-high';
-            startAmbient();
+            if (ytPlayer && ytApiReady) {
+                try {
+                    ytPlayer.unMute(); ytPlayer.setVolume(70); ytPlayer.playVideo();
+                } catch(e){}
+            }
+            consoleLog('[AUDIO] Ambient stream synced', 'cyan');
         } else {
             btn.classList.add('muted');
             icon.className = 'fa-solid fa-volume-xmark';
-            stopAmbient();
+            if (ytPlayer) { try { ytPlayer.pauseVideo(); } catch(e){} }
+            consoleLog('[AUDIO] Silenced mode active', 'amber');
         }
     });
 
     document.getElementById('ship-toggle').addEventListener('click', () => {
         shipVisible = !shipVisible;
-        const btn = document.getElementById('ship-toggle');
-        if (shipVisible) {
-            btn.classList.remove('hidden-ship');
-            consoleLog('[SHIP] Launch sequence resumed', 'cyan');
-        } else {
-            btn.classList.add('hidden-ship');
-            consoleLog('[SHIP] Spacecraft disabled', 'amber');
-        }
+        document.getElementById('ship-toggle').classList.toggle('hidden-ship', !shipVisible);
+        consoleLog(shipVisible ? '[SHIP] Flight vector online' : '[SHIP] Warp core inactive', shipVisible ? 'cyan' : 'amber');
     });
 
     // ============================================================
-    // CONSOLE LOG
-    // ============================================================
-    const consoleLogEl = document.getElementById('console-log');
-    function consoleLog(msg, color) {
-        color = color || 'cyan';
-        const el = document.createElement('div');
-        el.className = `log-${color}`;
-        const now = new Date();
-        const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
-        el.textContent = `${time} ${msg}`;
-        consoleLogEl.appendChild(el);
-        while (consoleLogEl.children.length > 6) consoleLogEl.removeChild(consoleLogEl.firstChild);
-    }
-    consoleLog('[SYSTEM] Boot sequence complete', 'cyan');
-    consoleLog('[RENDER] Bloom + chromatic + grain active', 'amber');
-    consoleLog('[OBSERVATORY] All 8 nodes synced', 'cyan');
-
-    // ============================================================
-    // MINIMAP
+    // SECTOR MAP MINIMAP SYSTEM
     // ============================================================
     const minimapCanvas = document.getElementById('minimap');
     const mctx = minimapCanvas.getContext('2d');
     function resizeMinimap() {
         const r = minimapCanvas.getBoundingClientRect();
-        minimapCanvas.width = r.width * 2;
-        minimapCanvas.height = r.height * 2;
+        minimapCanvas.width = r.width * 2; minimapCanvas.height = r.height * 2;
         mctx.scale(2, 2);
     }
     resizeMinimap();
 
     function drawMinimap() {
-        const w = minimapCanvas.width / 2;
-        const h = minimapCanvas.height / 2;
+        const w = minimapCanvas.width / 2; const h = minimapCanvas.height / 2;
         mctx.clearRect(0, 0, w, h);
-
-        const cx = w / 2, cy = h / 2;
-        const scale = 1.4;
+        const cx = w / 2, cy = h / 2, scale = 1.4;
 
         mctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
         mctx.lineWidth = 0.5;
@@ -3511,76 +3192,41 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
 
         bodies.forEach(b => {
             if (b.data.type !== 'planet') return;
-            mctx.strokeStyle = `rgba(${b.data.rgb}, 0.25)`;
-            mctx.beginPath();
-            mctx.arc(cx, cy, b.data.distance * scale, 0, Math.PI * 2);
-            mctx.stroke();
+            mctx.strokeStyle = `rgba(${b.data.rgb}, 0.2)`;
+            mctx.beginPath(); mctx.arc(cx, cy, b.data.distance * scale, 0, Math.PI * 2); mctx.stroke();
         });
 
         bodies.forEach(b => {
             const x = cx + b.mesh.position.x * scale;
             const y = cy + b.mesh.position.z * scale;
             mctx.fillStyle = `rgb(${b.data.rgb})`;
-            mctx.beginPath();
-            mctx.arc(x, y, b.data.type === 'star' ? 4 : 2.5, 0, Math.PI * 2);
-            mctx.fill();
+            mctx.beginPath(); mctx.arc(x, y, b.data.type === 'star' ? 4 : 2.5, 0, Math.PI * 2); mctx.fill();
 
             if (selectedMesh === b.mesh) {
                 mctx.strokeStyle = `rgba(${b.data.rgb}, 0.8)`;
-                mctx.lineWidth = 1;
-                mctx.beginPath();
-                mctx.arc(x, y, 7, 0, Math.PI * 2);
-                mctx.stroke();
-            }
-        });
-
-        const camX = cx + camera.position.x * scale;
-        const camY = cy + camera.position.z * scale;
-        mctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-        mctx.lineWidth = 1;
-        mctx.beginPath();
-        mctx.moveTo(camX - 4, camY);
-        mctx.lineTo(camX + 4, camY);
-        mctx.moveTo(camX, camY - 4);
-        mctx.lineTo(camX, camY + 4);
-        mctx.stroke();
-
-        if (shipVisible) {
-            const sx = cx + spaceship.position.x * scale;
-            const sy = cy + spaceship.position.z * scale;
-            mctx.fillStyle = 'rgba(93, 213, 213, 0.95)';
-            mctx.beginPath();
-            mctx.arc(sx, sy, 2.5, 0, Math.PI * 2);
-            mctx.fill();
-            mctx.strokeStyle = 'rgba(93, 213, 213, 0.5)';
-            mctx.lineWidth = 0.8;
-            mctx.beginPath();
-            mctx.arc(sx, sy, 5, 0, Math.PI * 2);
-            mctx.stroke();
-        }
-
-        const astScale = 0.35;
-        clusters.forEach(cluster => {
-            const ax = cx + cluster.center.x * astScale;
-            const ay = cy + cluster.center.z * astScale;
-            if (ax > 6 && ax < w - 6 && ay > 6 && ay < h - 6) {
-                const memberAcc = cluster.members[0].mesh.material.uniforms.uAccentColor.value;
-                const r = Math.floor(memberAcc.r * 255);
-                const g = Math.floor(memberAcc.g * 255);
-                const b = Math.floor(memberAcc.b * 255);
-                mctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.8)`;
-                mctx.beginPath();
-                mctx.moveTo(ax, ay - 3);
-                mctx.lineTo(ax - 3, ay + 2);
-                mctx.lineTo(ax + 3, ay + 2);
-                mctx.closePath();
-                mctx.fill();
+                mctx.beginPath(); mctx.arc(x, y, 6.5, 0, Math.PI * 2); mctx.stroke();
             }
         });
     }
 
     // ============================================================
-    // CURVED TEXT OVERLAY
+    // CONSOLE LOGGER
+    // ============================================================
+    const consoleLogEl = document.getElementById('console-log');
+    function consoleLog(msg, color = 'cyan') {
+        const el = document.createElement('div');
+        el.className = `log-${color}`;
+        const now = new Date();
+        const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+        el.textContent = `${time} ${msg}`;
+        consoleLogEl.appendChild(el);
+        while (consoleLogEl.children.length > 5) consoleLogEl.removeChild(consoleLogEl.firstChild);
+    }
+    consoleLog('[SYSTEM] Observatory core ready', 'cyan');
+    consoleLog('[RENDER] Multi-pass composite active', 'amber');
+
+    // ============================================================
+    // CURVED SATELLITE HUD TEXT
     // ============================================================
     const curvedTextEl = document.getElementById('curved-text');
     const curvedSvg = document.getElementById('curved-svg');
@@ -3638,26 +3284,20 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
 
         const arcR = sr.r * 1.35;
         const arcR2 = sr.r * 1.15;
-
         const startAngle = Math.PI * 1.15;
         const endAngle   = Math.PI * 1.85;
-        const sx = Math.cos(startAngle) * arcR;
-        const sy = Math.sin(startAngle) * arcR;
-        const ex = Math.cos(endAngle) * arcR;
-        const ey = Math.sin(endAngle) * arcR;
+
+        const sx = Math.cos(startAngle) * arcR; const sy = Math.sin(startAngle) * arcR;
+        const ex = Math.cos(endAngle) * arcR; const ey = Math.sin(endAngle) * arcR;
         arcPathTop.setAttribute('d', `M ${sx} ${sy} A ${arcR} ${arcR} 0 0 1 ${ex} ${ey}`);
 
-        const sx2 = Math.cos(startAngle) * arcR2;
-        const sy2 = Math.sin(startAngle) * arcR2;
-        const ex2 = Math.cos(endAngle) * arcR2;
-        const ey2 = Math.sin(endAngle) * arcR2;
+        const sx2 = Math.cos(startAngle) * arcR2; const sy2 = Math.sin(startAngle) * arcR2;
+        const ex2 = Math.cos(endAngle) * arcR2; const ey2 = Math.sin(endAngle) * arcR2;
         arcPathBottom.setAttribute('d', `M ${sx2} ${sy2} A ${arcR2} ${arcR2} 0 0 1 ${ex2} ${ey2}`);
 
         const arcRouter = sr.r * 1.55;
-        const sxo = Math.cos(startAngle - 0.15) * arcRouter;
-        const syo = Math.sin(startAngle - 0.15) * arcRouter;
-        const exo = Math.cos(endAngle + 0.15) * arcRouter;
-        const eyo = Math.sin(endAngle + 0.15) * arcRouter;
+        const sxo = Math.cos(startAngle - 0.15) * arcRouter; const syo = Math.sin(startAngle - 0.15) * arcRouter;
+        const exo = Math.cos(endAngle + 0.15) * arcRouter; const eyo = Math.sin(endAngle + 0.15) * arcRouter;
         arcOuter.setAttribute('d', `M ${sxo} ${syo} A ${arcRouter} ${arcRouter} 0 0 1 ${exo} ${eyo}`);
 
         arcTicks.innerHTML = '';
@@ -3665,33 +3305,24 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
         for (let i = 0; i < tickCount; i++) {
             const t = i / (tickCount - 1);
             const angle = startAngle + t * (endAngle - startAngle);
-            const tickInner = arcR * 1.05;
-            const tickOuter = arcR * 1.12;
-            const x1 = Math.cos(angle) * tickInner;
-            const y1 = Math.sin(angle) * tickInner;
-            const x2 = Math.cos(angle) * tickOuter;
-            const y2 = Math.sin(angle) * tickOuter;
+            const x1 = Math.cos(angle) * (arcR * 1.05); const y1 = Math.sin(angle) * (arcR * 1.05);
+            const x2 = Math.cos(angle) * (arcR * 1.12); const y2 = Math.sin(angle) * (arcR * 1.12);
             const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            tick.setAttribute('x1', x1);
-            tick.setAttribute('y1', y1);
-            tick.setAttribute('x2', x2);
-            tick.setAttribute('y2', y2);
+            tick.setAttribute('x1', x1); tick.setAttribute('y1', y1);
+            tick.setAttribute('x2', x2); tick.setAttribute('y2', y2);
             tick.setAttribute('class', 'arc-tick');
             tick.setAttribute('opacity', i === 0 || i === tickCount - 1 ? '1' : '0.5');
             arcTicks.appendChild(tick);
         }
 
-        arcDotLeft.setAttribute('cx', sx);
-        arcDotLeft.setAttribute('cy', sy);
-        arcDotRight.setAttribute('cx', ex);
-        arcDotRight.setAttribute('cy', ey);
+        arcDotLeft.setAttribute('cx', sx); arcDotLeft.setAttribute('cy', sy);
+        arcDotRight.setAttribute('cx', ex); arcDotRight.setAttribute('cy', ey);
 
         if (curvedTextEl.dataset.currentId !== data.id) {
             arcTextpathMain.textContent = data.subtitle;
             arcTextpathCode.textContent = `[ ${data.code} · ${data.name.toUpperCase()} ]`;
             curvedTextEl.dataset.currentId = data.id;
         }
-
         curvedTextEl.classList.add('visible');
     }
 
@@ -3700,6 +3331,9 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
         curvedTextEl.dataset.currentId = '';
     }
 
+    // ============================================================
+    // MAIN SYSTEM TICK / ANIMATION LOOP
+    // ============================================================
     const clock = new THREE.Clock();
     let elapsed = 0;
 
@@ -3720,11 +3354,25 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
 
         starLayers.forEach(layer => {
             layer.mesh.rotation.y += dt * layer.speed;
-            layer.mesh.rotation.x += dt * layer.speed * 0.3;
         });
 
         bodies.forEach(b => {
             b.mesh.rotation.y += dt * 0.3;
+
+            // Đồng bộ hóa biến uTime vào trong Shader của Hào quang Nhịp thở (Atmosphere)
+            if (b.mesh.userData.atmo && b.mesh.userData.atmo.material.uniforms.uTime) {
+                b.mesh.userData.atmo.material.uniforms.uTime.value = elapsed;
+            }
+
+            // Đồng bộ hóa biến uTime vào trong Shader của Sóng gợn Radial tâm (Ripple)
+            if (b.mesh.userData.ripple && b.mesh.userData.ripple.material.uniforms.uTime) {
+                b.mesh.userData.ripple.material.uniforms.uTime.value = elapsed;
+            }
+
+            // ⭐ CẬP NHẬT BIẾN THỜI GIAN uTime CHO SHADER QUỸ ĐẠO SỊN SÒ ⭐
+            if (b.orbitMesh && b.orbitMesh.material.uniforms.uTime) {
+                b.orbitMesh.material.uniforms.uTime.value = elapsed;
+            }
 
             if (b.data.type === 'planet') {
                 if (hoveredMesh !== b.mesh && selectedMesh !== b.mesh) {
@@ -3758,6 +3406,7 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
                 activeBeam.material.uniforms.uTime.value = elapsed;
             }
 
+            // Project 3D Positions to High-Tech Labels
             const screenPos = b.mesh.position.clone().project(camera);
             if (screenPos.z > 1 || screenPos.z < -1) {
                 b.label.style.opacity = '0';
@@ -3769,28 +3418,22 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
                 const yOffset = b.data.type === 'star' ? -110 : -70;
                 const y = (-screenPos.y * 0.5 + 0.5) * window.innerHeight + yOffset;
                 const scale = Math.max(0.55, Math.min(1.1, 1.15 - screenPos.z * 0.6));
-                b.label.style.left = x + 'px';
-                b.label.style.top = y + 'px';
+                b.label.style.left = x + 'px'; b.label.style.top = y + 'px';
                 b.label.style.transform = `translate(-50%, -50%) scale(${scale})`;
                 b.label.classList.toggle('selected', selectedMesh === b.mesh);
             }
         });
 
         updateCurvedText();
-
         coreLight.intensity = 22 + Math.sin(elapsed * 1.5) * 5;
-
         updateAsteroids(dt, elapsed);
 
         if (shipVisible) {
             shipT += dt * 0.025;
             if (shipT > 1) shipT -= 1;
-
             const pos = shipPathPosition(shipT);
             spaceship.position.copy(pos);
-
-            const next = shipPathPosition(Math.min(1, shipT + 0.005));
-            spaceship.lookAt(next);
+            spaceship.lookAt(shipPathPosition(Math.min(1, shipT + 0.005)));
             spaceship.rotateX(Math.PI / 2);
 
             if (spaceship.userData.engineGlow) {
@@ -3803,13 +3446,13 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
                 trailPos[i * 3 + 1] = trailPos[(i - 1) * 3 + 1];
                 trailPos[i * 3 + 2] = trailPos[(i - 1) * 3 + 2];
             }
-            const engineOffset = new THREE.Vector3(0, -1.5, 0);
-            engineOffset.applyQuaternion(spaceship.quaternion);
+            const engineOffset = new THREE.Vector3(0, -1.5, 0).applyQuaternion(spaceship.quaternion);
             trailPos[0] = pos.x + engineOffset.x;
             trailPos[1] = pos.y + engineOffset.y;
             trailPos[2] = pos.z + engineOffset.z;
             spaceship.userData.trail.geometry.attributes.position.needsUpdate = true;
         }
+
         spaceship.visible = shipVisible;
         if (spaceship.userData.trail) spaceship.userData.trail.visible = shipVisible;
 
@@ -3829,7 +3472,6 @@ Bắt đầu khám phá bằng cách hỏi tôi điều bất kỳ hoặc click 
             loadFromURL();
         }, 600);
     }, 2400);
-
     }
     </script>
 </body>
